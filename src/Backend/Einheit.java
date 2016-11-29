@@ -1,3 +1,5 @@
+package Backend;
+
 import java.util.Date;
 
 /**
@@ -30,6 +32,25 @@ public class Einheit {
     public Einheit(Object args[]){
         anfangsZeit = (Date)args[0];
         endZeit = (Date)args[1];
+        ort = (String)args[2];
+        name = (String)args[3];
+        lehrender = (String)args[4];
+        wiederholungsrhytmus = (int)args[5];
+        prioriät = (int)args[6];
+        typ = (String)args[7];
+    }
+
+    public Einheit changeEinheit(Object args[]){
+        anfangsZeit = (Date)args[0];
+        endZeit = (Date)args[1];
+        ort = (String)args[2];
+        name = (String)args[3];
+        lehrender = (String)args[4];
+        wiederholungsrhytmus = (int)args[5];
+        prioriät = (int)args[6];
+        typ = (String)args[7];
+
+        return this;
     }
 
 }
