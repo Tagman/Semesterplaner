@@ -15,6 +15,7 @@ public class Einheit {
     private int wiederholungsrhytmus;
     private int prioriät;
     private String typ;
+    private Date date;
 
 
     public Einheit(){
@@ -26,31 +27,41 @@ public class Einheit {
         wiederholungsrhytmus = -1;
         prioriät = -1;
         typ = null;
+        date = null;
+
 
     }
 
     public Einheit(Object args[]){
-        anfangsZeit = (Date)args[0];
-        endZeit = (Date)args[1];
-        ort = (String)args[2];
-        name = (String)args[3];
-        lehrender = (String)args[4];
-        wiederholungsrhytmus = (int)args[5];
-        prioriät = (int)args[6];
-        typ = (String)args[7];
+        name = (String)args[0];
+        typ = (String)args[1];
+        anfangsZeit = (Date)args[2];
+        endZeit = (Date)args[3];
+        ort = (String)args[4];
+        lehrender = (String)args[5];
+        date = (Date)args[6];
+        wiederholungsrhytmus = (int)args[7];
+        prioriät = (int)args[8];
+
+
     }
 
     public Einheit changeEinheit(Object args[]){
-        anfangsZeit = (Date)args[0];
-        endZeit = (Date)args[1];
-        ort = (String)args[2];
-        name = (String)args[3];
-        lehrender = (String)args[4];
-        wiederholungsrhytmus = (int)args[5];
-        prioriät = (int)args[6];
-        typ = (String)args[7];
+        name = (String)args[0];
+        typ = (String)args[1];
+        anfangsZeit = (Date)args[2];
+        endZeit = (Date)args[3];
+        ort = (String)args[4];
+        lehrender = (String)args[5];
+        date = (Date)args[6];
+        wiederholungsrhytmus = (int)args[7];
+        prioriät = (int)args[8];
 
         return this;
+    }
+
+    public void ausgabe(){
+        System.out.println(lehrender);
     }
 
 }
