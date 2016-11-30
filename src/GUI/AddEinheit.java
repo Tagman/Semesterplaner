@@ -3,7 +3,6 @@ package GUI;
 /**
  * Created by chris on 30/11/16.
  */
-import javafx.scene.control.ComboBox;
 
 import java.awt.EventQueue;
 
@@ -12,13 +11,18 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Einheit implements ActionListener {
+import java.time.LocalTime;
+
+public class AddEinheit implements ActionListener {
 
     private JFrame frame;
     private JTextField txtFieldName;
@@ -31,6 +35,9 @@ public class Einheit implements ActionListener {
     private JComboBox comboIntervall;
     private JCheckBox checkPflicht;
 
+
+
+
     /**
      * Launch the application.
      */
@@ -38,7 +45,7 @@ public class Einheit implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Einheit window = new Einheit();
+                    AddEinheit window = new AddEinheit();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,7 +57,7 @@ public class Einheit implements ActionListener {
     /**
      * Create the application.
      */
-    public Einheit() {
+    public AddEinheit() {
         initialize();
     }
 
@@ -63,7 +70,7 @@ public class Einheit implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Hinzuf\u00FCgen einer Einheit");
+        JLabel lblNewLabel = new JLabel("Hinzuf\u00FCgen einer AddEinheit");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
         lblNewLabel.setBounds(196, 16, 400, 33);
         frame.getContentPane().add(lblNewLabel);
@@ -89,14 +96,14 @@ public class Einheit implements ActionListener {
         txtFieldTimeStart = new JTextField();
         txtFieldTimeStart.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStart.setColumns(10);
-        txtFieldTimeStart.setText("Field2");
+        txtFieldTimeStart.setText("13:30");
         txtFieldTimeStart.setBounds(15, 209, 153, 49);
         frame.getContentPane().add(txtFieldTimeStart);
 
         txtFieldTimeStop = new JTextField();
         txtFieldTimeStop.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStop.setColumns(10);
-        txtFieldTimeStop.setText("Field3");
+        txtFieldTimeStop.setText("14:00");
         txtFieldTimeStop.setBounds(227, 209, 153, 49);
         frame.getContentPane().add(txtFieldTimeStop);
 
@@ -170,24 +177,40 @@ public class Einheit implements ActionListener {
         System.out.println("Test");
         Object[] args = getAttributes();
 
-        System.out.println((String)args[5]);
-        System.out.println((int)args[7]);
-        System.out.println((String)args[1]);
 
         Backend.Einheit newEinheit = new Backend.Einheit(args);
         newEinheit.ausgabe();
+
+        ArrayList<JTextField> txtFieldsToCheck = new ArrayList<>();
+
+        txtFieldsToCheck = collectTxtFields();
+
+
+        /*
+        ////////////////////////////////////////////
+        //Hier MethodenAufruf für Prüfung einbauen
+         */
+
+
+
     }
 
-    public Object[] getAttributes() {
+    private Object[] getAttributes() {
         Object[] args = new Object[9];
 
         args[0] = txtFieldName.getText();
         args[1] = comboTyp.getSelectedItem();
-        args[2] = txtFieldTimeStart.getText();
-        args[3] = txtFieldTimeStop.getText();
+
+        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+
+        args[2] = startTime;
+        args[3] = endTime;
         args[4] = txtFieldLocation.getText();
         args[5] = txtFieldTeacher.getText();
-        args[6] = txtFieldDate.getText();
+
+        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        args[6] = date;
 
         if(comboIntervall.getSelectedItem().equals("Einmalig")){
             args[7] = 0;
@@ -208,6 +231,17 @@ public class Einheit implements ActionListener {
 
         return args;
 
+    }
+
+    private ArrayList<JTextField> collectTxtFields(){
+       ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
+
+        gatheredTxtFields.add(txtFieldDate);
+        gatheredTxtFields.add(txtFieldLocation);
+        gatheredTxtFields.add(txtFieldName);
+        gatheredTxtFields.add(txtFieldTeacher);
+
+        return gatheredTxtFields;
     }
 }
 

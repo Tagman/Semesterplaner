@@ -1,5 +1,7 @@
 package Backend;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -7,15 +9,15 @@ import java.util.Date;
  */
 public class Einheit {
 
-    private Date anfangsZeit;
-    private Date endZeit;
+    private LocalTime anfangsZeit;
+    private LocalTime endZeit;
     private String ort;
     private String name;
     private String lehrender;
     private int wiederholungsrhytmus;
     private int prioriät;
     private String typ;
-    private Date date;
+    private LocalDate date;
 
 
     public Einheit(){
@@ -35,11 +37,11 @@ public class Einheit {
     public Einheit(Object args[]){
         name = (String)args[0];
         typ = (String)args[1];
-        anfangsZeit = (Date)args[2];
-        endZeit = (Date)args[3];
+        anfangsZeit = (LocalTime)args[2];
+        endZeit = (LocalTime)args[3];
         ort = (String)args[4];
         lehrender = (String)args[5];
-        date = (Date)args[6];
+        date = (LocalDate) args[6];
         wiederholungsrhytmus = (int)args[7];
         prioriät = (int)args[8];
 
@@ -49,11 +51,11 @@ public class Einheit {
     public Einheit changeEinheit(Object args[]){
         name = (String)args[0];
         typ = (String)args[1];
-        anfangsZeit = (Date)args[2];
-        endZeit = (Date)args[3];
+        anfangsZeit = (LocalTime) args[2];
+        endZeit = (LocalTime) args[3];
         ort = (String)args[4];
         lehrender = (String)args[5];
-        date = (Date)args[6];
+        date = (LocalDate) args[6];
         wiederholungsrhytmus = (int)args[7];
         prioriät = (int)args[8];
 
@@ -62,6 +64,8 @@ public class Einheit {
 
     public void ausgabe(){
         System.out.println(lehrender);
+        System.out.println(date);
+        System.out.println(anfangsZeit);
     }
 
 }
