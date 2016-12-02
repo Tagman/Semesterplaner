@@ -76,7 +76,7 @@ public class AddEinheit implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblNewLabel = new JLabel("Hinzuf\u00FCgen einer AddEinheit");
+        JLabel lblNewLabel = new JLabel("Hinzuf\u00FCgen einer Einheit");
         lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 27));
         lblNewLabel.setBounds(196, 16, 400, 33);
         frame.getContentPane().add(lblNewLabel);
@@ -87,6 +87,7 @@ public class AddEinheit implements ActionListener {
 
         txtFieldName = new JTextField();
         txtFieldName.setName("Name");
+        //txtFieldName.setToolTipText("Hier Name eingeben. mind. 3 max 29 Zeichen");
         txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldName.setBounds(14, 114, 383, 49);
         frame.getContentPane().add(txtFieldName);
@@ -265,5 +266,7 @@ public class AddEinheit implements ActionListener {
 
         return gatheredTxtFields;
     }
+
+
 }
 

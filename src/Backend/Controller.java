@@ -1,6 +1,10 @@
 package Backend;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +35,7 @@ public class Controller {
               1 = Txt too short
               2 = Txt too long
               3 = Txt includes special characters
+              4 = Date has wrong format
 
               Add Error Messages, via throwsException (?)
               Want to do it like in C, with perror and non-zero return values
@@ -42,6 +47,21 @@ public class Controller {
 
         String text;
         text=field.getText();
+
+        if(field.getName().equals("Datum")) {
+            try{
+                LocalDate.parse(field.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+                return 0;
+
+            }catch(DateTimeParseException e) {
+
+                return 4;
+
+            }
+
+        if(field.getName().equals(""))
+        }
 
         if(text.length() < 3)
         {
@@ -82,13 +102,16 @@ public class Controller {
             switch(checkField(field)) {
 
                 case 1:
-                    System.out.println("Text in " + field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
+                    System.out.println(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
                     break;
                 case 2:
-                    System.out.println("Text in " + field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
+                    System.out.println(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
                     break;
                 case 3:
-                    System.out.println("Text in " + field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
+                    System.out.println(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
+                    break;
+                case 4:
+                    System.out.println(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
                     break;
 
                 default:
@@ -97,5 +120,17 @@ public class Controller {
             }
         });
 
+    }
+
+    private int checkTime(JTextField start, JTextField end) {
+
+        try{
+            LocalTime startTime = LocalTime.parse(start.getText());
+            LocalTime endTime = LocalTime.parse(end.getText());
+
+            
+        }catch (){
+
+        }
     }
 }
