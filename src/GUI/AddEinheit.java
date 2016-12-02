@@ -4,6 +4,8 @@ package GUI;
  * Created by chris on 30/11/16.
  */
 
+import Backend.Controller;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,6 +37,8 @@ public class AddEinheit implements ActionListener {
     private JComboBox comboIntervall;
     private JCheckBox checkPflicht;
 
+    Controller controller = new Controller();
+
 
 
 
@@ -42,6 +46,8 @@ public class AddEinheit implements ActionListener {
      * Launch the application.
      */
     public static void main(String[] args) {
+
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -80,6 +86,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblName);
 
         txtFieldName = new JTextField();
+        txtFieldName.setName("Name");
         txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldName.setBounds(14, 114, 383, 49);
         frame.getContentPane().add(txtFieldName);
@@ -94,6 +101,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblUhrzeitintervall);
 
         txtFieldTimeStart = new JTextField();
+        txtFieldTimeStart.setName("Startzeit");
         txtFieldTimeStart.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStart.setColumns(10);
         txtFieldTimeStart.setText("13:30");
@@ -101,6 +109,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(txtFieldTimeStart);
 
         txtFieldTimeStop = new JTextField();
+        txtFieldTimeStop.setName("Endzeit");
         txtFieldTimeStop.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStop.setColumns(10);
         txtFieldTimeStop.setText("14:00");
@@ -113,6 +122,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(label);
 
         txtFieldLocation = new JTextField();
+        txtFieldLocation.setName("Ort");
         txtFieldLocation.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldLocation.setColumns(10);
         txtFieldLocation.setText("Field4");
@@ -124,6 +134,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblRaumbezeichnung);
 
         checkPflicht = new JCheckBox("Pflichtveranstaltung?");
+        checkPflicht.setName("Pflichtveranstaltung?");
         checkPflicht.setBounds(15, 487, 224, 49);
         frame.getContentPane().add(checkPflicht);
 
@@ -137,6 +148,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblNameDesLrhrenden);
 
         txtFieldTeacher = new JTextField();
+        txtFieldTeacher.setName("Lehrender");
         txtFieldTeacher.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTeacher.setColumns(10);
         txtFieldTeacher.setBounds(14, 310, 383, 49);
@@ -147,6 +159,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblPeriodisch);
 
         comboIntervall = new JComboBox();
+        comboIntervall.setName("Intervall");
         comboIntervall.setModel(new DefaultComboBoxModel(new String[] {"Einmalig", "Jede Woche", "Jede zweite Woche", "sdgsgdfh", "dsgsdgsfhjta", "j", "htdhtfhtsfhdj", "sdfgdhrsfjtdh", "dhfg", "hfg", "hdfh", "fgj", "fg", "hdyfh", "fjgh", "kr", "fjfxhfgjxf", "hshrtzjzfx", "nfj", "fjzfxhk", "xuglkx", "jfzhj", "zkk", "zfj"}));
         comboIntervall.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboIntervall.setBounds(15, 417, 382, 49);
@@ -156,7 +169,8 @@ public class AddEinheit implements ActionListener {
         comboIntervall.addItem("Jede zweite Woche");
 
         txtFieldDate = new JTextField();
-        txtFieldDate.setText("DD.MM.JJJJ");
+        txtFieldDate.setName("Datum");
+        txtFieldDate.setText("10.04.1999");
         txtFieldDate.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldDate.setColumns(10);
         txtFieldDate.setBounds(437, 310, 361, 49);
@@ -167,6 +181,7 @@ public class AddEinheit implements ActionListener {
         frame.getContentPane().add(lblDatum);
 
         comboTyp = new JComboBox();
+        comboTyp.setName("Typ");
         comboTyp.setModel(new DefaultComboBoxModel(new String[] {"Vorlesung\t", "Praktikum", "Seminar", "Tutorium"}));
         comboTyp.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboTyp.setBounds(437, 114, 361, 49);
@@ -174,22 +189,29 @@ public class AddEinheit implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae){
+        /*
+
         System.out.println("Test");
+
         Object[] args = getAttributes();
 
 
         Backend.Einheit newEinheit = new Backend.Einheit(args);
         newEinheit.ausgabe();
 
+        */
+
         ArrayList<JTextField> txtFieldsToCheck = new ArrayList<>();
 
         txtFieldsToCheck = collectTxtFields();
 
+        controller.iterateField(txtFieldsToCheck);
 
         /*
         ////////////////////////////////////////////
         //Hier MethodenAufruf für Prüfung einbauen
          */
+
 
 
 
