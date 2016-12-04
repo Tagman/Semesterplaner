@@ -10,12 +10,12 @@ public class Fach {
     private String name;
     private ArrayList<Einheit> einheiten;
 
-    public void Fach(String name, ArrayList<Einheit> einheiten){
+    public Fach(String name, ArrayList<Einheit> einheiten){
         this.name = name;
         this.einheiten = einheiten;
     }
 
-    public void Fach(){
+    public Fach(){
         name = null;
         einheiten = null;
     }

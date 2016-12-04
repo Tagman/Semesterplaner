@@ -1,5 +1,7 @@
 package Backend;
 
+import java.time.LocalTime;
+
 /**
  * Created by chris on 04/12/16.
  */
@@ -7,39 +9,51 @@ package Backend;
 
 public class Semesterplan
 {
-    private String Semestername;
-    private String Startzeit;
-    private String Endzeit;
+    private String semestername;
+    private LocalTime startzeit;
+    private LocalTime endzeit;
 
+
+    public Semesterplan(String name, LocalTime start, LocalTime end){
+        semestername = name;
+        startzeit = start;
+        endzeit = end;
+    }
+
+    public Semesterplan(){
+        semestername = null;
+        startzeit = null;
+        endzeit = null;
+    }
 
     public String getSemestername()
     {
-        return Semestername;
+        return semestername;
     }
 
     public void setSemestername(String semestername)
     {
-        Semestername = semestername;
+        this.semestername = semestername;
     }
 
-    public String getStartzeit()
+    public LocalTime getStartzeit()
     {
-        return Startzeit;
+        return startzeit;
     }
 
-    public void setStartzeit(String startzeit)
+    public void setStartzeit(LocalTime startzeit)
     {
-        Startzeit = startzeit;
+        this.startzeit = startzeit;
     }
 
-    public String getEndzeit()
+    public LocalTime getEndzeit()
     {
-        return Endzeit;
+        return endzeit;
     }
 
-    public void setEndzeit(String endzeit)
+    public void setEndzeit(LocalTime endzeit)
     {
-        Endzeit = endzeit;
+        this.endzeit = endzeit;
     }
 
 
