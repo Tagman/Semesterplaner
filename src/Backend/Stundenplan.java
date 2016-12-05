@@ -6,6 +6,7 @@ package Backend;
 
 import java.util.ArrayList;
 
+
 public class Stundenplan {
 
     private ArrayList<Fach> faecher = new ArrayList<Fach>();

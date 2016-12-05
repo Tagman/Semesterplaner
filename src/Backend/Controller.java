@@ -56,11 +56,11 @@ public class Controller {
 
             }catch(DateTimeParseException e) {
 
+                System.out.println(e.getParsedString());
                 return 4;
 
             }
 
-        if(field.getName().equals(""))
         }
 
         if(text.length() < 3)
@@ -124,12 +124,24 @@ public class Controller {
 
     private int checkTime(JTextField start, JTextField end) {
 
+        /*
+            0 - Time is in Correct Format
+            1 - Time has Wrong format
+         */
+
         try{
             LocalTime startTime = LocalTime.parse(start.getText());
             LocalTime endTime = LocalTime.parse(end.getText());
 
+            return 0;
+
             
-        }catch (){
+        }catch (DateTimeParseException e){
+
+            System.out.println("Die Zeit: " + e.getParsedString() + "muss das Format hh:mm haben");
+
+            return 1;
+
 
         }
     }

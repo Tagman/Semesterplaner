@@ -23,6 +23,8 @@ public class Fach {
     public Fach changeFach(String name, ArrayList<Einheit> einheiten){
         this.name = name;
         this.einheiten = einheiten;
+
+        return this;
     }
 
     public ArrayList<Einheit> addEinheit(Einheit einheit){
