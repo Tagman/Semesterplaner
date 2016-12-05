@@ -134,7 +134,7 @@ public class ChangeTermin    {
                 änderungstermin.setStartzeit(textField_1.getText());
                 änderungstermin.setEndzeit(textField_2.getText());
                 änderungstermin.setPeriodisch(comboBox.getSelectedItem().toString());
-                //änderungstermin.setPriorität((int)comboBox.getSelectedItem());
+                //änderungstermin.setPriorität((int)comboIntervall.getSelectedItem());
                 änderungstermin.setOrt(txtMusterstrae.getText());
                 änderungstermin.setDatum(textField_4.getText());
 
@@ -168,7 +168,7 @@ public class ChangeTermin    {
         label_6.setBounds(16, 274, 203, 20);
         frame.getContentPane().add(label_6);
 
-        //JComboBox comboBox = new JComboBox();
+        //JComboBox comboIntervall = new JComboBox();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"W\u00F6chentlich", "Einmalig", "Alle zwei Wochen"}));
         comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboBox.setBounds(16, 310, 382, 49);

@@ -7,47 +7,49 @@ import java.util.ArrayList;
 
 public class Termin {
 
-    private String Bezeichnung;
+    private String bezeichnung;
 
-    private String Startzeit;
-    private String Endzeit;
-    private String Periodisch;
+    private String startzeit;
+    private String endzeit;
+    private String periodisch;
 
 
-    private int Priorität;
-    private String Ort;
-    private String Datum;
-    static ArrayList<Termin> Termine = new ArrayList<Termin>();
+    private int priorität;
+    private String ort;
+    private String datum;
+    private ArrayList<Termin> Termine = new ArrayList<Termin>();
+    //Füge Termine liste zu Semesterplan hinzu
+    //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
 
     public Termin()
     {
     }
 
-    public Termin(String Bezeichnung, String Startzeit, String Endzeit, String Periodisch, int Priorität, String Ort, String Datum)
+    public Termin(String bezeichnung, String startzeit, String endzeit, String periodisch, int priorität, String ort, String datum)
     {
-        this.Bezeichnung = Bezeichnung;
-        this.Datum=Datum;
-        this.Startzeit=Startzeit;
-        this.Endzeit=Endzeit;
-        this.Ort=Ort;
-        this.Periodisch=Periodisch;
-        this.Priorität=Priorität;
+        this.bezeichnung = bezeichnung;
+        this.datum = datum;
+        this.startzeit = startzeit;
+        this.endzeit = endzeit;
+        this.ort = ort;
+        this.periodisch = periodisch;
+        this.priorität = priorität;
 
     };
 
-    public void Terminändern(String Bezeichnung, String Startzeit, String Endzeit, String Periodisch, int Priorität, String Ort, String Datum)
+    public void changeTermin(String bezeichnung, String startzeit, String endzeit, String periodisch, int priorität, String ort, String datum)
     {
-        this.Bezeichnung = Bezeichnung;
-        this.Datum=Datum;
-        this.Startzeit=Startzeit;
-        this.Endzeit=Endzeit;
-        this.Ort=Ort;
-        this.Periodisch=Periodisch;
-        this.Priorität=Priorität;
+        this.bezeichnung = bezeichnung;
+        this.datum = datum;
+        this.startzeit = startzeit;
+        this.endzeit = endzeit;
+        this.ort = ort;
+        this.periodisch = periodisch;
+        this.priorität = priorität;
 
     };
 
-    public void Termineausgeben(){
+    public void ausgabeTermin(){
         for( int i = 0; i < Termin.Termine.size(); i++)
         {
             System.out.println("Termin nummer "+ (i+1));
@@ -64,67 +66,61 @@ public class Termin {
 
 
     public String getBezeichnung() {
-        return Bezeichnung;
+        return bezeichnung;
     }
 
     public void setBezeichnung(String bezeichnung) {
-        Bezeichnung = bezeichnung;
+        this.bezeichnung = bezeichnung;
     }
 
     public String getDatum() {
-        return Datum;
+        return datum;
     }
 
     public void setDatum(String datum) {
-        Datum = datum;
+        this.datum = datum;
     }
 
     public String getStartzeit() {
-        return Startzeit;
+        return startzeit;
     }
 
     public void setStartzeit(String startzeit) {
-        Startzeit = startzeit;
+        this.startzeit = startzeit;
     }
 
     public String getEndzeit() {
-        return Endzeit;
+        return endzeit;
     }
 
     public void setEndzeit(String endzeit) {
-        Endzeit = endzeit;
+        this.endzeit = endzeit;
     }
 
     public String getOrt() {
-        return Ort;
+        return ort;
     }
 
     public void setOrt(String ort) {
-        Ort = ort;
+        this.ort = ort;
     }
 
     public String getPeriodisch() {
-        return Periodisch;
+        return periodisch;
     }
 
     public void setPeriodisch(String periodisch) {
-        Periodisch = periodisch;
+        this.periodisch = periodisch;
     }
 
     public int getPriorität() {
-        return Priorität;
+        return priorität;
     }
 
     public void setPriorität(int priorität) {
-        Priorität = priorität;
+        this.priorität = priorität;
     }
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        Termin termino = new Termin();
-        termino.setBezeichnung("lel");
-        System.out.println("" + termino.getBezeichnung());
-        Termine.add(termino);
-    }
+
 
 }

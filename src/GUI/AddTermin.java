@@ -31,8 +31,8 @@ public class AddTermin {
     private JTextField textField_1;
     private JTextField textField_2;
     private JTextField textField_3;
-    private JTextField textField_5;
-    JComboBox comboBox = new JComboBox();
+    private JTextField txtFieldDate;
+    JComboBox comboIntervall = new JComboBox();
     JComboBox comboBox_1 = new JComboBox();
 
     /**
@@ -78,6 +78,7 @@ public class AddTermin {
 
         textField = new JTextField();
         textField.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        textField.setText("Field");
         textField.setColumns(10);
         textField.setBounds(15, 114, 383, 49);
         frame.getContentPane().add(textField);
@@ -93,12 +94,14 @@ public class AddTermin {
         textField_1 = new JTextField();
         textField_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
         textField_1.setColumns(10);
+        textField_1.setText("Field1");
         textField_1.setBounds(16, 209, 153, 49);
         frame.getContentPane().add(textField_1);
 
         textField_2 = new JTextField();
         textField_2.setFont(new Font("Tahoma", Font.PLAIN, 22));
         textField_2.setColumns(10);
+        textField_2.setText("Field2");
         textField_2.setBounds(228, 209, 153, 49);
         frame.getContentPane().add(textField_2);
 
@@ -110,6 +113,7 @@ public class AddTermin {
         textField_3 = new JTextField();
         textField_3.setFont(new Font("Tahoma", Font.PLAIN, 22));
         textField_3.setColumns(10);
+        textField_3.setText("Field3");
         textField_3.setBounds(438, 209, 361, 49);
         frame.getContentPane().add(textField_3);
 
@@ -127,10 +131,10 @@ public class AddTermin {
                 eingabetermin.setBezeichnung(textField.getText());
                 eingabetermin.setStartzeit(textField_1.getText());
                 eingabetermin.setEndzeit(textField_2.getText());
-                eingabetermin.setPeriodisch(comboBox.getSelectedItem().toString());
-                //eingabetermin.setPriorität((int)comboBox.getSelectedItem());
+                eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
+                //eingabetermin.setPriorität((int)comboIntervall.getSelectedItem());
                 eingabetermin.setOrt(textField_3.getText());
-                eingabetermin.setDatum(textField_5.getText());
+                eingabetermin.setDatum(txtFieldDate.getText());
 
                 //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
                 Termin.Termine.add(new Termin(	eingabetermin.getBezeichnung(),
@@ -157,18 +161,18 @@ public class AddTermin {
         label_7.setBounds(16, 274, 203, 20);
         frame.getContentPane().add(label_7);
 
-        //	JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Einmalig", "W\u00F6chentlich", "Alle zwei Wochen"}));
-        comboBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        comboBox.setBounds(16, 310, 382, 49);
-        frame.getContentPane().add(comboBox);
+        //	JComboBox comboIntervall = new JComboBox();
+        comboIntervall.setModel(new DefaultComboBoxModel(new String[] {"Einmalig", "W\u00F6chentlich", "Alle zwei Wochen"}));
+        comboIntervall.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        comboIntervall.setBounds(16, 310, 382, 49);
+        frame.getContentPane().add(comboIntervall);
 
-        textField_5 = new JTextField();
-        textField_5.setText("DD.MM.JJJJ");
-        textField_5.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_5.setColumns(10);
-        textField_5.setBounds(438, 310, 361, 49);
-        frame.getContentPane().add(textField_5);
+        txtFieldDate = new JTextField();
+        txtFieldDate.setText("DD.MM.JJJJ");
+        txtFieldDate.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        txtFieldDate.setColumns(10);
+        txtFieldDate.setBounds(438, 310, 361, 49);
+        frame.getContentPane().add(txtFieldDate);
 
         JLabel label_8 = new JLabel("Datum");
         label_8.setBounds(438, 274, 203, 20);
