@@ -49,6 +49,10 @@ public class Termin {
 
     };
 
+    /*
+        Hier diese Ausgabe in Stundenplan einfügen
+
+
     public void ausgabeTermin(){
         for( int i = 0; i < Termin.Termine.size(); i++)
         {
@@ -63,6 +67,7 @@ public class Termin {
             System.out.println();
         }
     }
+    */
 
 
     public String getBezeichnung() {
