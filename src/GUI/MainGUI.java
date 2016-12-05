@@ -3,6 +3,8 @@ package GUI;
 /**
  * Created by chris on 04/12/16.
  */
+import Backend.Semesterplan;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -32,9 +34,9 @@ public class MainGUI {
     public JTable Tabelle;
     private JTextField txtAnfangsdatum;
     private JTextField txtEnddatum;
-
+    static Semesterplan sem;
     static Object[][] data;
-    static SemesterplanObjekt sem;
+
     static DefaultTableModel tm;
 
     /**
@@ -80,7 +82,7 @@ public class MainGUI {
         mntmNewMenuItem_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
-                Termin.main(null);
+                AddTermin.main(null);
             }
         });
         mntmNewMenuItem_3.setToolTipText("Hier klicken um eine neue Einheit zu erstellen");
@@ -197,7 +199,6 @@ public class MainGUI {
         panel.add(jps);
         tm = (DefaultTableModel) Tabelle.getModel();
     }
-
 
 
     private static void addPopup(Component component, final JPopupMenu popup) {
