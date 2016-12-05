@@ -4,6 +4,8 @@ package GUI;
  * Created by chris on 04/12/16.
  */
 
+import Backend.Semesterplan;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.time.LocalTime;
 
 public class Semester {
 
@@ -102,12 +105,12 @@ public class Semester {
         btnBesttigen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
-                SemesterplanObjekt Se = new  SemesterplanObjekt();
+                Semesterplan Se = new  Semesterplan();
                 Se.setSemestername(textField.getText()); //speichern
-                Se.setStartzeit(textField_1.getText()); //speichern
-                Se.setEndzeit(textField_2.getText()); //speichern
-                GUI.main(null);
-                GUI.sem=Se;
+                Se.setStartzeit(LocalTime.parse(textField_1.getText())); //speichern
+                Se.setEndzeit(LocalTime.parse(textField_2.getText())); //speichern
+                MainGUI.main(null);
+                MainGUI.sem=Se;
                 frame.dispose();
             }
         });
