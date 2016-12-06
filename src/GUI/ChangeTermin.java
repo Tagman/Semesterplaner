@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalTime;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -131,8 +132,10 @@ public class ChangeTermin    {
 
                 ///werte einlesen und änderungstermin mit werten füllen
                 änderungstermin.setBezeichnung(txtPhysiotherapie.getText());
-                änderungstermin.setStartzeit(textField_1.getText());
-                änderungstermin.setEndzeit(textField_2.getText());
+                änderungstermin.setStartZeit(LocalTime.parse(textField_1.getText()));
+               // änderungstermin.setStartZeit(textField_1.getText());
+                änderungstermin.setEndZeit(LocalTime.parse(textField_2.getText()));
+                //änderungstermin.setEndZeit(textField_2.getText());
                 änderungstermin.setPeriodisch(comboBox.getSelectedItem().toString());
                 //änderungstermin.setPriorität((int)comboIntervall.getSelectedItem());
                 änderungstermin.setOrt(txtMusterstrae.getText());
@@ -142,19 +145,15 @@ public class ChangeTermin    {
 
 
                 if (Termin.Termine.size()==0) Termin.Termine.add(termino); //falls liste leer, leeren beispieltermin einfügen
-                Termin.Termineausgeben();
-                termino.Terminändern(			änderungstermin.getBezeichnung(),
-                        änderungstermin.getStartzeit(),
-                        änderungstermin.getEndzeit(),
+
+                termino.changeTermin(
+                        änderungstermin.getBezeichnung(),
+                        änderungstermin.getStartZeit(),
+                        änderungstermin.getEndZeit(),
                         änderungstermin.getPeriodisch(),
                         änderungstermin.getPriorität(),
                         änderungstermin.getOrt(),
                         änderungstermin.getDatum());
-
-
-
-                Termin.Termineausgeben();
-
 
 
 

@@ -1,6 +1,9 @@
 package Backend;
 
+import GUI.Semester;
+
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 /**
  * Created by chris on 04/12/16.
@@ -9,51 +12,70 @@ import java.time.LocalTime;
 
 public class Semesterplan
 {
-    private String semestername;
-    private LocalTime startzeit;
-    private LocalTime endzeit;
+    private String semesterName;
+    private LocalTime startZeit;
+    private LocalTime endZeit;
+    private ArrayList<Termin> termine;
 
 
-    public Semesterplan(String name, LocalTime start, LocalTime end){
-        semestername = name;
-        startzeit = start;
-        endzeit = end;
+    public Semesterplan(String name, LocalTime start, LocalTime end, ArrayList<Termin> termine){
+        semesterName = name;
+        startZeit = start;
+        endZeit = end;
+        this.termine = termine;
     }
 
     public Semesterplan(){
-        semestername = null;
-        startzeit = null;
-        endzeit = null;
+        semesterName = null;
+        startZeit = null;
+        endZeit = null;
+        termine = null;
     }
 
-    public String getSemestername()
-    {
-        return semestername;
+    public Semesterplan changeSemesterplan(String name, LocalTime start, LocalTime end, ArrayList<Termin> termine){
+
+        semesterName = name;
+        startZeit = start;
+        endZeit = end;
+        this.termine = termine;
+
+        return this;
     }
 
-    public void setSemestername(String semestername)
-    {
-        this.semestername = semestername;
+    public ArrayList<Termin> addTermin(Termin termin){
+        termine.add(termin);
+
+        return termine;
     }
 
-    public LocalTime getStartzeit()
+    public String getSemesterName()
     {
-        return startzeit;
+        return semesterName;
     }
 
-    public void setStartzeit(LocalTime startzeit)
+    public void setSemesterName(String semesterName)
     {
-        this.startzeit = startzeit;
+        this.semesterName = semesterName;
     }
 
-    public LocalTime getEndzeit()
+    public LocalTime getStartZeit()
     {
-        return endzeit;
+        return startZeit;
     }
 
-    public void setEndzeit(LocalTime endzeit)
+    public void setStartZeit(LocalTime startZeit)
     {
-        this.endzeit = endzeit;
+        this.startZeit = startZeit;
+    }
+
+    public LocalTime getEndZeit()
+    {
+        return endZeit;
+    }
+
+    public void setEndZeit(LocalTime endZeit)
+    {
+        this.endZeit = endZeit;
     }
 
 

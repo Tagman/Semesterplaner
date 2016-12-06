@@ -3,14 +3,15 @@ package Backend;
 /**
  * Created by peter on 04/12/16.
  */
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class Termin {
 
     private String bezeichnung;
 
-    private String startzeit;
-    private String endzeit;
+    private LocalTime startZeit;
+    private LocalTime endZeit;
     private String periodisch;
 
 
@@ -25,24 +26,24 @@ public class Termin {
     {
     }
 
-    public Termin(String bezeichnung, String startzeit, String endzeit, String periodisch, int priorität, String ort, String datum)
+    public Termin(String bezeichnung, LocalTime startZeit, LocalTime endZeit, String periodisch, int priorität, String ort, String datum)
     {
         this.bezeichnung = bezeichnung;
         this.datum = datum;
-        this.startzeit = startzeit;
-        this.endzeit = endzeit;
+        this.startZeit = startZeit;
+        this.endZeit = endZeit;
         this.ort = ort;
         this.periodisch = periodisch;
         this.priorität = priorität;
 
     };
 
-    public void changeTermin(String bezeichnung, String startzeit, String endzeit, String periodisch, int priorität, String ort, String datum)
+    public void changeTermin(String bezeichnung, LocalTime startzeit, LocalTime endzeit, String periodisch, int priorität, String ort, String datum)
     {
         this.bezeichnung = bezeichnung;
         this.datum = datum;
-        this.startzeit = startzeit;
-        this.endzeit = endzeit;
+        this.startZeit = startzeit;
+        this.endZeit = endzeit;
         this.ort = ort;
         this.periodisch = periodisch;
         this.priorität = priorität;
@@ -58,8 +59,8 @@ public class Termin {
         {
             System.out.println("Termin nummer "+ (i+1));
             System.out.println(Termin.Termine.get(i).getBezeichnung());
-            System.out.println(Termin.Termine.get(i).getStartzeit());
-            System.out.println(Termin.Termine.get(i).getEndzeit());
+            System.out.println(Termin.Termine.get(i).getStartZeit());
+            System.out.println(Termin.Termine.get(i).getEndZeit());
             System.out.println(Termin.Termine.get(i).getPeriodisch());
             System.out.println(Termin.Termine.get(i).getPriorität());
             System.out.println(Termin.Termine.get(i).getOrt());
@@ -86,20 +87,20 @@ public class Termin {
         this.datum = datum;
     }
 
-    public String getStartzeit() {
-        return startzeit;
+    public LocalTime getStartZeit() {
+        return startZeit;
     }
 
-    public void setStartzeit(String startzeit) {
-        this.startzeit = startzeit;
+    public void setStartZeit(LocalTime startZeit) {
+        this.startZeit = startZeit;
     }
 
-    public String getEndzeit() {
-        return endzeit;
+    public LocalTime getEndZeit() {
+        return endZeit;
     }
 
-    public void setEndzeit(String endzeit) {
-        this.endzeit = endzeit;
+    public void setEndZeit(LocalTime endZeit) {
+        this.endZeit = endZeit;
     }
 
     public String getOrt() {
