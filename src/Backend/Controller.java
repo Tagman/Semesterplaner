@@ -26,7 +26,7 @@ public class Controller {
         // emtpy constructor.
     }
 
-    public int checkField(JTextField field){
+    public static int checkField(JTextField field){
 
         /*
             Return values:
@@ -45,8 +45,8 @@ public class Controller {
 
          */
 
-        String text;
-        text=field.getText();
+        String text=field.getText();
+
 
         if(field.getName().equals("Datum")) {
             try{
@@ -96,7 +96,8 @@ public class Controller {
         }
     }
 
-    public void iterateField(ArrayList<JTextField> fields){
+    public static void iterateField(ArrayList<JTextField> fields)
+    {
 
         fields.forEach(field -> {
             switch(checkField(field)) {

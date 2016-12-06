@@ -4,6 +4,7 @@ package GUI;
  * Created by chris on 04/12/16.
  */
 
+import Backend.Controller;
 import Backend.Semesterplan;
 
 import java.awt.EventQueue;
@@ -19,14 +20,15 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Semester {
 
     private JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-
+    private JTextField start;
+    private JTextField ende;
+    private JTextField name;
+    private JTextField error;
 
     /**
      * Launch the application.
@@ -70,19 +72,19 @@ public class Semester {
         lblSemesterzeitraum.setBounds(15, 133, 142, 20);
         frame.getContentPane().add(lblSemesterzeitraum);
 
-        textField = new JTextField();
-        textField.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField.setBounds(190, 133, 186, 50);
-        textField.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        start = new JTextField();
+        start.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        start.setBounds(190, 133, 186, 50);
+        start.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
+        frame.getContentPane().add(start);
+        start.setColumns(10);
 
-        textField_1 = new JTextField();
-        textField_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_1.setColumns(10);
-        textField_1.setBounds(448, 133, 186, 50);
-        textField_1.setToolTipText("Enddatum eintragen. (DD.MM.YYYY)");
-        frame.getContentPane().add(textField_1);
+        ende = new JTextField();
+        ende.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        ende.setColumns(10);
+        ende.setBounds(448, 133, 186, 50);
+        ende.setToolTipText("Enddatum eintragen. (DD.MM.YYYY)");
+        frame.getContentPane().add(ende);
 
         JLabel label = new JLabel("-");
         label.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -94,19 +96,32 @@ public class Semester {
         lblSemesterbezeichnung.setBounds(13, 71, 167, 20);
         frame.getContentPane().add(lblSemesterbezeichnung);
 
-        textField_2 = new JTextField();
-        textField_2.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_2.setColumns(10);
-        textField_2.setBounds(190, 71, 444, 50);
-        textField_2.setToolTipText("Die Bezeichnung für das Semester eingeben. (zwischen 3 und 29 Zeichen)");
-        frame.getContentPane().add(textField_2);
+        name = new JTextField();
+        name.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        name.setColumns(10);
+        name.setBounds(190, 71, 444, 50);
+        name.setToolTipText("Die Bezeichnung für das Semester eingeben. (zwischen 3 und 29 Zeichen)");
+        frame.getContentPane().add(name);
+
+        error = new JTextField();
+        error.setBounds(10, 489, 818, 20);
+        frame.getContentPane().add(error);
+        error.setColumns(10);
 
         JButton btnBesttigen = new JButton("Best\u00E4tigen");
         btnBesttigen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
+                //Testen
+                ArrayList<JTextField> SemesterList= new ArrayList();
+                SemesterList.add(start);
+                SemesterList.add(ende);
+                SemesterList.add(name);
+
+                Controller.iterateField(SemesterList);
+
                 Semesterplan Se = new  Semesterplan();
-                Se.setSemestername(textField.getText()); //speichern
+                Se.setSemestername(start.getText()); //speichern
                 //  Se.setStartzeit(LocalTime.parse(textField_1.getText())); //speichern
                 //  Se.setEndzeit(LocalTime.parse(textField_2.getText())); //speichern
                 MainGUI.main(null);
@@ -118,6 +133,7 @@ public class Semester {
         btnBesttigen.setToolTipText("Drücken des Knopfes erstellt den neuen Semesterplan.");
         frame.getContentPane().add(btnBesttigen);
     }
+
 }
 
 

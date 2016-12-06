@@ -245,6 +245,8 @@ public class MainGUI {
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
         tm = (DefaultTableModel) Tabelle.getModel();
+
+
     }
 
 
