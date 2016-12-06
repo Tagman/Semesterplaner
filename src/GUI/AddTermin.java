@@ -4,6 +4,7 @@ package GUI;
  * Created by chris on 04/12/16.
  */
 
+
 import Backend.Termin;
 import Backend.Controller;
 
@@ -15,6 +16,9 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -26,7 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 public class AddTermin implements ActionListener{
 
     //speichert eingabe
-    private Termin eingabeTermin;
+    private Termin eingabetermin = new Termin();
 
 
     private JFrame frame;
@@ -38,6 +42,7 @@ public class AddTermin implements ActionListener{
     private JComboBox comboInterval = new JComboBox();
     private JComboBox comboPriority = new JComboBox();
     private Controller controller = new Controller();
+    private JTextField error;
 
     /**
      * Launch the application.
@@ -83,6 +88,7 @@ public class AddTermin implements ActionListener{
         txtFieldName = new JTextField();
         txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldName.setText("Field");
+        txtFieldName.setName("Bezeichnung");
         txtFieldName.setColumns(10);
         txtFieldName.setBounds(15, 114, 383, 49);
         frame.getContentPane().add(txtFieldName);
@@ -98,11 +104,13 @@ public class AddTermin implements ActionListener{
         txtFieldTimeStart = new JTextField();
         txtFieldTimeStart.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStart.setColumns(10);
+        txtFieldTimeStart.setName("Startzeit");
         txtFieldTimeStart.setText("Field1");
         txtFieldTimeStart.setBounds(16, 209, 153, 49);
         frame.getContentPane().add(txtFieldTimeStart);
 
         txtFieldTimeStop = new JTextField();
+        txtFieldTimeStop.setName("Endzeit");
         txtFieldTimeStop.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldTimeStop.setColumns(10);
         txtFieldTimeStop.setText("Field2");
@@ -115,6 +123,7 @@ public class AddTermin implements ActionListener{
         frame.getContentPane().add(label_4);
 
         txtFieldLocation = new JTextField();
+        txtFieldLocation.setName("Veranstaltungsort");
         txtFieldLocation.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldLocation.setColumns(10);
         txtFieldLocation.setText("Field3");
@@ -126,6 +135,66 @@ public class AddTermin implements ActionListener{
         frame.getContentPane().add(lblOrt);
 
         JButton button = new JButton("Zum Stundenplan hinzuf\u00FCgen");
+        button.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+
+                //Testen
+                ArrayList<JTextField> TerminList= new ArrayList();
+                TerminList.add(name);
+                TerminList.add(start);
+                TerminList.add(ende);
+                TerminList.add(Datum);
+                TerminList.add(ort);
+                Controller.iterateField(TerminList,error);
+
+                //eingabetermin mit werten füllen
+                eingabetermin.setBezeichnung(name.getText());
+                eingabetermin.setStartzeit(start.getText());
+                eingabetermin.setEndzeit(ende.getText());
+                eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
+                eingabetermin.setPriorität(Integer.parseInt((String) comboBox_1.getSelectedItem()));
+                eingabetermin.setOrt(ort.getText());
+                eingabetermin.setDatum(LocalDate.parse(Datum.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+
+                //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
+                Termin.Termine.add(new Termin(
+                        eingabetermin.getBezeichnung(),
+                        eingabetermin.getStartzeit(),
+                        eingabetermin.getEndzeit(),
+                        eingabetermin.getPeriodisch(),
+                        eingabetermin.getPriorität(),
+                        eingabetermin.getOrt(),
+                        eingabetermin.getDatum()));
+
+                //experimentell
+                Object[] args = new Object[9];
+                args[0] = eingabetermin.getBezeichnung();
+                args[1] = "";
+                args[2] = eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit();
+                args[3] = eingabetermin.getOrt();
+                args[4] = "";
+                args[5] = "";
+                args[6] = eingabetermin.getDatum();
+                args[7] = eingabetermin.getPeriodisch();
+                args[8] = eingabetermin.getPriorität();
+
+                for(int i=0;i<=MainGUI.daten.length; i++)
+                {
+                    if(MainGUI.daten[i]==null)
+                    {
+
+                        MainGUI.daten[i] = args;
+                        break;
+                    }
+
+                }
+                //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
+
+
+
+
+            }
+        });
         button.addActionListener(this);
         button.setBounds(438, 417, 361, 99);
         frame.getContentPane().add(button);
@@ -141,6 +210,7 @@ public class AddTermin implements ActionListener{
         frame.getContentPane().add(comboInterval);
 
         txtFieldDate = new JTextField();
+        txtFieldDate.setName("Datum");
         txtFieldDate.setText("DD.MM.JJJJ");
         txtFieldDate.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldDate.setColumns(10);
@@ -151,6 +221,10 @@ public class AddTermin implements ActionListener{
         label_8.setBounds(438, 274, 203, 20);
         frame.getContentPane().add(label_8);
 
+        error = new JTextField();
+        error.setBounds(10, 540, 799, 20);
+        frame.getContentPane().add(error);
+        error.setColumns(10);
         //	JComboBox comboPriority = new JComboBox();
         comboPriority.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
         comboPriority.setFont(new Font("Tahoma", Font.PLAIN, 22));

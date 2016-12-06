@@ -23,13 +23,13 @@ import java.util.ArrayList;
 public class Controller {
 
     private static String errString;
-    private boolean errBoolean;
+    public static boolean errBoolean;
 
     public Controller(){
         // emtpy constructor.
     }
 
-    public int checkField(JTextField field){
+    public static int checkField(JTextField field){
 
         /*
             Return values:
@@ -48,8 +48,8 @@ public class Controller {
 
          */
 
-        String text;
-        text=field.getText();
+        String text=field.getText();
+
 
         if(field.getName().equals("Datum")) {
             try{
@@ -99,7 +99,7 @@ public class Controller {
         }
     }
 
-    public boolean iterateField(ArrayList<JTextField> fields){
+    public static boolean iterateField(ArrayList<JTextField> fields, JTextField error){
 
 
 
@@ -110,35 +110,33 @@ public class Controller {
                 case 1:
                     errString = field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.";
                     errBoolean = false;
-                    System.out.println(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
                     break;
                 case 2:
                     errString = field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.";
                     errBoolean = false;
-                    System.out.println(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
                     break;
                 case 3:
                     errString = field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!";
                     errBoolean = false;
-                    System.out.println(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
+                    error.setText(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
                     break;
                 case 4:
                     errString = field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein";
                     errBoolean = false;
-                    System.out.println(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
+                    error.setText(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
                     break;
 
                 default:
                     errString = field.getName() + " OK!";
                     errBoolean = true;
-                    System.out.println(field.getName() + " OK!");
+                    error.setText(field.getName() + " OK!");
 
             }
-
-
         });
-        return errBoolean;
-    }
+
+        return errBoolean; }
 
     public boolean checkTime(JTextField start, JTextField end) {
 

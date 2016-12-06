@@ -13,7 +13,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-
+import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,6 +28,11 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainGUI {
 
@@ -38,13 +43,15 @@ public class MainGUI {
     static Semesterplan sem;
     static Stundenplan stundenplan;
     static Object[][] data;
-
     static DefaultTableModel tm;
+    static Object[] daten = new Object[200];
+
 
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -67,7 +74,9 @@ public class MainGUI {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize()
+    {
+
         frame = new JFrame();
         frame.setBounds(100, 100, 909, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -182,6 +191,37 @@ public class MainGUI {
         frame.getContentPane().add(lblAnzeigezeitraum);
 
         JButton btnAktualisieren = new JButton("Aktualisieren");
+        btnAktualisieren.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+                try {
+                for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+                {
+                    tm.removeRow(j);
+                }
+
+                for(int i=0;i<=daten.length;i++)
+                {
+                    LocalDate today = LocalDate.now();
+                    TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                    int weekNumber = today.get(woy);
+                  //  System.out.println(weekNumber);
+                    Object[] etwas = (Object[]) daten[i];
+                    LocalDate datum = (LocalDate) etwas[6];
+                    TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                    int holweek = datum.get(week);
+                   // System.out.println(holweek);
+                  //  System.out.println(datum);
+                    if(weekNumber==holweek)
+                    {
+
+                        tm.addRow((Object[]) daten[i]);
+                    }
+                }}
+                catch (NullPointerException igno) {
+                    System.out.print("ignorieren");}
+            }
+        });
         btnAktualisieren.setBounds(633, 87, 130, 29);
         frame.getContentPane().add(btnAktualisieren);
         btnAktualisieren.setToolTipText("Hier klicken um die Ansicht auf Basis der Daten zu Aktualisieren");
@@ -207,6 +247,8 @@ public class MainGUI {
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
         tm = (DefaultTableModel) Tabelle.getModel();
+
+
     }
 
 

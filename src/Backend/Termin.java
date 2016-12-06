@@ -4,6 +4,7 @@ package Backend;
  * Created by peter on 04/12/16.
  */
 import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Termin {
@@ -17,7 +18,7 @@ public class Termin {
 
     private int priorität;
     private String ort;
-    private String datum;
+    private LocalDate datum;
     public static ArrayList<Termin> Termine = new ArrayList<Termin>();
     //Füge Termine liste zu Semesterplan hinzu
     //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
@@ -26,7 +27,7 @@ public class Termin {
     {
     }
 
-    public Termin(String bezeichnung, LocalTime startZeit, LocalTime endZeit, String periodisch, int priorität, String ort, String datum)
+    public Termin(String bezeichnung, LocalTime startZeit, LocalTime endZeit, String periodisch, int priorität, String ort, LocalDate datum)
     {
         this.bezeichnung = bezeichnung;
         this.datum = datum;
@@ -38,7 +39,7 @@ public class Termin {
 
     };
 
-    public void changeTermin(String bezeichnung, LocalTime startzeit, LocalTime endzeit, String periodisch, int priorität, String ort, String datum)
+    public void changeTermin(String bezeichnung, LocalTime startzeit, LocalTime endzeit, String periodisch, int priorität, String ort, LocalDate datum)
     {
         this.bezeichnung = bezeichnung;
         this.datum = datum;
@@ -79,11 +80,11 @@ public class Termin {
         this.bezeichnung = bezeichnung;
     }
 
-    public String getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 

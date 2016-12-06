@@ -4,6 +4,7 @@ package GUI;
  * Created by chris on 04/12/16.
  */
 
+import Backend.Controller;
 import Backend.Semesterplan;
 
 import java.awt.EventQueue;
@@ -20,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Semester implements ActionListener{
 
@@ -27,7 +29,7 @@ public class Semester implements ActionListener{
     private JTextField txtFieldName;
     private JTextField txtFieldStartZeit;
     private JTextField txtFieldEndZeit;
-
+    private JTextField error;
 
     /**
      * Launch the application.
@@ -72,6 +74,7 @@ public class Semester implements ActionListener{
         frame.getContentPane().add(lblSemesterzeitraum);
 
         txtFieldName = new JTextField();
+        txtFieldName.setName("Startdatum");
         txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldName.setBounds(190, 133, 186, 50);
         txtFieldName.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
@@ -79,6 +82,7 @@ public class Semester implements ActionListener{
         txtFieldName.setColumns(10);
 
         txtFieldStartZeit = new JTextField();
+        txtFieldStartZeit.setName("Enddatum");
         txtFieldStartZeit.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldStartZeit.setColumns(10);
         txtFieldStartZeit.setBounds(448, 133, 186, 50);
@@ -96,18 +100,38 @@ public class Semester implements ActionListener{
         frame.getContentPane().add(lblSemesterbezeichnung);
 
         txtFieldEndZeit = new JTextField();
+        txtFieldEndZeit.setName("Semesterbezeichnung");
         txtFieldEndZeit.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldEndZeit.setColumns(10);
         txtFieldEndZeit.setBounds(190, 71, 444, 50);
         txtFieldEndZeit.setToolTipText("Die Bezeichnung für das Semester eingeben. (zwischen 3 und 29 Zeichen)");
         frame.getContentPane().add(txtFieldEndZeit);
 
+        error = new JTextField();
+        error.setBounds(10, 489, 818, 20);
+        frame.getContentPane().add(error);
+        error.setColumns(10);
+
         JButton btnBesttigen = new JButton("Best\u00E4tigen");
         btnBesttigen.addActionListener(this);
+        btnBesttigen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                //Testen
+                ArrayList<JTextField> SemesterList= new ArrayList();
+                SemesterList.add(txtFieldStartZeit);
+                SemesterList.add(txtFieldEndZeit);
+                SemesterList.add(txtFieldName);
+                Controller.iterateField(SemesterList,error);
+                MainGUI.main(null);
+                frame.dispose();
+            }
+        });
         btnBesttigen.setBounds(291, 289, 231, 68);
         btnBesttigen.setToolTipText("Drücken des Knopfes erstellt den neuen Semesterplan.");
         frame.getContentPane().add(btnBesttigen);
     }
+
 
     public void actionPerformed(ActionEvent ae){
 

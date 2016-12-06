@@ -6,6 +6,7 @@ package GUI;
 
 import Backend.Controller;
 import Backend.Einheit;
+import Backend.Termin;
 
 import java.awt.EventQueue;
 
@@ -37,6 +38,8 @@ public class AddEinheit implements ActionListener {
     private JComboBox comboTyp;
     private JComboBox comboIntervall;
     private JCheckBox checkPflicht;
+    private JTextField error;
+
 
     private Controller controller = new Controller();
 
@@ -131,7 +134,6 @@ public class AddEinheit implements ActionListener {
         txtFieldLocation.setName("Ort");
         txtFieldLocation.setFont(new Font("Tahoma", Font.PLAIN, 22));
         txtFieldLocation.setColumns(10);
-        txtFieldLocation.setText("Field4");
         txtFieldLocation.setBounds(437, 209, 361, 49);
         txtFieldLocation.setToolTipText("Bitte den Namen des Raums eintragen in welchem die Veranstaltung stattfindet");
         frame.getContentPane().add(txtFieldLocation);
@@ -199,12 +201,39 @@ public class AddEinheit implements ActionListener {
         comboTyp.setBounds(437, 114, 361, 49);
         comboTyp.setToolTipText("Bitte die Art der Veranstaltung auswählen");
         frame.getContentPane().add(comboTyp);
+
+        error = new JTextField();
+        error.setBounds(14, 538, 795, 20);
+        frame.getContentPane().add(error);
+        error.setColumns(10);
     }
 
     public void actionPerformed(ActionEvent ae){
 
+        //Testen
+        ArrayList<JTextField> EinheitList= new ArrayList();
+        EinheitList.add(txtFieldName);
+        EinheitList.add(txtFieldTimeStart);
+        EinheitList.add(txtFieldTimeStop);
+        EinheitList.add(txtFieldDate);
+        EinheitList.add(txtFieldLocation);
+        EinheitList.add(txtFieldTeacher);
+
+        Controller.iterateField(EinheitList,error);
+
         Object[] args = getAttributes();
 
+        for(int i=0;i<=MainGUI.daten.length; i++)
+        {
+            if(MainGUI.daten[i]==null)
+            {
+
+                MainGUI.daten[i] = (getAttributes());
+                break;
+            }
+
+        }
+/*
         Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
 
         ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
