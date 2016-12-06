@@ -38,9 +38,9 @@ public class AddEinheit implements ActionListener {
     private JComboBox comboIntervall;
     private JCheckBox checkPflicht;
 
-    Controller controller = new Controller();
+    private Controller controller = new Controller();
 
-    Einheit eingabeEinheit;
+     private Einheit eingabeEinheit;
 
 
 

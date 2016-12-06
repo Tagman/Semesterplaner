@@ -5,7 +5,7 @@ package GUI;
  */
 
 import Backend.Termin;
-import sun.rmi.server.LoaderHandler;
+import Backend.Controller;
 
 import java.awt.EventQueue;
 
@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -36,6 +37,7 @@ public class AddTermin implements ActionListener{
     private JTextField txtFieldDate;
     private JComboBox comboInterval = new JComboBox();
     private JComboBox comboPriority = new JComboBox();
+    private Controller controller = new Controller();
 
     /**
      * Launch the application.
@@ -171,19 +173,26 @@ public class AddTermin implements ActionListener{
         eingabeTermin.setDatum(txtFieldDate.getText());
         */
 
+        ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
 
-        eingabeTermin = new Termin( txtFieldName.getText(),
-                                    LocalTime.parse(txtFieldTimeStart.getText()),
-                                    LocalTime.parse(txtFieldTimeStop.getText()),
-                                    comboInterval.getSelectedItem().toString(),
-                                    Integer.parseInt((String)comboPriority.getSelectedItem()),
-                                    txtFieldLocation.getText(),
-                                    txtFieldDate.getText()
-                                    );
+        if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){
 
-        // neuen Termin mit Eingabenwert in Liste des Semesterplans Objekt hinzufügen
+            eingabeTermin = new Termin( txtFieldName.getText(),
+                    LocalTime.parse(txtFieldTimeStart.getText()),
+                    LocalTime.parse(txtFieldTimeStop.getText()),
+                    comboInterval.getSelectedItem().toString(),
+                    Integer.parseInt((String)comboPriority.getSelectedItem()),
+                    txtFieldLocation.getText(),
+                    txtFieldDate.getText()
+            );
 
-        MainGUI.sem.addTermin(eingabeTermin);  //Anschauen ob es in der wirklich in der Liste ist
+            // neuen Termin mit Eingabenwert in Liste des Semesterplans Objekt hinzufügen
+
+            MainGUI.sem.addTermin(eingabeTermin);  //Anschauen ob es in der wirklich in der Liste ist
+        }
+
+
+
 
         /*
         //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
@@ -200,8 +209,15 @@ public class AddTermin implements ActionListener{
 
         MainGUI.tm.addRow(new Object[]{eingabeTermin.getBezeichnung(), "", eingabeTermin.getStartZeit()+"-"+ eingabeTermin.getEndZeit(), eingabeTermin.getOrt(), "", "", eingabeTermin.getDatum(), eingabeTermin.getPeriodisch(), eingabeTermin.getPriorität()});
 
+    }
 
+    private ArrayList<JTextField> collectTxtFields(){
+        ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
 
+        gatheredTxtFields.add(txtFieldDate);
+        gatheredTxtFields.add(txtFieldLocation);
+        gatheredTxtFields.add(txtFieldName);
 
+        return gatheredTxtFields;
     }
 }
