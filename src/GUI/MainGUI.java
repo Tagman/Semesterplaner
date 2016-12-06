@@ -89,6 +89,12 @@ public class MainGUI {
         mnNewMenu.add(mntmNewMenuItem_3);
 
         JMenuItem mntmNewMenuItem_4 = new JMenuItem("Termin");
+        mntmNewMenuItem_4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                AddTermin.main(null);
+            }
+        });
         mntmNewMenuItem_4.setToolTipText("Hier klicken um einen neuen Termin zu erstellen");
         mnNewMenu.add(mntmNewMenuItem_4);
 
@@ -140,11 +146,12 @@ public class MainGUI {
         String[] columnNames = {"Modulname",
                 "Veranstaltungsart",
                 "Uhrzeit",
-                "Raum",
-                "Name des Lehrenden",
+                "Raum/Ort",
+                "Lehrender",
                 "Pflicht?",
                 "Datum",
-                "Wiederholrhythmus"
+                "Wiederholrhythmus",
+                "Priorität"
         };
 
 

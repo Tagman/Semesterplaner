@@ -243,11 +243,11 @@ public class AddEinheit implements ActionListener {
         args[4] = txtFieldTeacher.getText();
 
         LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        args[5] = date;
+        args[6] = date;
 
-        args[6]=(comboIntervall.getSelectedItem());
+        args[7]=(comboIntervall.getSelectedItem());
 
-        args[7]=(checkPflicht.isSelected());
+        args[5]=(checkPflicht.isSelected());
 
 
 

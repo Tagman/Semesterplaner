@@ -17,7 +17,7 @@ public class Termin {
     private int priorität;
     private String ort;
     private String datum;
-    private ArrayList<Termin> Termine = new ArrayList<Termin>();
+    public static ArrayList<Termin> Termine = new ArrayList<Termin>();
     //Füge Termine liste zu Semesterplan hinzu
     //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
 

@@ -64,7 +64,7 @@ public class AddTermin {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 835, 610);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JLabel lblHinzufgenEinesTermins = new JLabel("Hinzuf\u00FCgen eines Termins");
@@ -132,12 +132,13 @@ public class AddTermin {
                 eingabetermin.setStartzeit(textField_1.getText());
                 eingabetermin.setEndzeit(textField_2.getText());
                 eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
-                //eingabetermin.setPriorität((int)comboIntervall.getSelectedItem());
+                eingabetermin.setPriorität(Integer.parseInt((String) comboBox_1.getSelectedItem()));
                 eingabetermin.setOrt(textField_3.getText());
                 eingabetermin.setDatum(txtFieldDate.getText());
 
                 //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
-                Termin.Termine.add(new Termin(	eingabetermin.getBezeichnung(),
+                Termin.Termine.add(new Termin(
+                        eingabetermin.getBezeichnung(),
                         eingabetermin.getStartzeit(),
                         eingabetermin.getEndzeit(),
                         eingabetermin.getPeriodisch(),
@@ -145,9 +146,7 @@ public class AddTermin {
                         eingabetermin.getOrt(),
                         eingabetermin.getDatum()));
 
-
-
-                Termin.Termineausgeben();
+                MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
 
 
 
