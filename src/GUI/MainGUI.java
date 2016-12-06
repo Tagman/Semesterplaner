@@ -12,7 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-
+import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,7 +28,10 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.text.SimpleDateFormat;
+import java.time.temporal.TemporalField;
+import java.time.temporal.WeekFields;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainGUI {
 
@@ -189,22 +192,32 @@ public class MainGUI {
         btnAktualisieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
+                try {
+                for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+                {
+                    tm.removeRow(j);
+                }
 
                 for(int i=0;i<=daten.length;i++)
                 {
-                    String now = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-                    java.util.Calendar date = java.util.Calendar.getInstance();
-                    String Tag="";
-                    Tag=Tag+now.charAt(0)+now.charAt(1);
-                    String Monat="";
-                    Monat=Monat+ now.charAt(3)+now.charAt(4);
-                    String Jahr="";
-                    Jahr=Jahr+now.charAt(6)+now.charAt(7)+now.charAt(8)+now.charAt(9);
-                    Date date = new Date(Integer.parseInt(Jahr), Integer.parseInt(Monat), 10);
-                    date.setTime(now);
-                    if(now) */
-                    tm.addRow((Object[]) daten[i]);
-                }
+                    LocalDate today = LocalDate.now();
+                    TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                    int weekNumber = today.get(woy);
+                  //  System.out.println(weekNumber);
+                    Object[] etwas = (Object[]) daten[i];
+                    LocalDate datum = (LocalDate) etwas[6];
+                    TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                    int holweek = datum.get(week);
+                   // System.out.println(holweek);
+                  //  System.out.println(datum);
+                    if(weekNumber==holweek)
+                    {
+
+                        tm.addRow((Object[]) daten[i]);
+                    }
+                }}
+                catch (NullPointerException igno) {
+                    System.out.print("ignorieren");}
             }
         });
         btnAktualisieren.setBounds(633, 87, 130, 29);

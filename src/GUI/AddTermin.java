@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -134,7 +136,7 @@ public class AddTermin {
                 eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
                 eingabetermin.setPriorität(Integer.parseInt((String) comboBox_1.getSelectedItem()));
                 eingabetermin.setOrt(textField_3.getText());
-                eingabetermin.setDatum(txtFieldDate.getText());
+                eingabetermin.setDatum(LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
                 //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
                 Termin.Termine.add(new Termin(
