@@ -61,18 +61,18 @@ public class Semester {
         frame.getContentPane().setLayout(null);
 
         JLabel lblErstellenEinesNeuen = new JLabel("Erstellen eines neuen Semesterplans");
-        lblErstellenEinesNeuen.setFont(new Font("Arial Black", Font.BOLD, 20));
+        lblErstellenEinesNeuen.setFont(new Font("Tahoma", Font.PLAIN, 24));
         lblErstellenEinesNeuen.setBounds(190, 16, 564, 33);
         frame.getContentPane().add(lblErstellenEinesNeuen);
 
         JLabel lblSemesterzeitraum = new JLabel("Semesterzeitraum");
-        lblSemesterzeitraum.setFont(new Font("Arial Black", Font.BOLD, 11));
-        lblSemesterzeitraum.setBounds(15, 152, 142, 20);
+        lblSemesterzeitraum.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblSemesterzeitraum.setBounds(15, 133, 142, 20);
         frame.getContentPane().add(lblSemesterzeitraum);
 
         textField = new JTextField();
         textField.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField.setBounds(192, 137, 186, 50);
+        textField.setBounds(190, 133, 186, 50);
         textField.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
         frame.getContentPane().add(textField);
         textField.setColumns(10);
@@ -80,7 +80,7 @@ public class Semester {
         textField_1 = new JTextField();
         textField_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
         textField_1.setColumns(10);
-        textField_1.setBounds(448, 137, 186, 50);
+        textField_1.setBounds(448, 133, 186, 50);
         textField_1.setToolTipText("Enddatum eintragen. (DD.MM.YYYY)");
         frame.getContentPane().add(textField_1);
 
@@ -90,8 +90,8 @@ public class Semester {
         frame.getContentPane().add(label);
 
         JLabel lblSemesterbezeichnung = new JLabel("Semesterbezeichnung");
-        lblSemesterbezeichnung.setFont(new Font("Arial Black", Font.BOLD, 11));
-        lblSemesterbezeichnung.setBounds(15, 88, 167, 20);
+        lblSemesterbezeichnung.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblSemesterbezeichnung.setBounds(13, 71, 167, 20);
         frame.getContentPane().add(lblSemesterbezeichnung);
 
         textField_2 = new JTextField();
@@ -107,8 +107,8 @@ public class Semester {
             {
                 Semesterplan Se = new  Semesterplan();
                 Se.setSemestername(textField.getText()); //speichern
-                Se.setStartzeit(LocalTime.parse(textField_1.getText())); //speichern
-                Se.setEndzeit(LocalTime.parse(textField_2.getText())); //speichern
+                //  Se.setStartzeit(LocalTime.parse(textField_1.getText())); //speichern
+                //  Se.setEndzeit(LocalTime.parse(textField_2.getText())); //speichern
                 MainGUI.main(null);
                 MainGUI.sem=Se;
                 frame.dispose();

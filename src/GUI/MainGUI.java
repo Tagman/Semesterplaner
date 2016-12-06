@@ -82,7 +82,7 @@ public class MainGUI {
         mntmNewMenuItem_3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
-                AddTermin.main(null);
+                AddEinheit.main(null);
             }
         });
         mntmNewMenuItem_3.setToolTipText("Hier klicken um eine neue Einheit zu erstellen");

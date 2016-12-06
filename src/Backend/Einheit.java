@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by Chris on 28.11.2016.
  */
-//klasse
+
 public class Einheit {
 
     private LocalTime anfangsZeit;
