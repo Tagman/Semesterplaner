@@ -34,7 +34,7 @@ public class AddTermin {
     private JTextField name;
     private JTextField start;
     private JTextField ende;
-    private JTextField textField_3;
+    private JTextField ort;
     private JTextField Datum;
     JComboBox comboIntervall = new JComboBox();
     JComboBox comboBox_1 = new JComboBox();
@@ -83,6 +83,7 @@ public class AddTermin {
 
         name = new JTextField();
         name.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        name.setName("Bezeichnung");
         name.setText("Field");
         name.setColumns(10);
         name.setBounds(15, 114, 383, 49);
@@ -97,6 +98,7 @@ public class AddTermin {
         frame.getContentPane().add(label_3);
 
         start = new JTextField();
+        start.setName("Startzeit");
         start.setFont(new Font("Tahoma", Font.PLAIN, 22));
         start.setColumns(10);
         start.setText("Field1");
@@ -104,6 +106,7 @@ public class AddTermin {
         frame.getContentPane().add(start);
 
         ende = new JTextField();
+        ende.setName("Endzeit");
         ende.setFont(new Font("Tahoma", Font.PLAIN, 22));
         ende.setColumns(10);
         ende.setText("Field2");
@@ -115,12 +118,13 @@ public class AddTermin {
         label_4.setBounds(197, 214, 31, 33);
         frame.getContentPane().add(label_4);
 
-        textField_3 = new JTextField();
-        textField_3.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_3.setColumns(10);
-        textField_3.setText("Field3");
-        textField_3.setBounds(438, 209, 361, 49);
-        frame.getContentPane().add(textField_3);
+        ort = new JTextField();
+        ort.setName("Veranstaltungsort");
+        ort.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        ort.setColumns(10);
+        ort.setText("Field3");
+        ort.setBounds(438, 209, 361, 49);
+        frame.getContentPane().add(ort);
 
         JLabel lblOrt = new JLabel("Ort\r\n");
         lblOrt.setBounds(438, 179, 203, 20);
@@ -130,13 +134,14 @@ public class AddTermin {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
-                /*Testen
+                //Testen
                 ArrayList<JTextField> TerminList= new ArrayList();
                 TerminList.add(name);
                 TerminList.add(start);
                 TerminList.add(ende);
                 TerminList.add(Datum);
-                Controller.iterateField(TerminList);*/
+                TerminList.add(ort);
+                Controller.iterateField(TerminList,error);
 
                 //eingabetermin mit werten füllen
                 eingabetermin.setBezeichnung(name.getText());
@@ -144,7 +149,7 @@ public class AddTermin {
                 eingabetermin.setEndzeit(ende.getText());
                 eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
                 eingabetermin.setPriorität(Integer.parseInt((String) comboBox_1.getSelectedItem()));
-                eingabetermin.setOrt(textField_3.getText());
+                eingabetermin.setOrt(ort.getText());
                 eingabetermin.setDatum(LocalDate.parse(Datum.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
 
                 //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
@@ -200,6 +205,7 @@ public class AddTermin {
         frame.getContentPane().add(comboIntervall);
 
         Datum = new JTextField();
+        Datum.setName("Datum");
         Datum.setText("DD.MM.JJJJ");
         Datum.setFont(new Font("Tahoma", Font.PLAIN, 22));
         Datum.setColumns(10);

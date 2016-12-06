@@ -96,27 +96,27 @@ public class Controller {
         }
     }
 
-    public static void iterateField(ArrayList<JTextField> fields)
+    public static void iterateField(ArrayList<JTextField> fields, JTextField error)
     {
 
         fields.forEach(field -> {
             switch(checkField(field)) {
 
                 case 1:
-                    System.out.println(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
                     break;
                 case 2:
-                    System.out.println(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
                     break;
                 case 3:
-                    System.out.println(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
+                    error.setText(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
                     break;
                 case 4:
-                    System.out.println(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
+                    error.setText(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
                     break;
 
                 default:
-                    System.out.println(field.getName() + " OK!");
+                    error.setText(field.getName() + " OK!");
 
             }
         });

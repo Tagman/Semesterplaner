@@ -205,7 +205,7 @@ public class AddEinheit implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
 
-        /*/Testen
+        //Testen
         ArrayList<JTextField> EinheitList= new ArrayList();
         EinheitList.add(txtFieldName);
         EinheitList.add(txtFieldTimeStart);
@@ -214,7 +214,7 @@ public class AddEinheit implements ActionListener {
         EinheitList.add(txtFieldLocation);
         EinheitList.add(txtFieldTeacher);
 
-        Controller.iterateField(EinheitList);*/
+        Controller.iterateField(EinheitList,error);
 
 
         for(int i=0;i<=MainGUI.daten.length; i++)

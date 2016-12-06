@@ -73,6 +73,7 @@ public class Semester {
         frame.getContentPane().add(lblSemesterzeitraum);
 
         start = new JTextField();
+        start.setName("Startdatum");
         start.setFont(new Font("Tahoma", Font.PLAIN, 22));
         start.setBounds(190, 133, 186, 50);
         start.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
@@ -80,6 +81,7 @@ public class Semester {
         start.setColumns(10);
 
         ende = new JTextField();
+        ende.setName("Enddatum");
         ende.setFont(new Font("Tahoma", Font.PLAIN, 22));
         ende.setColumns(10);
         ende.setBounds(448, 133, 186, 50);
@@ -97,6 +99,7 @@ public class Semester {
         frame.getContentPane().add(lblSemesterbezeichnung);
 
         name = new JTextField();
+        name.setName("Semesterbezeichnung");
         name.setFont(new Font("Tahoma", Font.PLAIN, 22));
         name.setColumns(10);
         name.setBounds(190, 71, 444, 50);
@@ -118,7 +121,7 @@ public class Semester {
                 SemesterList.add(ende);
                 SemesterList.add(name);
 
-                Controller.iterateField(SemesterList);
+                Controller.iterateField(SemesterList,error);
 
                 Semesterplan Se = new  Semesterplan();
                 Se.setSemestername(start.getText()); //speichern
