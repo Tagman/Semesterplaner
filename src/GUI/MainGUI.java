@@ -27,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainGUI {
 
@@ -36,13 +38,15 @@ public class MainGUI {
     private JTextField txtEnddatum;
     static Semesterplan sem;
     static Object[][] data;
-
     static DefaultTableModel tm;
+    static Object[] daten = new Object[200];
+
 
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -65,7 +69,9 @@ public class MainGUI {
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize()
+    {
+
         frame = new JFrame();
         frame.setBounds(100, 100, 909, 650);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -180,6 +186,26 @@ public class MainGUI {
         frame.getContentPane().add(lblAnzeigezeitraum);
 
         JButton btnAktualisieren = new JButton("Aktualisieren");
+        btnAktualisieren.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e)
+            {
+
+                for(int i=0;i<=daten.length;i++)
+                {
+                   /* String now = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+                    java.util.Calendar date = java.util.Calendar.getInstance();
+                    String Tag="";
+                    String Monat="";
+                    Monat=Monat+ now.charAt(4)+now.charAt(5);
+                    String Jahr="";
+                    Jahr=Jahr+now.charAt(6)+now.charAt(7)+now.charAt(8)+now.charAt(9);
+                    Date date = new Date(Integer.parseInt(Jahr), 10, 10);
+                    date.setTime(now);
+                    if(now) */
+                    tm.addRow((Object[]) daten[i]);
+                }
+            }
+        });
         btnAktualisieren.setBounds(633, 87, 130, 29);
         frame.getContentPane().add(btnAktualisieren);
         btnAktualisieren.setToolTipText("Hier klicken um die Ansicht auf Basis der Daten zu Aktualisieren");

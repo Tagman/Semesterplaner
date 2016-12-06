@@ -146,7 +146,29 @@ public class AddTermin {
                         eingabetermin.getOrt(),
                         eingabetermin.getDatum()));
 
-                MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
+                //experimentell
+                Object[] args = new Object[9];
+                args[0] = eingabetermin.getBezeichnung();
+                args[1] = "";
+                args[2] = eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit();
+                args[3] = eingabetermin.getOrt();
+                args[4] = "";
+                args[5] = "";
+                args[6] = eingabetermin.getDatum();
+                args[7] = eingabetermin.getPeriodisch();
+                args[8] = eingabetermin.getPriorität();
+
+                for(int i=0;i<=MainGUI.daten.length; i++)
+                {
+                    if(MainGUI.daten[i]==null)
+                    {
+
+                        MainGUI.daten[i] = args;
+                        break;
+                    }
+
+                }
+                //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
 
 
 

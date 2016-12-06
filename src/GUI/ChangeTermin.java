@@ -124,7 +124,7 @@ public class ChangeTermin    {
         frame.getContentPane().add(label_5);
 
         JButton btnBesttigen = new JButton("Best\u00E4tigen");
-        btnBesttigen.addActionListener(new ActionListener() {
+      /*  btnBesttigen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
 
 
@@ -160,7 +160,7 @@ public class ChangeTermin    {
 
             }
         });
-
+*/
         btnBesttigen.setBounds(438, 417, 361, 99);
         frame.getContentPane().add(btnBesttigen);
 

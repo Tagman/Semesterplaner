@@ -201,11 +201,18 @@ public class AddEinheit implements ActionListener {
     public void actionPerformed(ActionEvent ae){
 
 
-        System.out.println("Test");
 
-        Object[] args = getAttributes();
 
-        MainGUI.tm.addRow(args);
+        for(int i=0;i<=MainGUI.daten.length; i++)
+        {
+            if(MainGUI.daten[i]==null)
+            {
+
+                MainGUI.daten[i] = (getAttributes());
+                break;
+            }
+
+        }
 /*
 
         Backend.Einheit newEinheit = new Backend.Einheit(args);
