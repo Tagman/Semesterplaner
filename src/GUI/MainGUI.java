@@ -4,6 +4,7 @@ package GUI;
  * Created by chris on 04/12/16.
  */
 import Backend.Semesterplan;
+import Backend.Stundenplan;
 
 import java.awt.EventQueue;
 
@@ -35,6 +36,7 @@ public class MainGUI {
     private JTextField txtAnfangsdatum;
     private JTextField txtEnddatum;
     static Semesterplan sem;
+    static Stundenplan stundenplan;
     static Object[][] data;
 
     static DefaultTableModel tm;

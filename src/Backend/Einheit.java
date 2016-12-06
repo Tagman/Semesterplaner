@@ -15,7 +15,8 @@ public class Einheit {
     private String ort;
     private String name;
     private String lehrender;
-    private int wiederholungsrhytmus;
+    //private int wiederholungsrhytmus; //Integer Wert um später damit rechnen zu können
+    private String wiederholungsrhytmus;
     private int prioriät;
     private String typ;
     private LocalDate date;
@@ -27,7 +28,7 @@ public class Einheit {
         ort = null;
         name = null;
         lehrender = null;
-        wiederholungsrhytmus = -1;
+        wiederholungsrhytmus = null;
         prioriät = -1;
         typ = null;
         date = null;
@@ -43,7 +44,7 @@ public class Einheit {
         ort = (String)args[4];
         lehrender = (String)args[5];
         date = (LocalDate) args[6];
-        wiederholungsrhytmus = (int)args[7];
+        wiederholungsrhytmus = (String)args[7];
         prioriät = (int)args[8];
 
 
@@ -57,7 +58,7 @@ public class Einheit {
         ort = (String)args[4];
         lehrender = (String)args[5];
         date = (LocalDate) args[6];
-        wiederholungsrhytmus = (int)args[7];
+        wiederholungsrhytmus = (String)args[7];
         prioriät = (int)args[8];
 
         return this;

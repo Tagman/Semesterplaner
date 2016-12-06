@@ -21,12 +21,12 @@ import java.awt.event.ActionEvent;
 
 import java.time.LocalTime;
 
-public class Semester {
+public class Semester implements ActionListener{
 
     private JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
+    private JTextField txtFieldName;
+    private JTextField txtFieldStartZeit;
+    private JTextField txtFieldEndZeit;
 
 
     /**
@@ -71,19 +71,19 @@ public class Semester {
         lblSemesterzeitraum.setBounds(15, 133, 142, 20);
         frame.getContentPane().add(lblSemesterzeitraum);
 
-        textField = new JTextField();
-        textField.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField.setBounds(190, 133, 186, 50);
-        textField.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        txtFieldName = new JTextField();
+        txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        txtFieldName.setBounds(190, 133, 186, 50);
+        txtFieldName.setToolTipText("Startdatum eintragen. (DD.MM.YYYY)");
+        frame.getContentPane().add(txtFieldName);
+        txtFieldName.setColumns(10);
 
-        textField_1 = new JTextField();
-        textField_1.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_1.setColumns(10);
-        textField_1.setBounds(448, 133, 186, 50);
-        textField_1.setToolTipText("Enddatum eintragen. (DD.MM.YYYY)");
-        frame.getContentPane().add(textField_1);
+        txtFieldStartZeit = new JTextField();
+        txtFieldStartZeit.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        txtFieldStartZeit.setColumns(10);
+        txtFieldStartZeit.setBounds(448, 133, 186, 50);
+        txtFieldStartZeit.setToolTipText("Enddatum eintragen. (DD.MM.YYYY)");
+        frame.getContentPane().add(txtFieldStartZeit);
 
         JLabel label = new JLabel("-");
         label.setFont(new Font("Tahoma", Font.PLAIN, 27));
@@ -95,29 +95,30 @@ public class Semester {
         lblSemesterbezeichnung.setBounds(13, 71, 167, 20);
         frame.getContentPane().add(lblSemesterbezeichnung);
 
-        textField_2 = new JTextField();
-        textField_2.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        textField_2.setColumns(10);
-        textField_2.setBounds(190, 71, 444, 50);
-        textField_2.setToolTipText("Die Bezeichnung für das Semester eingeben. (zwischen 3 und 29 Zeichen)");
-        frame.getContentPane().add(textField_2);
+        txtFieldEndZeit = new JTextField();
+        txtFieldEndZeit.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        txtFieldEndZeit.setColumns(10);
+        txtFieldEndZeit.setBounds(190, 71, 444, 50);
+        txtFieldEndZeit.setToolTipText("Die Bezeichnung für das Semester eingeben. (zwischen 3 und 29 Zeichen)");
+        frame.getContentPane().add(txtFieldEndZeit);
 
         JButton btnBesttigen = new JButton("Best\u00E4tigen");
-        btnBesttigen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                Semesterplan se = new  Semesterplan();
-                se.setSemesterName(textField.getText()); //speichern
-                se.setStartZeit(LocalTime.parse(textField_1.getText())); //speichern
-                se.setEndZeit(LocalTime.parse(textField_2.getText())); //speichern
-                MainGUI.main(null);
-                MainGUI.sem=se;
-                frame.dispose();
-            }
-        });
+        btnBesttigen.addActionListener(this);
         btnBesttigen.setBounds(291, 289, 231, 68);
         btnBesttigen.setToolTipText("Drücken des Knopfes erstellt den neuen Semesterplan.");
         frame.getContentPane().add(btnBesttigen);
+    }
+
+    public void actionPerformed(ActionEvent ae){
+
+        Semesterplan se = new  Semesterplan();
+        se.setSemesterName(txtFieldName.getText()); //speichern
+        se.setStartZeit(LocalTime.parse(txtFieldStartZeit.getText())); //speichern
+        se.setEndZeit(LocalTime.parse(txtFieldEndZeit.getText())); //speichern
+        MainGUI.main(null);
+        MainGUI.sem=se;
+        frame.dispose();
+
     }
 }
 

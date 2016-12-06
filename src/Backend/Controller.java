@@ -22,6 +22,9 @@ import java.util.ArrayList;
 
 public class Controller {
 
+    private static String errString;
+    private boolean errBoolean;
+
     public Controller(){
         // emtpy constructor.
     }
@@ -96,33 +99,48 @@ public class Controller {
         }
     }
 
-    public void iterateField(ArrayList<JTextField> fields){
+    public boolean iterateField(ArrayList<JTextField> fields){
+
+
 
         fields.forEach(field -> {
+
             switch(checkField(field)) {
 
                 case 1:
+                    errString = field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.";
+                    errBoolean = false;
                     System.out.println(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
                     break;
                 case 2:
+                    errString = field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.";
+                    errBoolean = false;
                     System.out.println(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
                     break;
                 case 3:
+                    errString = field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!";
+                    errBoolean = false;
                     System.out.println(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
                     break;
                 case 4:
+                    errString = field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein";
+                    errBoolean = false;
                     System.out.println(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
                     break;
 
                 default:
+                    errString = field.getName() + " OK!";
+                    errBoolean = true;
                     System.out.println(field.getName() + " OK!");
 
             }
-        });
 
+
+        });
+        return errBoolean;
     }
 
-    private int checkTime(JTextField start, JTextField end) {
+    public boolean checkTime(JTextField start, JTextField end) {
 
         /*
             0 - Time is in Correct Format
@@ -133,14 +151,21 @@ public class Controller {
             LocalTime startTime = LocalTime.parse(start.getText());
             LocalTime endTime = LocalTime.parse(end.getText());
 
-            return 0;
+            if(startTime.isBefore(endTime)){
+                return true;
+            }
+            else{
+                return false;
+            }
+
+
 
             
         }catch (DateTimeParseException e){
 
             System.out.println("Die Zeit: " + e.getParsedString() + "muss das Format hh:mm haben");
 
-            return 1;
+            return false;
 
 
         }

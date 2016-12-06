@@ -16,6 +16,10 @@ public class Stundenplan {
         this.faecher = f;
     }
 
+    public Stundenplan(){
+        faecher = null;
+    }
+
     public void addFach(Fach f)
     {
         faecher.add(f);

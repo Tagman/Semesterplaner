@@ -5,6 +5,7 @@ package GUI;
  */
 
 import Backend.Controller;
+import Backend.Einheit;
 
 import java.awt.EventQueue;
 
@@ -38,6 +39,8 @@ public class AddEinheit implements ActionListener {
     private JCheckBox checkPflicht;
 
     Controller controller = new Controller();
+
+    Einheit eingabeEinheit;
 
 
 
@@ -200,37 +203,70 @@ public class AddEinheit implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
 
-
-        System.out.println("Test");
-
         Object[] args = getAttributes();
 
-        MainGUI.tm.addRow(args);
-/*
+        Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
 
-        Backend.Einheit newEinheit = new Backend.Einheit(args);
-        newEinheit.ausgabe();
+        ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
 
+        if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){      // Falls Felder alle in Ordnung sind kommt true zurück
 
+            eingabeEinheit = new Einheit(args);
 
-        ArrayList<JTextField> txtFieldsToCheck = new ArrayList<>();
-
-        txtFieldsToCheck = collectTxtFields();
-
-        controller.iterateField(txtFieldsToCheck);
-*/
-        /*
-        ////////////////////////////////////////////
-        //Hier MethodenAufruf für Prüfung einbauen
-         */
+            //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
 
 
+            MainGUI.tm.addRow(tableArgs);
 
+        }
 
     }
 
     private Object[] getAttributes() {
         Object[] args = new Object[9];
+
+        args[0] = txtFieldName.getText();
+        args[1] = comboTyp.getSelectedItem();
+
+        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+
+        //args[2] = ""+startTime+"-"+endTime;
+        args[2] = startTime;
+        args[3] = endTime;
+        args[4] = txtFieldLocation.getText();
+        args[5] = txtFieldTeacher.getText();
+
+        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        args[6] = date;
+
+        args[7]=(comboIntervall.getSelectedItem());
+
+
+        if(checkPflicht.isSelected()){
+            args[8] = 10;
+        }
+        else{
+            args[8] = 1;
+        }
+
+        return args;
+
+    }
+
+    private ArrayList<JTextField> collectTxtFields(){
+        ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
+
+        gatheredTxtFields.add(txtFieldDate);
+        gatheredTxtFields.add(txtFieldLocation);
+        gatheredTxtFields.add(txtFieldName);
+        gatheredTxtFields.add(txtFieldTeacher);
+
+        return gatheredTxtFields;
+    }
+
+    public Object[] reorderAttributes() {
+        Object [] args = new Object[9];
 
         args[0] = txtFieldName.getText();
         args[1] = comboTyp.getSelectedItem();
@@ -249,21 +285,8 @@ public class AddEinheit implements ActionListener {
 
         args[5]=(checkPflicht.isSelected());
 
-
-
         return args;
 
-    }
-
-    private ArrayList<JTextField> collectTxtFields(){
-        ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
-
-        gatheredTxtFields.add(txtFieldDate);
-        gatheredTxtFields.add(txtFieldLocation);
-        gatheredTxtFields.add(txtFieldName);
-        gatheredTxtFields.add(txtFieldTeacher);
-
-        return gatheredTxtFields;
     }
 
 
