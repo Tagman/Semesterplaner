@@ -192,14 +192,15 @@ public class MainGUI {
 
                 for(int i=0;i<=daten.length;i++)
                 {
-                   /* String now = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+                    String now = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
                     java.util.Calendar date = java.util.Calendar.getInstance();
                     String Tag="";
+                    Tag=Tag+now.charAt(0)+now.charAt(1);
                     String Monat="";
-                    Monat=Monat+ now.charAt(4)+now.charAt(5);
+                    Monat=Monat+ now.charAt(3)+now.charAt(4);
                     String Jahr="";
                     Jahr=Jahr+now.charAt(6)+now.charAt(7)+now.charAt(8)+now.charAt(9);
-                    Date date = new Date(Integer.parseInt(Jahr), 10, 10);
+                    Date date = new Date(Integer.parseInt(Jahr), Integer.parseInt(Monat), 10);
                     date.setTime(now);
                     if(now) */
                     tm.addRow((Object[]) daten[i]);
