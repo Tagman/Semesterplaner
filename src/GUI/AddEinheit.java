@@ -208,10 +208,10 @@ public class AddEinheit implements ActionListener {
         error.setColumns(10);
     }
 
-    public void actionPerformed(ActionEvent ae){
+    public void actionPerformed(ActionEvent ae) {
 
         //Testen
-        ArrayList<JTextField> EinheitList= new ArrayList();
+        ArrayList<JTextField> EinheitList = new ArrayList();
         EinheitList.add(txtFieldName);
         EinheitList.add(txtFieldTimeStart);
         EinheitList.add(txtFieldTimeStop);
@@ -219,19 +219,15 @@ public class AddEinheit implements ActionListener {
         EinheitList.add(txtFieldLocation);
         EinheitList.add(txtFieldTeacher);
 
-        Controller.iterateField(EinheitList,error);
+        Controller.iterateField(EinheitList, error);
 
-        Object[] args = getAttributes();
-
-        for(int i=0;i<=MainGUI.daten.length; i++)
-        {
-            if(MainGUI.daten[i]==null)
-            {
+        for (int i = 0; i <= MainGUI.daten.length; i++) {
+            if (MainGUI.daten[i] == null) {
 
                 MainGUI.daten[i] = (getAttributes());
                 break;
             }
-
+        }
         }
 /*
         Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
@@ -250,73 +246,73 @@ public class AddEinheit implements ActionListener {
         }
 
     }
+*/
+        private Object[] getAttributes()
+        {
+            Object[] args = new Object[9];
 
-    private Object[] getAttributes() {
-        Object[] args = new Object[9];
+            args[0] = txtFieldName.getText();
+            args[1] = comboTyp.getSelectedItem();
 
-        args[0] = txtFieldName.getText();
-        args[1] = comboTyp.getSelectedItem();
+            LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+            LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
 
-        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
-        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+            //args[2] = ""+startTime+"-"+endTime;
+            args[2] = startTime;
+            args[3] = endTime;
+            args[4] = txtFieldLocation.getText();
+            args[5] = txtFieldTeacher.getText();
 
-        //args[2] = ""+startTime+"-"+endTime;
-        args[2] = startTime;
-        args[3] = endTime;
-        args[4] = txtFieldLocation.getText();
-        args[5] = txtFieldTeacher.getText();
+            LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            args[6] = date;
 
-        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        args[6] = date;
-
-        args[7]=(comboIntervall.getSelectedItem());
+            args[7] = (comboIntervall.getSelectedItem());
 
 
-        if(checkPflicht.isSelected()){
-            args[8] = 10;
+            if (checkPflicht.isSelected()) {
+                args[8] = 10;
+            } else {
+                args[8] = 1;
+            }
+
+            return args;
+
         }
-        else{
-            args[8] = 1;
+
+        private ArrayList<JTextField> collectTxtFields () {
+            ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
+
+            gatheredTxtFields.add(txtFieldDate);
+            gatheredTxtFields.add(txtFieldLocation);
+            gatheredTxtFields.add(txtFieldName);
+            gatheredTxtFields.add(txtFieldTeacher);
+
+            return gatheredTxtFields;
         }
 
-        return args;
+        public Object[] reorderAttributes () {
+            Object[] args = new Object[9];
 
-    }
+            args[0] = txtFieldName.getText();
+            args[1] = comboTyp.getSelectedItem();
 
-    private ArrayList<JTextField> collectTxtFields(){
-        ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
+            LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+            LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
 
-        gatheredTxtFields.add(txtFieldDate);
-        gatheredTxtFields.add(txtFieldLocation);
-        gatheredTxtFields.add(txtFieldName);
-        gatheredTxtFields.add(txtFieldTeacher);
+            args[2] = "" + startTime + "-" + endTime;
+            args[3] = txtFieldLocation.getText();
+            args[4] = txtFieldTeacher.getText();
 
-        return gatheredTxtFields;
-    }
+            LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            args[6] = date;
 
-    public Object[] reorderAttributes() {
-        Object [] args = new Object[9];
+            args[7] = (comboIntervall.getSelectedItem());
 
-        args[0] = txtFieldName.getText();
-        args[1] = comboTyp.getSelectedItem();
+            args[5] = (checkPflicht.isSelected());
 
-        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
-        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+            return args;
 
-        args[2] = ""+startTime+"-"+endTime;
-        args[3] = txtFieldLocation.getText();
-        args[4] = txtFieldTeacher.getText();
-
-        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        args[6] = date;
-
-        args[7]=(comboIntervall.getSelectedItem());
-
-        args[5]=(checkPflicht.isSelected());
-
-        return args;
-
-    }
+        }
 
 
 }

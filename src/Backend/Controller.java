@@ -138,7 +138,7 @@ public class Controller {
 
         return errBoolean; }
 
-    public boolean checkTime(JTextField start, JTextField end) {
+    public static boolean checkTime(JTextField start, JTextField end) {
 
         /*
             0 - Time is in Correct Format

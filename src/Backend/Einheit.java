@@ -50,7 +50,8 @@ public class Einheit {
 
     }
 
-    public Einheit changeEinheit(Object args[]){
+    public Einheit changeEinheit(Object args[])
+    {
         name = (String)args[0];
         typ = (String)args[1];
         anfangsZeit = (LocalTime) args[2];

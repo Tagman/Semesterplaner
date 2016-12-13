@@ -27,7 +27,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class AddTermin implements ActionListener{
+public class AddTermin implements ActionListener// implements ActionListener
+ {
 
     //speichert eingabe
     private Termin eingabetermin = new Termin();
@@ -109,6 +110,12 @@ public class AddTermin implements ActionListener{
         txtFieldTimeStart.setBounds(16, 209, 153, 49);
         frame.getContentPane().add(txtFieldTimeStart);
 
+        JButton btnHinzufgen = new JButton("Zum Stundenplan hinzuf\u00FCgen");
+        btnHinzufgen.setBounds(437, 417, 361, 99);
+        btnHinzufgen.addActionListener(this);
+        btnHinzufgen.setToolTipText("Mit drückend es Buttons bestätigen sie die Eingabe und Die einheit wird in ihren Stundenplan übertragen.");
+        frame.getContentPane().add(btnHinzufgen);
+
         txtFieldTimeStop = new JTextField();
         txtFieldTimeStop.setName("Endzeit");
         txtFieldTimeStop.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -129,75 +136,6 @@ public class AddTermin implements ActionListener{
         txtFieldLocation.setText("Field3");
         txtFieldLocation.setBounds(438, 209, 361, 49);
         frame.getContentPane().add(txtFieldLocation);
-
-        JLabel lblOrt = new JLabel("Ort\r\n");
-        lblOrt.setBounds(438, 179, 203, 20);
-        frame.getContentPane().add(lblOrt);
-
-        JButton button = new JButton("Zum Stundenplan hinzuf\u00FCgen");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-
-                //Testen
-                ArrayList<JTextField> TerminList= new ArrayList();
-                TerminList.add(name);
-                TerminList.add(start);
-                TerminList.add(ende);
-                TerminList.add(Datum);
-                TerminList.add(ort);
-                Controller.iterateField(TerminList,error);
-
-                //eingabetermin mit werten füllen
-                eingabetermin.setBezeichnung(name.getText());
-                eingabetermin.setStartzeit(start.getText());
-                eingabetermin.setEndzeit(ende.getText());
-                eingabetermin.setPeriodisch(comboIntervall.getSelectedItem().toString());
-                eingabetermin.setPriorität(Integer.parseInt((String) comboBox_1.getSelectedItem()));
-                eingabetermin.setOrt(ort.getText());
-                eingabetermin.setDatum(LocalDate.parse(Datum.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-
-                //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
-                Termin.Termine.add(new Termin(
-                        eingabetermin.getBezeichnung(),
-                        eingabetermin.getStartzeit(),
-                        eingabetermin.getEndzeit(),
-                        eingabetermin.getPeriodisch(),
-                        eingabetermin.getPriorität(),
-                        eingabetermin.getOrt(),
-                        eingabetermin.getDatum()));
-
-                //experimentell
-                Object[] args = new Object[9];
-                args[0] = eingabetermin.getBezeichnung();
-                args[1] = "";
-                args[2] = eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit();
-                args[3] = eingabetermin.getOrt();
-                args[4] = "";
-                args[5] = "";
-                args[6] = eingabetermin.getDatum();
-                args[7] = eingabetermin.getPeriodisch();
-                args[8] = eingabetermin.getPriorität();
-
-                for(int i=0;i<=MainGUI.daten.length; i++)
-                {
-                    if(MainGUI.daten[i]==null)
-                    {
-
-                        MainGUI.daten[i] = args;
-                        break;
-                    }
-
-                }
-                //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
-
-
-
-
-            }
-        });
-        button.addActionListener(this);
-        button.setBounds(438, 417, 361, 99);
-        frame.getContentPane().add(button);
 
         JLabel label_7 = new JLabel("Periodisch");
         label_7.setBounds(16, 274, 203, 20);
@@ -225,14 +163,83 @@ public class AddTermin implements ActionListener{
         error.setBounds(10, 540, 799, 20);
         frame.getContentPane().add(error);
         error.setColumns(10);
-        //	JComboBox comboPriority = new JComboBox();
+
+        JLabel lblOrt = new JLabel("Ort\r\n");
+        lblOrt.setBounds(438, 179, 203, 20);
+        frame.getContentPane().add(lblOrt);
+
         comboPriority.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
         comboPriority.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboPriority.setBounds(438, 114, 361, 49);
         frame.getContentPane().add(comboPriority);
-    }
 
-    public void actionPerformed(ActionEvent arg0) {
+        JButton button = new JButton("Zum Stundenplan hinzuf\u00FCgen");}
+
+            public void actionPerformed(ActionEvent e) {
+
+
+
+                //Testen
+                ArrayList<JTextField> TerminList= new ArrayList();
+                TerminList.add(txtFieldName);
+                TerminList.add(txtFieldTimeStart);
+                TerminList.add(txtFieldTimeStop);
+                TerminList.add(txtFieldDate);
+                TerminList.add(txtFieldLocation);
+
+                if(Controller.iterateField(TerminList,error) && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop))
+                {
+
+                //eingabetermin mit werten füllen
+                eingabetermin.setBezeichnung(txtFieldName.getText());
+                eingabetermin.setStartZeit(LocalTime.parse(txtFieldTimeStart.getText()));
+                eingabetermin.setEndZeit(LocalTime.parse(txtFieldTimeStop.getText()));
+                eingabetermin.setPeriodisch(comboInterval.getSelectedItem().toString());
+                eingabetermin.setPriorität(Integer.parseInt((String) comboPriority.getSelectedItem()));
+                eingabetermin.setOrt(txtFieldLocation.getText());
+                eingabetermin.setDatum(LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+
+                //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
+                Termin.Termine.add(new Termin(
+                        eingabetermin.getBezeichnung(),
+                        eingabetermin.getStartZeit(),
+                        eingabetermin.getEndZeit(),
+                        eingabetermin.getPeriodisch(),
+                        eingabetermin.getPriorität(),
+                        eingabetermin.getOrt(),
+                        eingabetermin.getDatum()));
+
+                //experimentell
+                Object[] args = new Object[9];
+                args[0] = eingabetermin.getBezeichnung();
+                args[1] = "";
+                args[2] = eingabetermin.getStartZeit()+"-"+eingabetermin.getEndZeit();
+                args[3] = eingabetermin.getOrt();
+                args[4] = "";
+                args[5] = "";
+                args[6] = eingabetermin.getDatum();
+                args[7] = eingabetermin.getPeriodisch();
+                args[8] = eingabetermin.getPriorität();
+
+                for(int i=0;i<=MainGUI.daten.length; i++)
+                {
+                    if(MainGUI.daten[i]==null)
+                    {
+
+                        MainGUI.daten[i] = args;
+                        break;
+                    }
+
+                }
+                //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
+
+
+
+
+            }}
+
+
+    //public void actionPerformed(ActionEvent arg0) {
 
 
 
@@ -247,7 +254,7 @@ public class AddTermin implements ActionListener{
         eingabeTermin.setDatum(txtFieldDate.getText());
         */
 
-        ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
+     /*   ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
 
         if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){
 
@@ -264,7 +271,7 @@ public class AddTermin implements ActionListener{
 
             MainGUI.sem.addTermin(eingabeTermin);  //Anschauen ob es in der wirklich in der Liste ist
         }
-
+   */
 
 
 
@@ -281,9 +288,9 @@ public class AddTermin implements ActionListener{
 
             */
 
-        MainGUI.tm.addRow(new Object[]{eingabeTermin.getBezeichnung(), "", eingabeTermin.getStartZeit()+"-"+ eingabeTermin.getEndZeit(), eingabeTermin.getOrt(), "", "", eingabeTermin.getDatum(), eingabeTermin.getPeriodisch(), eingabeTermin.getPriorität()});
+       // MainGUI.tm.addRow(new Object[]{eingabeTermin.getBezeichnung(), "", eingabeTermin.getStartZeit()+"-"+ eingabeTermin.getEndZeit(), eingabeTermin.getOrt(), "", "", eingabeTermin.getDatum(), eingabeTermin.getPeriodisch(), eingabeTermin.getPriorität()});
 
-    }
+ //   }
 
     private ArrayList<JTextField> collectTxtFields(){
         ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
@@ -294,4 +301,7 @@ public class AddTermin implements ActionListener{
 
         return gatheredTxtFields;
     }
-}
+
+
+
+ }

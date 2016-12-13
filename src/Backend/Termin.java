@@ -88,7 +88,8 @@ public class Termin {
         this.datum = datum;
     }
 
-    public LocalTime getStartZeit() {
+    public LocalTime getStartZeit()
+    {
         return startZeit;
     }
 
