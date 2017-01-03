@@ -56,9 +56,7 @@ public class MainGUI {
         });
     }
 
-    /**
-     * Create the application.
-     */
+
     public MainGUI() {
         initialize();
     }
