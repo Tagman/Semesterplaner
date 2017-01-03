@@ -8,22 +8,12 @@ import Backend.Stundenplan;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
@@ -32,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class MainGUI {
@@ -44,6 +35,7 @@ public class MainGUI {
     static Stundenplan stundenplan;
     static Object[][] data;
     static DefaultTableModel tm;
+    static ListSelectionModel lm;
     static Object[] daten = new Object[200];
 
 
@@ -191,35 +183,12 @@ public class MainGUI {
         frame.getContentPane().add(lblAnzeigezeitraum);
 
         JButton btnAktualisieren = new JButton("Aktualisieren");
-        btnAktualisieren.addActionListener(new ActionListener() {
+        btnAktualisieren.addActionListener(new ActionListener()
+        {
             public void actionPerformed(ActionEvent e)
             {
-                try {
-                for( int j = tm.getRowCount() - 1; j >= 0; j-- )
-                {
-                    tm.removeRow(j);
-                }
-
-                for(int i=0;i<=daten.length;i++)
-                {
-                    LocalDate today = LocalDate.now();
-                    TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-                    int weekNumber = today.get(woy);
-                  //  System.out.println(weekNumber);
-                    Object[] etwas = (Object[]) daten[i];
-                    LocalDate datum = (LocalDate) etwas[6];
-                    TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-                    int holweek = datum.get(week);
-                   // System.out.println(holweek);
-                  //  System.out.println(datum);
-                    if(weekNumber==holweek)
-                    {
-
-                        tm.addRow((Object[]) daten[i]);
-                    }
-                }}
-                catch (NullPointerException igno) {
-                    System.out.print("ignorieren");}
+                System.out.println(Tabelle.getSelectedRow());
+               aktualisieren();
             }
         });
         btnAktualisieren.setBounds(633, 87, 130, 29);
@@ -247,6 +216,7 @@ public class MainGUI {
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
         tm = (DefaultTableModel) Tabelle.getModel();
+        Tabelle.getSelectedColumn();
 
 
     }
@@ -268,6 +238,35 @@ public class MainGUI {
                 popup.show(e.getComponent(), e.getX(), e.getY());
             }
         });
+    }
+    public static void aktualisieren()
+    {
+        try {
+            for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+            {
+                tm.removeRow(j);
+            }
+
+            for(int i=0;i<=daten.length;i++)
+            {
+                LocalDate today = LocalDate.now();
+                TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                int weekNumber = today.get(woy);
+                //  System.out.println(weekNumber);
+                Object[] etwas = (Object[]) daten[i];
+                LocalDate datum = (LocalDate) etwas[6];
+                TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                int holweek = datum.get(week);
+                // System.out.println(holweek);
+                //  System.out.println(datum);
+                if(weekNumber==holweek)
+                {
+
+                    tm.addRow((Object[]) daten[i]);
+                }
+            }}
+        catch (NullPointerException igno) {
+            System.out.print("ignorieren");}
     }
 
 }

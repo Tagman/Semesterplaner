@@ -187,8 +187,11 @@ public class AddTermin implements ActionListener// implements ActionListener
                 TerminList.add(txtFieldDate);
                 TerminList.add(txtFieldLocation);
 
-                if(Controller.iterateField(TerminList,error) && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop))
+                if(Controller.iterateField(TerminList,error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals(""))
                 {
+                    Confirmation.main(null);
+                  //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
+                      Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
 
                 //eingabetermin mit werten füllen
                 eingabetermin.setBezeichnung(txtFieldName.getText());
@@ -236,7 +239,13 @@ public class AddTermin implements ActionListener// implements ActionListener
 
 
 
-            }}
+            }
+            else
+                {
+                    Confirmation.main(null);
+                    Confirmation.confirm(Controller.iterateField(TerminList,error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
+                }
+    }
 
 
     //public void actionPerformed(ActionEvent arg0) {

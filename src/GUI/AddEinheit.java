@@ -29,16 +29,16 @@ import java.time.LocalTime;
 public class AddEinheit implements ActionListener {
 
     private JFrame frame;
-    private JTextField txtFieldName;
-    private JTextField txtFieldTimeStart;
-    private JTextField txtFieldTimeStop;
-    private JTextField txtFieldLocation;
-    private JTextField txtFieldTeacher;
-    private JTextField txtFieldDate;
-    private JComboBox comboTyp;
-    private JComboBox comboIntervall;
-    private JCheckBox checkPflicht;
-    private JTextField error;
+    private static  JTextField txtFieldName;
+    private static  JTextField txtFieldTimeStart;
+    private static  JTextField txtFieldTimeStop;
+    private static JTextField txtFieldLocation;
+    private static JTextField txtFieldTeacher;
+    private static JTextField txtFieldDate;
+    private static JComboBox comboTyp;
+    private static JComboBox comboIntervall;
+    private static JCheckBox checkPflicht;
+    private static JTextField error;
 
 
     private Controller controller = new Controller();
@@ -220,14 +220,24 @@ public class AddEinheit implements ActionListener {
         EinheitList.add(txtFieldTeacher);
 
         Controller.iterateField(EinheitList, error);
+        if(Controller.iterateField(EinheitList, error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals(""))
+        {
+            Confirmation.main(null);
+            //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
+            Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
+            for (int i = 0; i <= MainGUI.daten.length; i++) {
+                if (MainGUI.daten[i] == null) {
 
-        for (int i = 0; i <= MainGUI.daten.length; i++) {
-            if (MainGUI.daten[i] == null) {
-
-                MainGUI.daten[i] = (getAttributes());
-                break;
+                    MainGUI.daten[i] = (getAttributes());
+                    break;
+                }
             }
         }
+        else
+            {
+                Confirmation.main(null);
+                Confirmation.confirm(Controller.iterateField(EinheitList,error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
+            }
         }
 /*
         Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
@@ -314,6 +324,18 @@ public class AddEinheit implements ActionListener {
 
         }
 
+        public static void changeEinheit(String name, String type, LocalTime start, LocalTime schluss, String location, String teacher, LocalDate datum, String intervall, Boolean pflicht)
+        {
+            txtFieldName.setText(name);
+            comboTyp.setSelectedItem(type);
+            txtFieldTimeStart.setText(""+start+"");
+            txtFieldTimeStop.setText(""+schluss+"");
+            txtFieldLocation.setText(location);
+            txtFieldTeacher.setText(teacher);
+            txtFieldDate.setText(""+datum+"");
+            comboIntervall.setSelectedItem(intervall);
+            checkPflicht.setSelected(pflicht);
+        }
 
 }
 
