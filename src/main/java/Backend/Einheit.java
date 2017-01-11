@@ -1,5 +1,6 @@
 package Backend;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
@@ -7,9 +8,12 @@ import java.util.Date;
 /**
  * Created by Chris on 28.11.2016.
  */
-
+@Entity
 public class Einheit {
 
+    @Id
+    @GeneratedValue
+    private long IDEinheit;
     private LocalTime anfangsZeit;
     private LocalTime endZeit;
     private String ort;
@@ -20,6 +24,9 @@ public class Einheit {
     private int prioriät;
     private String typ;
     private LocalDate date;
+
+    @ManyToOne
+    private Fach fach;
 
 
     public Einheit(){

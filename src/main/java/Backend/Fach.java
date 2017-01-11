@@ -1,14 +1,23 @@
 package Backend;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
  * Created by chris on 04/12/16.
  */
+@Entity
 public class Fach {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long IDFach;
     private String name;
+    @Transient
     private ArrayList<Einheit> einheiten;
+
+    @ManyToOne
+    private Stundenplan stundenplan;
 
     public Fach(String name, ArrayList<Einheit> einheiten){
         this.name = name;

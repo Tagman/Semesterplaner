@@ -4,12 +4,21 @@ package Backend;
  * Created by Chris on 05.12.2016.
  */
 
+import javax.persistence.*;
 import java.util.ArrayList;
 
-
+@Entity
 public class Stundenplan {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long IDStundenplan;
+
+    @Transient
     private ArrayList<Fach> faecher = new ArrayList<Fach>();
+
+    @ManyToOne
+    private Semesterplan semesterplan;
 
     public Stundenplan(ArrayList<Fach> f)
     {

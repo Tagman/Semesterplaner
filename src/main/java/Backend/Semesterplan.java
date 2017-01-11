@@ -1,12 +1,8 @@
 package Backend;
 
-import GUI.Semester;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.time.LocalTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -14,38 +10,38 @@ import java.util.ArrayList;
  */
 
 @Entity
-@Table(name = "sp")
 public class Semesterplan
 {
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long IDSemesterplan;
 
     private String semesterName;
-    private LocalTime startZeit;
-    private LocalTime endZeit;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    @Transient
     private ArrayList<Termin> termine;
 
 
-    public Semesterplan(String name, LocalTime start, LocalTime end, ArrayList<Termin> termine){
+    public Semesterplan(String name, LocalDate start, LocalDate end, ArrayList<Termin> termine){
         semesterName = name;
-        startZeit = start;
-        endZeit = end;
+        startDate = start;
+        endDate = end;
         this.termine = termine;
     }
 
     public Semesterplan(){
         semesterName = null;
-        startZeit = null;
-        endZeit = null;
+        startDate = null;
+        endDate = null;
         termine = null;
     }
 
-    public Semesterplan changeSemesterplan(String name, LocalTime start, LocalTime end, ArrayList<Termin> termine){
+    public Semesterplan changeSemesterplan(String name, LocalDate start, LocalDate end, ArrayList<Termin> termine){
 
         semesterName = name;
-        startZeit = start;
-        endZeit = end;
+        startDate = start;
+        endDate = end;
         this.termine = termine;
 
         return this;
@@ -67,24 +63,24 @@ public class Semesterplan
         this.semesterName = semesterName;
     }
 
-    public LocalTime getStartZeit()
+    public LocalDate getStartDate()
     {
-        return startZeit;
+        return startDate;
     }
 
-    public void setStartZeit(LocalTime startZeit)
+    public void setStartDate(LocalDate startZeit)
     {
-        this.startZeit = startZeit;
+        this.startDate = startZeit;
     }
 
-    public LocalTime getEndZeit()
+    public LocalDate getEndDate()
     {
-        return endZeit;
+        return endDate;
     }
 
-    public void setEndZeit(LocalTime endZeit)
+    public void setEndDate(LocalDate endZeit)
     {
-        this.endZeit = endZeit;
+        this.endDate = endZeit;
     }
 
 

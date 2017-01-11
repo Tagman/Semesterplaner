@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -137,8 +138,8 @@ public class Semester implements ActionListener{
 
         Semesterplan se = new  Semesterplan();
         se.setSemesterName(txtFieldName.getText()); //speichern
-        se.setStartZeit(LocalTime.parse(txtFieldStartZeit.getText())); //speichern
-        se.setEndZeit(LocalTime.parse(txtFieldEndZeit.getText())); //speichern
+        se.setStartDate(LocalDate.parse(txtFieldStartZeit.getText())); //speichern
+        se.setEndDate(LocalDate.parse(txtFieldEndZeit.getText())); //speichern
         MainGUI.main(null);
         MainGUI.sem=se;
         frame.dispose();

@@ -3,11 +3,16 @@ package Backend;
 /**
  * Created by peter on 04/12/16.
  */
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Entity
 public class Termin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long IDTermin;
 
     private String bezeichnung;
 
@@ -19,6 +24,10 @@ public class Termin {
     private int priorität;
     private String ort;
     private LocalDate datum;
+
+    @ManyToOne
+    private Semesterplan semesterplan;
+
     public static ArrayList<Termin> Termine = new ArrayList<Termin>();
     //Füge Termine liste zu Semesterplan hinzu
     //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
@@ -129,6 +138,19 @@ public class Termin {
         this.priorität = priorität;
     }
 
+    public Long getIDTermin() {
+        return IDTermin;
+    }
 
+    public void setIDTermin(Long IDTermin) {
+        this.IDTermin = IDTermin;
+    }
 
+    public Semesterplan getSemesterplan() {
+        return semesterplan;
+    }
+
+    public void setSemesterplan(Semesterplan semesterplan) {
+        this.semesterplan = semesterplan;
+    }
 }
