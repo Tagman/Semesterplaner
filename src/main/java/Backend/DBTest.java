@@ -84,6 +84,8 @@ public class DBTest {
             Semesterplan semplan = terminausgabe.getSemesterplan();
             System.out.println(semplan.getSemesterName());
 
+            String klasse = "Termin.class";
+
             TypedQuery<Termin> query = entityManager.createQuery("SELECT t FROM Termin t", Termin.class);
             List<Termin> resultList = query.getResultList();
 
