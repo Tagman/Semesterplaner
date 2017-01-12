@@ -25,6 +25,7 @@ public class Termin {
     private String ort;
     private LocalDate datum;
 
+
     @ManyToOne
     private Semesterplan semesterplan;
 
@@ -146,6 +147,7 @@ public class Termin {
         this.IDTermin = IDTermin;
     }
 
+
     public Semesterplan getSemesterplan() {
         return semesterplan;
     }
@@ -153,4 +155,5 @@ public class Termin {
     public void setSemesterplan(Semesterplan semesterplan) {
         this.semesterplan = semesterplan;
     }
+
 }

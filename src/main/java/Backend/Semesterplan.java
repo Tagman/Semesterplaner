@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by chris on 04/12/16.
@@ -18,9 +19,14 @@ public class Semesterplan
 
     private String semesterName;
     private LocalDate startDate;
+
+
     private LocalDate endDate;
-    @Transient
-    private ArrayList<Termin> termine;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Termin> termine;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Stundenplan stundenplan;
 
 
     public Semesterplan(String name, LocalDate start, LocalDate end, ArrayList<Termin> termine){
@@ -47,7 +53,7 @@ public class Semesterplan
         return this;
     }
 
-    public ArrayList<Termin> addTermin(Termin termin){
+    public List<Termin> addTermin(Termin termin){
         termine.add(termin);
 
         return termine;
@@ -83,5 +89,27 @@ public class Semesterplan
         this.endDate = endZeit;
     }
 
+    public Long getIDSemesterplan() {
+        return IDSemesterplan;
+    }
 
+    public void setIDSemesterplan(Long IDSemesterplan) {
+        this.IDSemesterplan = IDSemesterplan;
+    }
+
+    public List<Termin> getTermine() {
+        return termine;
+    }
+
+    public void setTermine(List<Termin> termine) {
+        this.termine = termine;
+    }
+
+    public Stundenplan getStundenplan() {
+        return stundenplan;
+    }
+
+    public void setStundenplan(Stundenplan stundenplan) {
+        this.stundenplan = stundenplan;
+    }
 }

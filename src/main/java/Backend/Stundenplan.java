@@ -5,7 +5,8 @@ package Backend;
  */
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.List;
 
 @Entity
 public class Stundenplan {
@@ -14,13 +15,15 @@ public class Stundenplan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDStundenplan;
 
-    @Transient
-    private ArrayList<Fach> faecher = new ArrayList<Fach>();
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Fach> faecher;
 
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Semesterplan semesterplan;
 
-    public Stundenplan(ArrayList<Fach> f)
+
+    public Stundenplan(List<Fach> f)
     {
         this.faecher = f;
     }
@@ -34,13 +37,33 @@ public class Stundenplan {
         faecher.add(f);
     }
 
-    public ArrayList<Fach> getFaecher()
+    public List<Fach> getFaecher()
     {
         return this.faecher;
     }
 
-    public void changeFaecher(ArrayList<Fach> f)
+    public void changeFaecher(List<Fach> f)
     {
         this.faecher = f;
+    }
+
+    public long getIDStundenplan() {
+        return IDStundenplan;
+    }
+
+    public void setIDStundenplan(long IDStundenplan) {
+        this.IDStundenplan = IDStundenplan;
+    }
+
+    public void setFaecher(List<Fach> faecher) {
+        this.faecher = faecher;
+    }
+
+    public Semesterplan getSemesterplan() {
+        return semesterplan;
+    }
+
+    public void setSemesterplan(Semesterplan semesterplan) {
+        this.semesterplan = semesterplan;
     }
 }

@@ -25,6 +25,7 @@ public class Einheit {
     private String typ;
     private LocalDate date;
 
+
     @ManyToOne
     private Fach fach;
 
@@ -41,6 +42,19 @@ public class Einheit {
         date = null;
 
 
+    }
+
+    public Einheit(LocalTime anfangsZeit, LocalTime endZeit, String ort, String name, String lehrender, String wiederholungsrhytmus, int prioriät, String typ, LocalDate date, Fach fach) {
+        this.anfangsZeit = anfangsZeit;
+        this.endZeit = endZeit;
+        this.ort = ort;
+        this.name = name;
+        this.lehrender = lehrender;
+        this.wiederholungsrhytmus = wiederholungsrhytmus;
+        this.prioriät = prioriät;
+        this.typ = typ;
+        this.date = date;
+        this.fach = fach;
     }
 
     public Einheit(Object args[]){
@@ -78,5 +92,92 @@ public class Einheit {
         System.out.println(anfangsZeit);
     }
 
+    public long getIDEinheit() {
+        return IDEinheit;
+    }
+
+    public void setIDEinheit(long IDEinheit) {
+        this.IDEinheit = IDEinheit;
+    }
+
+    public LocalTime getAnfangsZeit() {
+        return anfangsZeit;
+    }
+
+    public void setAnfangsZeit(LocalTime anfangsZeit) {
+        this.anfangsZeit = anfangsZeit;
+    }
+
+    public LocalTime getEndZeit() {
+        return endZeit;
+    }
+
+    public void setEndZeit(LocalTime endZeit) {
+        this.endZeit = endZeit;
+    }
+
+    public String getOrt() {
+        return ort;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLehrender() {
+        return lehrender;
+    }
+
+    public void setLehrender(String lehrender) {
+        this.lehrender = lehrender;
+    }
+
+    public String getWiederholungsrhytmus() {
+        return wiederholungsrhytmus;
+    }
+
+    public void setWiederholungsrhytmus(String wiederholungsrhytmus) {
+        this.wiederholungsrhytmus = wiederholungsrhytmus;
+    }
+
+    public int getPrioriät() {
+        return prioriät;
+    }
+
+    public void setPrioriät(int prioriät) {
+        this.prioriät = prioriät;
+    }
+
+    public String getTyp() {
+        return typ;
+    }
+
+    public void setTyp(String typ) {
+        this.typ = typ;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public Fach getFach() {
+        return fach;
+    }
+
+    public void setFach(Fach fach) {
+        this.fach = fach;
+    }
 }
 
