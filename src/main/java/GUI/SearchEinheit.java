@@ -1,8 +1,5 @@
 package GUI;
 
-/**
- * Created by Whoop on 13.01.2017.
- */
 import Backend.Controller;
 import Backend.Einheit;
 import org.apache.log4j.Logger;
@@ -17,10 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class SuchErgebnis implements ActionListener {
+public class SearchEinheit implements ActionListener {
 
     private Controller controller = new Controller();
-    private static final Logger logger = Logger.getLogger(SuchErgebnis.class);
+    private static final Logger logger = Logger.getLogger(SearchEinheit.class);
 
     private JFrame frame;
 
@@ -37,7 +34,7 @@ public class SuchErgebnis implements ActionListener {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    SuchErgebnis window = new SuchErgebnis();
+                    SearchEinheit window = new SearchEinheit();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -49,7 +46,7 @@ public class SuchErgebnis implements ActionListener {
     /**
      * Create the application.
      */
-    public SuchErgebnis() {
+    public SearchEinheit() {
         initialize();
     }
 
@@ -59,7 +56,7 @@ public class SuchErgebnis implements ActionListener {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 470, 420);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JLabel label = new JLabel("Suchen eines Termins");
         label.setHorizontalAlignment(SwingConstants.CENTER);

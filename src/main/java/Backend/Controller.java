@@ -1,6 +1,5 @@
 package Backend;
 
-import GUI.Semester;
 import org.apache.log4j.Logger;
 
 import javax.persistence.*;
@@ -167,12 +166,7 @@ public class Controller {
             LocalTime startTime = LocalTime.parse(start.getText());
             LocalTime endTime = LocalTime.parse(end.getText());
 
-            if(startTime.isBefore(endTime)){
-                return true;
-            }
-            else{
-                return false;
-            }
+            return startTime.isBefore(endTime);
 
 
 
@@ -187,15 +181,13 @@ public class Controller {
         }
     }
 
-    public boolean closeEntityManager(){
+    public void closeEntityManager(){
         entityManager.close();
-        return true;
     }
 
-    public boolean closeEntityManagerFactory(){
+    public void closeEntityManagerFactory(){
         emf.close();
-        return true;
-    }
+           }
 
     public boolean save(Semesterplan sp){
 
@@ -223,7 +215,9 @@ public class Controller {
 
             entityManager.close();
         }
+
         return boolReturn;
+
     }
 
     public Semesterplan initLoad(){
@@ -249,8 +243,8 @@ public class Controller {
 
     public String buildQueryStringEinheit(String attribute, String condition ){
         StringBuilder builder = new StringBuilder("SELECT ein FROM Einheit ein WHERE ");
-        builder.append(attribute + " = ");
-        builder.append("'" + condition + "'");
+        builder.append(attribute).append(" = ");
+        builder.append("'").append(condition).append("'");
 
         logger.info(builder.toString());
 

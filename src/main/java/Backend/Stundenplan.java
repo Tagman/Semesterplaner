@@ -1,9 +1,5 @@
 package Backend;
 
-/**
- * Created by Chris on 05.12.2016.
- */
-
 import javax.persistence.*;
 import java.util.List;
 import java.util.List;
