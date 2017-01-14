@@ -19,6 +19,8 @@ public class DBTest {
 
         logger.debug("starting db test");
 
+        /*
+
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
 
         EntityManager entityManager = emf.createEntityManager();
@@ -100,5 +102,42 @@ public class DBTest {
         }
 
         emf.close();
+        */
+
+        Controller controller = new Controller();
+
+        Semesterplan sp = new Semesterplan("Test2", LocalDate.now(), LocalDate.now(), new ArrayList<>());
+        Termin ter = new Termin("TestTermin", LocalTime.now(), LocalTime.now(), "2", 3, "300", LocalDate.now());
+        Termin ter2 = new Termin("Test2Termin", LocalTime.now(), LocalTime.now(), "4", 5, "400", LocalDate.now());
+
+        Stundenplan testPlan = new Stundenplan(new ArrayList<>());
+        Fach fach1 = new Fach("Fach1", new ArrayList<>());
+        Einheit einheit1 = new Einheit(LocalTime.now(), LocalTime.MAX, "100", "Einheit1", "Ich", "Wöchetnluch", 5, "Vorlesung", LocalDate.now(), fach1);
+
+
+        ter.setSemesterplan(sp);
+        ter2.setSemesterplan(sp);
+
+        sp.addTermin(ter);
+        sp.addTermin(ter2);
+
+
+
+
+        sp.setStundenplan(testPlan);
+        testPlan.addFach(fach1);
+        fach1.addEinheit(einheit1);
+
+        controller.save(sp);
+
+        Semesterplan spLoaded = controller.initLoad();
+
+        System.out.println(spLoaded.getStundenplan().getFaecher().get(0).getEinheiten().get(0).getName());
+
+        controller.closeEntityManager();
+
+        //controller.closeEntityManagerFactory();
+
     }
+
 }

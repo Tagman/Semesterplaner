@@ -1,11 +1,16 @@
 package Backend;
 
+import GUI.Semester;
+import org.apache.log4j.Logger;
+
+import javax.persistence.*;
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by chris on 02/12/16.
@@ -25,7 +30,20 @@ public class Controller {
     private static String errString;
     public static boolean errBoolean;
 
+    public static final Logger logger = Logger.getLogger(Controller.class);
+
+    private final EntityManagerFactory emf;
+
+    EntityManager entityManager;
+
+
+
+
     public Controller(){
+
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+
+
         // emtpy constructor.
     }
 
@@ -168,4 +186,93 @@ public class Controller {
 
         }
     }
+
+    public boolean closeEntityManager(){
+        entityManager.close();
+        return true;
+    }
+
+    public boolean closeEntityManagerFactory(){
+        emf.close();
+        return true;
+    }
+
+    public boolean save(Semesterplan sp){
+
+        boolean boolReturn = true;
+
+        entityManager = emf.createEntityManager();
+
+
+        EntityTransaction transaction = null;
+
+        try{
+            transaction = entityManager.getTransaction();
+
+            transaction.begin();
+
+            entityManager.persist(sp);
+            transaction.commit();
+
+
+        }catch (Exception e){
+            logger.error("cannot commit transaction....");
+            logger.error("Fehlermeldung: " + e.toString());
+            transaction.rollback();
+            boolReturn = false;
+
+            entityManager.close();
+        }
+        return boolReturn;
+    }
+
+    public Semesterplan initLoad(){
+
+        entityManager = emf.createEntityManager();
+        Semesterplan planReturn = null;
+
+        try {
+            TypedQuery<Semesterplan> query = entityManager.createQuery("select sp FROM Semesterplan sp", Semesterplan.class);
+
+            List<Semesterplan> semesterplanList = query.getResultList();
+
+            planReturn = semesterplanList.get(0);
+        }catch (Exception e){
+            logger.error("cannot query Semesterplan object for initLoad");
+            logger.error("Error message: " + e.toString());
+
+            entityManager.close();
+
+        }
+        return planReturn;
+        }
+
+    public String buildQueryStringEinheit(String attribute, String condition ){
+        StringBuilder builder = new StringBuilder("SELECT ein FROM Einheit ein WHERE ");
+        builder.append(attribute + " = ");
+        builder.append("'" + condition + "'");
+
+        logger.info(builder.toString());
+
+        return builder.toString();
+    }
+
+    public List<Einheit> searchEinheit(String query){
+
+        entityManager = emf.createEntityManager();
+
+        List<Einheit> einheitList = null;
+
+        try {
+            TypedQuery<Einheit> typedQuery = entityManager.createQuery(query, Einheit.class);
+
+            einheitList = typedQuery.getResultList();
+        }catch (Exception e){
+            logger.error("Cannot query for Einheit...");
+            logger.error(e.toString());
+        }
+
+        return einheitList;
+    }
+
 }

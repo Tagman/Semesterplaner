@@ -3,25 +3,32 @@ package GUI;
 /**
  * Created by Whoop on 13.01.2017.
  */
+import Backend.Controller;
+import Backend.Einheit;
+import org.apache.log4j.Logger;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
 
-public class SuchErgebnis {
+public class SuchErgebnis implements ActionListener {
+
+    private Controller controller = new Controller();
+    private static final Logger logger = Logger.getLogger(SuchErgebnis.class);
 
     private JFrame frame;
+
+    private JComboBox comboBox;
+    private JFormattedTextField txtFieldInput;
+
+    private String whereAttribute = null;
+    private String whereBedingung;
 
     /**
      * Launch the application.
@@ -58,9 +65,9 @@ public class SuchErgebnis {
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        JFormattedTextField formattedTextField = new JFormattedTextField();
-        formattedTextField.setToolTipText("Wonach soll gesucht werden?");
-        formattedTextField.setFont(new Font("Arial", Font.PLAIN, 11));
+        txtFieldInput = new JFormattedTextField();
+        txtFieldInput.setToolTipText("Wonach soll gesucht werden?");
+        txtFieldInput.setFont(new Font("Arial", Font.PLAIN, 11));
 
         JLabel label_1 = new JLabel("Suchbegriff:");
         label_1.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -68,8 +75,8 @@ public class SuchErgebnis {
         JLabel label_2 = new JLabel("Attribut:");
         label_2.setFont(new Font("Arial", Font.PLAIN, 11));
 
-        JComboBox comboBox = new JComboBox();
-        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Name der Veranstaltung", "Datum Dozent", "Priorit\u00E4t", "Raum", "Uhrzeit"}));
+        comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[] {"Name der Veranstaltung", "Datum", "Dozent", "Priorit\u00E4t", "Raum", "Startzeit"}));
         comboBox.setToolTipText("Bitte Attribut ausw\u00E4hlen z.B. Ort, Dozent etc.");
         comboBox.setFont(new Font("Arial", Font.PLAIN, 11));
 
@@ -80,6 +87,7 @@ public class SuchErgebnis {
         JButton btnsucheAusfhren = new JButton("Suchen\r\n");
         btnsucheAusfhren.setToolTipText("Klicken um Suche zu starten");
         btnsucheAusfhren.setFont(new Font("Arial", Font.PLAIN, 11));
+        btnsucheAusfhren.addActionListener(this);
 
         JFormattedTextField formattedTextField_1 = new JFormattedTextField();
         formattedTextField_1.setToolTipText("Kontrollanzeige");
@@ -109,7 +117,7 @@ public class SuchErgebnis {
                                                                 .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
                                                                 .addComponent(label, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-                                                                        .addComponent(formattedTextField, Alignment.LEADING)
+                                                                        .addComponent(txtFieldInput, Alignment.LEADING)
                                                                         .addComponent(comboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                                         .addContainerGap(109, Short.MAX_VALUE)))
                                         .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
@@ -124,7 +132,7 @@ public class SuchErgebnis {
                                 .addGap(44)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(label_1)
-                                        .addComponent(formattedTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtFieldInput, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(label_2)
@@ -139,5 +147,54 @@ public class SuchErgebnis {
                                 .addComponent(formattedTextField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         frame.getContentPane().setLayout(groupLayout);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        switch (comboBox.getSelectedIndex()){
+
+            case 0: whereAttribute = "name";
+                    break;
+            case 1: whereAttribute = "datum";
+                    break;
+            case 2: whereAttribute = "lehrender";
+                    break;
+            case 3: whereAttribute = "priorität";
+                    break;
+            case 4: whereAttribute = "ort";
+                    break;
+            case 5: whereAttribute = "anfangszeit";
+                    break;
+            default: break;
+        }
+
+        whereBedingung = txtFieldInput.getText();
+
+        String query = controller.buildQueryStringEinheit(whereAttribute,whereBedingung);
+        List<Einheit> result = controller.searchEinheit(query);
+
+        Einheit test = result.get(0);
+
+        logger.info(test.getName());
+
+
+
+    }
+
+    public String getWhereAttribute() {
+        return whereAttribute;
+    }
+
+    public void setWhereAttribute(String whereAttribute) {
+        this.whereAttribute = whereAttribute;
+    }
+
+    public String getWhereBedingung() {
+        return whereBedingung;
+    }
+
+    public void setWhereBedingung(String whereBedingung) {
+        this.whereBedingung = whereBedingung;
     }
 }
