@@ -3,7 +3,6 @@ package Backend;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 /**
  * Created by Chris on 28.11.2016.
@@ -21,7 +20,7 @@ public class Einheit {
     private String lehrender;
     //private int wiederholungsrhytmus; //Integer Wert um später damit rechnen zu können
     private String wiederholungsrhytmus;
-    private int prioriät;
+    private int priorität;
     private String typ;
     private LocalDate date;
 
@@ -37,21 +36,21 @@ public class Einheit {
         name = null;
         lehrender = null;
         wiederholungsrhytmus = null;
-        prioriät = -1;
+        priorität = -1;
         typ = null;
         date = null;
 
 
     }
 
-    public Einheit(LocalTime anfangsZeit, LocalTime endZeit, String ort, String name, String lehrender, String wiederholungsrhytmus, int prioriät, String typ, LocalDate date, Fach fach) {
+    public Einheit(LocalTime anfangsZeit, LocalTime endZeit, String ort, String name, String lehrender, String wiederholungsrhytmus, int priorität, String typ, LocalDate date, Fach fach) {
         this.anfangsZeit = anfangsZeit;
         this.endZeit = endZeit;
         this.ort = ort;
         this.name = name;
         this.lehrender = lehrender;
         this.wiederholungsrhytmus = wiederholungsrhytmus;
-        this.prioriät = prioriät;
+        this.priorität = priorität;
         this.typ = typ;
         this.date = date;
         this.fach = fach;
@@ -66,7 +65,7 @@ public class Einheit {
         lehrender = (String)args[5];
         date = (LocalDate) args[6];
         wiederholungsrhytmus = (String)args[7];
-        prioriät = (int)args[8];
+        priorität = (int)args[8];
 
 
     }
@@ -81,7 +80,7 @@ public class Einheit {
         lehrender = (String)args[5];
         date = (LocalDate) args[6];
         wiederholungsrhytmus = (String)args[7];
-        prioriät = (int)args[8];
+        priorität = (int)args[8];
 
         return this;
     }
@@ -148,12 +147,12 @@ public class Einheit {
         this.wiederholungsrhytmus = wiederholungsrhytmus;
     }
 
-    public int getPrioriät() {
-        return prioriät;
+    public int getPriorität() {
+        return priorität;
     }
 
-    public void setPrioriät(int prioriät) {
-        this.prioriät = prioriät;
+    public void setPriorität(int prioriät) {
+        this.priorität = prioriät;
     }
 
     public String getTyp() {

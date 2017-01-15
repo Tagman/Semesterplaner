@@ -11,6 +11,10 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -152,21 +156,29 @@ public class SearchEinheit implements ActionListener {
         switch (comboBox.getSelectedIndex()){
 
             case 0: whereAttribute = "name";
+                    whereBedingung = "'" + txtFieldInput.getText() + "'";
                     break;
-            case 1: whereAttribute = "datum";
+            case 1: whereAttribute = "date";
+                    LocalDate tempDate = LocalDate.parse(txtFieldInput.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                    whereBedingung = "STR_TO_DATE('" + tempDate.toString() + "', '%Y-%m-%d')";
                     break;
             case 2: whereAttribute = "lehrender";
+                    whereBedingung = "'" + txtFieldInput.getText() + "'";
                     break;
             case 3: whereAttribute = "priorität";
+                    whereBedingung = txtFieldInput.getText();
                     break;
             case 4: whereAttribute = "ort";
+                    whereBedingung = "'" + txtFieldInput.getText() + "'";
                     break;
-            case 5: whereAttribute = "anfangszeit";
+            case 5: whereAttribute = "TIME_FORMAT(anfangsZeit, '%H:%i')";
+                    LocalTime tempTime = LocalTime.parse(txtFieldInput.getText(), DateTimeFormatter.ofPattern("HH:mm"));
+                    whereBedingung = "TIME_FORMAT('" + tempTime.toString() + "', '%H:%i')";
                     break;
             default: break;
         }
 
-        whereBedingung = txtFieldInput.getText();
+
 
         String query = controller.buildQueryStringEinheit(whereAttribute,whereBedingung);
         List<Einheit> result = controller.searchEinheit(query);
