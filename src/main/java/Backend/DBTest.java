@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.SignStyle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +114,7 @@ public class DBTest {
 
         Stundenplan testPlan = new Stundenplan(new ArrayList<>());
         Fach fach1 = new Fach("Fach1", new ArrayList<>());
-        Einheit einheit1 = new Einheit(LocalTime.now(), LocalTime.MAX, "100", "Einheit1", "Ich", "Wöchetnluch", 5, "Vorlesung", LocalDate.now(), fach1);
+        Einheit einheit1 = new Einheit(LocalTime.parse("14:30", DateTimeFormatter.ofPattern("HH:mm")), LocalTime.MAX, "100", "Einheit1", "Ich", "Wöchetnluch", 5, "Vorlesung", LocalDate.now(), fach1);
 
 
         ter.setSemesterplan(sp);
@@ -134,9 +136,20 @@ public class DBTest {
 
         System.out.println(spLoaded.getStundenplan().getFaecher().get(0).getEinheiten().get(0).getName());
 
+        System.out.println(spLoaded.getTermine().get(0).getDatum().toString());
+
+
+        LocalDate testDate = LocalDate.parse("15.03.2014", DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        System.out.println(testDate.toString());
+
+        LocalTime testTime = LocalTime.parse("14:30");
+        System.out.println(testTime.toString());
+
+        //System.out.println(spLoaded.getStundenplan().getFaecher().get(0).getEinheiten().get(4).getAnfangsZeit().toString());
+
         controller.closeEntityManager();
 
-        //controller.closeEntityManagerFactory();
+        controller.closeEntityManagerFactory();
 
     }
 

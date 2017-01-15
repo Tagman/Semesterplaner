@@ -158,8 +158,8 @@ public class Controller {
     public static boolean checkTime(JTextField start, JTextField end) {
 
         /*
-            0 - Time is in Correct Format
-            1 - Time has Wrong format
+            0 - Time is in correct format
+            1 - Time has wrong format
          */
 
         try{
@@ -243,8 +243,15 @@ public class Controller {
 
     public String buildQueryStringEinheit(String attribute, String condition ){
         StringBuilder builder = new StringBuilder("SELECT ein FROM Einheit ein WHERE ");
-        builder.append(attribute).append(" = ");
-        builder.append("'").append(condition).append("'");
+
+        if(!attribute.contains("Zeit")){
+            builder.append(attribute).append(" = ");
+        }
+        else{
+            builder.append(attribute).append(" LIKE ");
+        }
+
+        builder.append(condition);
 
         logger.info(builder.toString());
 
