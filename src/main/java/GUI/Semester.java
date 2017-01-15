@@ -1,25 +1,18 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
-
 import Backend.Controller;
 import Backend.Semesterplan;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -60,7 +53,7 @@ public class Semester implements ActionListener{
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 854, 559);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JLabel lblErstellenEinesNeuen = new JLabel("Erstellen eines neuen Semesterplans");
@@ -137,8 +130,8 @@ public class Semester implements ActionListener{
 
         Semesterplan se = new  Semesterplan();
         se.setSemesterName(txtFieldName.getText()); //speichern
-        se.setStartZeit(LocalTime.parse(txtFieldStartZeit.getText())); //speichern
-        se.setEndZeit(LocalTime.parse(txtFieldEndZeit.getText())); //speichern
+        se.setStartDate(LocalDate.parse(txtFieldStartZeit.getText())); //speichern
+        se.setEndDate(LocalDate.parse(txtFieldEndZeit.getText())); //speichern
         MainGUI.main(null);
         MainGUI.sem=se;
         frame.dispose();

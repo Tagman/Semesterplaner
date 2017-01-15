@@ -1,13 +1,15 @@
 package Backend;
 
-/**
- * Created by peter on 04/12/16.
- */
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+@Entity
 public class Termin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long IDTermin;
 
     private String bezeichnung;
 
@@ -19,6 +21,11 @@ public class Termin {
     private int priorität;
     private String ort;
     private LocalDate datum;
+
+
+    @ManyToOne
+    private Semesterplan semesterplan;
+
     public static ArrayList<Termin> Termine = new ArrayList<Termin>();
     //Füge Termine liste zu Semesterplan hinzu
     //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
@@ -37,7 +44,7 @@ public class Termin {
         this.periodisch = periodisch;
         this.priorität = priorität;
 
-    };
+    }
 
     public void changeTermin(String bezeichnung, LocalTime startzeit, LocalTime endzeit, String periodisch, int priorität, String ort, LocalDate datum)
     {
@@ -49,7 +56,7 @@ public class Termin {
         this.periodisch = periodisch;
         this.priorität = priorität;
 
-    };
+    }
 
     /*
         Hier diese Ausgabe in Stundenplan einfügen
@@ -129,6 +136,34 @@ public class Termin {
         this.priorität = priorität;
     }
 
+    public Long getIDTermin() {
+        return IDTermin;
+    }
+
+    public void setIDTermin(Long IDTermin) {
+        this.IDTermin = IDTermin;
+    }
+
+
+    public Semesterplan getSemesterplan() {
+        return semesterplan;
+    }
+
+    public void setSemesterplan(Semesterplan semesterplan) {
+        this.semesterplan = semesterplan;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(bezeichnung).append("    ");
+        stringBuilder.append(datum).append("    ");
+        stringBuilder.append(startZeit).append("    ");
+        stringBuilder.append(ort).append("    ");
+
+        return stringBuilder.toString();
+    }
 
 
 }

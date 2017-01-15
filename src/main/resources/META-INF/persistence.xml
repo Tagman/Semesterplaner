@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence                             http://xmlns.jcp.org/xml/ns/persistence_2_1.xsd">
+    <persistence-unit name="SemesterplanerPU" transaction-type="RESOURCE_LOCAL">
+        <!--
+            MAPPINGS
+        -->
+        <class>Backend.Semesterplan</class>
+        <class>Backend.Fach</class>
+        <class>Backend.Einheit</class>
+        <class>Backend.Stundenplan</class>
+        <class>Backend.Termin</class>
+
+        <!-- Use only classes specified in MAPPINGS -->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!-- Configuring JDBC properties -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ssh.wukibude.de:3306/semesterplaner" />
+            <property name="javax.persistence.jdbc.user" value="semesterplaner" />
+            <property name="javax.persistence.jdbc.password" value="toor" />
+           <!-- <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />  -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
+
+            <!-- Log SQL queries -->
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.use_sql_comments" value="true" />
+
+            <!-- Drop and re-create the database schema on startup -->
+            <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create" /> -->
+            <!-- Do not drop DB on creation, comment out this or the one above -->
+            <property name="javax.persistence.schema-generation.database.action" value="create" />
+            <!-- Use only classes specified in MAPPINGS -->
+            <property name="hibernate.archive.autodetection" value="none" />
+        </properties>
+    </persistence-unit>
+</persistence>

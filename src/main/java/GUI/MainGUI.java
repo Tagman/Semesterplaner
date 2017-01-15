@@ -1,8 +1,5 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
 import Backend.Semesterplan;
 import Backend.Stundenplan;
 
@@ -69,7 +66,7 @@ public class MainGUI {
 
         frame = new JFrame();
         frame.setBounds(100, 100, 909, 650);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JMenuBar menuBar = new JMenuBar();
