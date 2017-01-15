@@ -46,3 +46,7 @@ out/
 
 .idea/compiler.xml
 .idea/misc.xml
+src/test/
+
+src/main/java/GUI/Such.java
+src/main/java/GUI/Ergebnis.java
