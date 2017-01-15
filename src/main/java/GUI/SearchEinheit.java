@@ -29,6 +29,8 @@ public class SearchEinheit implements ActionListener {
 
     private String whereAttribute = null;
     private String whereBedingung;
+    
+    private DefaultListModel listModel = new DefaultListModel();
 
     /**
      * Launch the application.
@@ -93,7 +95,7 @@ public class SearchEinheit implements ActionListener {
         KontrollAnzeige.setEditable(false);
         KontrollAnzeige.setToolTipText("Kontrollanzeige");
 
-        JList lsErgebnis = new JList();
+        JList lsErgebnis = new JList(listModel);
         lsErgebnis.setFont(new Font("Arial", Font.PLAIN, 11));
 
 
@@ -180,11 +182,13 @@ public class SearchEinheit implements ActionListener {
 
 
         String query = controller.buildQueryStringEinheit(whereAttribute,whereBedingung);
-        List<Einheit> result = controller.searchEinheit(query);
+        List<Einheit> results = controller.searchEinheit(query);
 
-        Einheit test = result.get(0);
+        results.forEach(result -> {
+            listModel.addElement(result);
+        });
 
-        logger.info(test.getName());
+
 
 
 
