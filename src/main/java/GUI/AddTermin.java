@@ -1,9 +1,5 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
-
 
 import Backend.Termin;
 import Backend.Controller;

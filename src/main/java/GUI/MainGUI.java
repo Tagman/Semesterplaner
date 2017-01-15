@@ -1,29 +1,16 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
 import Backend.Semesterplan;
 import Backend.Stundenplan;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import java.awt.event.ActionListener;
@@ -79,7 +66,7 @@ public class MainGUI {
 
         frame = new JFrame();
         frame.setBounds(100, 100, 909, 650);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JMenuBar menuBar = new JMenuBar();

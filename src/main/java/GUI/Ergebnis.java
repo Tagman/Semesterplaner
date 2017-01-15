@@ -1,28 +1,14 @@
 package GUI;
 
-/**
- * Created by Whoop on 08.01.2017.
- */
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JFormattedTextField;
-import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JList;
 import java.awt.ScrollPane;
 import java.awt.List;
-import javax.swing.JScrollPane;
 
 public class Ergebnis {
 
@@ -58,7 +44,7 @@ public class Ergebnis {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JLabel LbSuche = new JLabel("Gesuchter Begriff:");
         LbSuche.setFont(new Font("Arial", Font.PLAIN, 11));

@@ -1,8 +1,5 @@
 package Backend;
 
-/**
- * Created by peter on 04/12/16.
- */
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.time.LocalDate;
@@ -47,7 +44,7 @@ public class Termin {
         this.periodisch = periodisch;
         this.priorität = priorität;
 
-    };
+    }
 
     public void changeTermin(String bezeichnung, LocalTime startzeit, LocalTime endzeit, String periodisch, int priorität, String ort, LocalDate datum)
     {
@@ -59,7 +56,7 @@ public class Termin {
         this.periodisch = periodisch;
         this.priorität = priorität;
 
-    };
+    }
 
     /*
         Hier diese Ausgabe in Stundenplan einfügen

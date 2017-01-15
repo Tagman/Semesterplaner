@@ -1,29 +1,17 @@
 package GUI;
 
-/**
- * Created by Whoop on 08.01.2017.
- */
-
 import java.awt.EventQueue;
 
-        import javax.swing.JFrame;
-        import javax.swing.JLabel;
-        import java.awt.BorderLayout;
-        import javax.swing.SwingConstants;
-        import javax.swing.JButton;
-        import java.awt.GridBagLayout;
+import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
         import java.awt.GridBagConstraints;
         import java.awt.Insets;
-        import javax.swing.GroupLayout;
-        import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout.Alignment;
         import javax.swing.LayoutStyle.ComponentPlacement;
         import java.awt.event.ActionListener;
         import java.awt.event.ActionEvent;
-        import javax.swing.JTextField;
-        import javax.swing.JComboBox;
-        import javax.swing.JFormattedTextField;
-        import java.awt.Font;
-        import javax.swing.DefaultComboBoxModel;
+import java.awt.Font;
 
 public class Such {
 
@@ -58,7 +46,7 @@ public class Such {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         JLabel UeberschriftSuche = new JLabel("Suchen eines Termins");
         UeberschriftSuche.setHorizontalAlignment(SwingConstants.CENTER);

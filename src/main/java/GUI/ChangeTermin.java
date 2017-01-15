@@ -1,24 +1,15 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
 import Backend.Termin;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalTime;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class ChangeTermin    {
 
@@ -67,7 +58,7 @@ public class ChangeTermin    {
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 851, 610);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JLabel label = new JLabel("ändern eines Termins");

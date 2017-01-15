@@ -1,21 +1,13 @@
 package GUI;
 
-/**
- * Created by chris on 04/12/16.
- */
-
 import Backend.Controller;
 import Backend.Semesterplan;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import java.awt.Font;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -61,7 +53,7 @@ public class Semester implements ActionListener{
     private void initialize() {
         frame = new JFrame();
         frame.setBounds(100, 100, 854, 559);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JLabel lblErstellenEinesNeuen = new JLabel("Erstellen eines neuen Semesterplans");
