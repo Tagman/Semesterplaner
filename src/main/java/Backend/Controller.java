@@ -258,6 +258,23 @@ public class Controller {
         return builder.toString();
     }
 
+    public String buildQueryStringTermin(String attribute, String condition) {
+        StringBuilder builder = new StringBuilder("SELECT ter FROM Termin ter WHERE ");
+
+        if(!attribute.contains("Zeit")){
+            builder.append(attribute).append(" =  ");
+        }
+        else{
+            builder.append(attribute).append(" LIKE ");
+        }
+
+        builder.append(condition);
+
+        logger.info(builder.toString());
+
+        return builder.toString();
+    }
+
     public List<Einheit> searchEinheit(String query){
 
         entityManager = emf.createEntityManager();
@@ -274,6 +291,23 @@ public class Controller {
         }
 
         return einheitList;
+    }
+
+    public List<Termin> searchTermin(String query){
+        entityManager = emf.createEntityManager();
+
+        List<Termin> terminList = null;
+
+        try {
+            TypedQuery<Termin> typedQuery = entityManager.createQuery(query, Termin.class);
+
+            terminList = typedQuery.getResultList();
+        }catch (Exception e) {
+            logger.error("Cannot query for Termin...");
+            logger.error(e.toString());
+        }
+
+        return  terminList;
     }
 
 }

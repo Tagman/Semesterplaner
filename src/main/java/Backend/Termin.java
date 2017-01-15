@@ -153,4 +153,17 @@ public class Termin {
         this.semesterplan = semesterplan;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(bezeichnung).append("    ");
+        stringBuilder.append(datum).append("    ");
+        stringBuilder.append(startZeit).append("    ");
+        stringBuilder.append(ort).append("    ");
+
+        return stringBuilder.toString();
+    }
+
+
 }

@@ -1,7 +1,11 @@
 package GUI;
 
+/**
+ * Created by Whoop on 15.01.2017.
+ */
+
 import Backend.Controller;
-import Backend.Einheit;
+import Backend.Termin;
 import org.apache.log4j.Logger;
 
 import java.awt.EventQueue;
@@ -20,19 +24,25 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class SearchEinheit implements ActionListener,
+public class SearchTermin implements ActionListener,
                                         WindowListener{
 
-    private Controller controller = new Controller();
-    private static final Logger logger = Logger.getLogger(SearchEinheit.class);
+
 
     private JFrame frame;
+
+    private Controller controller = new Controller();
+    private static final Logger logger = Logger.getLogger(SearchTermin.class);
 
     private JComboBox boxAttribut;
     private JFormattedTextField ftfSuchbegriff;
     private JFormattedTextField kontrollAnzeige;
 
-    
+    private String whereAttribute;
+    private String whereBedingung;
+
+
+
     private DefaultListModel listModel = new DefaultListModel();
 
     /**
@@ -42,10 +52,8 @@ public class SearchEinheit implements ActionListener,
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    SearchEinheit window = new SearchEinheit();
+                    SearchTermin window = new SearchTermin();
                     window.frame.setVisible(true);
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -56,7 +64,7 @@ public class SearchEinheit implements ActionListener,
     /**
      * Create the application.
      */
-    public SearchEinheit() {
+    public SearchTermin() {
         initialize();
     }
 
@@ -69,9 +77,9 @@ public class SearchEinheit implements ActionListener,
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(this);
 
-        JLabel lblSuchenEinerEinheit = new JLabel("Suchen einer Einheit");
-        lblSuchenEinerEinheit.setHorizontalAlignment(SwingConstants.CENTER);
-        lblSuchenEinerEinheit.setFont(new Font("Arial", Font.PLAIN, 20));
+        JLabel lblSuchenTermin = new JLabel("Suchen eines Termins");
+        lblSuchenTermin.setHorizontalAlignment(SwingConstants.CENTER);
+        lblSuchenTermin.setFont(new Font("Arial", Font.PLAIN, 20));
 
         ftfSuchbegriff = new JFormattedTextField();
         ftfSuchbegriff.setToolTipText("Wonach soll gesucht werden?");
@@ -84,7 +92,7 @@ public class SearchEinheit implements ActionListener,
         lbAttribut.setFont(new Font("Arial", Font.PLAIN, 11));
 
         boxAttribut = new JComboBox();
-        boxAttribut.setModel(new DefaultComboBoxModel(new String[]{"Name der Veranstaltung", "Datum", "Dozent", "Priorit\u00E4t", "Raum", "Anfangszeit"}));
+        boxAttribut.setModel(new DefaultComboBoxModel(new String[] {"Name", "Datum", "Ort", "Priorit\u00E4t", "Anfangszeit"}));
         boxAttribut.setToolTipText("Bitte Attribut ausw\u00E4hlen z.B. Ort, Dozent etc.");
         boxAttribut.setFont(new Font("Arial", Font.PLAIN, 11));
 
@@ -105,38 +113,34 @@ public class SearchEinheit implements ActionListener,
         lsErgebnis.setFont(new Font("Arial", Font.PLAIN, 11));
 
 
+
         GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
         groupLayout.setHorizontalGroup(
                 groupLayout.createParallelGroup(Alignment.TRAILING)
                         .addGroup(groupLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                .addGroup(groupLayout.createSequentialGroup()
-                                                        .addComponent(kontrollAnzeige, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-                                                        .addContainerGap())
-                                                .addGroup(groupLayout.createSequentialGroup()
-                                                        .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                                                .addComponent(lblErgebnis)
-                                                                .addComponent(lbAttribut, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(lbSuchbegriff, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-                                                        .addPreferredGap(ComponentPlacement.RELATED)
-                                                        .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                                .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-                                                                .addComponent(lblSuchenEinerEinheit, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-                                                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-                                                                        .addComponent(ftfSuchbegriff, Alignment.LEADING)
-                                                                        .addComponent(boxAttribut, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                                        .addContainerGap(109, Short.MAX_VALUE)))
-                                        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-                                                .addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-                                                .addContainerGap())))
+                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                                        .addComponent(kontrollAnzeige, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                                        .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+                                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                                                        .addComponent(lblErgebnis)
+                                                        .addComponent(lbAttribut, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lbSuchbegriff, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+                                                .addPreferredGap(ComponentPlacement.RELATED)
+                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                                        .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+                                                                .addComponent(boxAttribut, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(ftfSuchbegriff, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
+                                        .addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap())
         );
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup(Alignment.TRAILING)
                         .addGroup(groupLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblSuchenEinerEinheit, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
                                 .addGap(44)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(lbSuchbegriff)
@@ -145,7 +149,7 @@ public class SearchEinheit implements ActionListener,
                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(lbAttribut)
                                         .addComponent(boxAttribut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblErgebnis))
@@ -161,48 +165,51 @@ public class SearchEinheit implements ActionListener,
     public void actionPerformed(ActionEvent e) {
 
         kontrollAnzeige.setText("");
-        String whereAttribute = null;
-        String whereBedingung = null;
+        whereAttribute = null;
+        whereBedingung = null;
         listModel.removeAllElements();
 
         switch (boxAttribut.getSelectedIndex()){
 
-            case 0: whereAttribute = "name";
+            case 0: whereAttribute = "bezeichnung";
                     whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
                     break;
-            case 1: whereAttribute = "date";
-                try {
-                    LocalDate tempDate = LocalDate.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-                    whereBedingung = "STR_TO_DATE('" + tempDate.toString() + "', '%Y-%m-%d')";
-                }catch (DateTimeParseException ae){
-                    kontrollAnzeige.setText("Datum muss in Format DD.MM.YYYY sein");
-                }
-                break;
-            case 2: whereAttribute = "lehrender";
+            case 1: whereAttribute = "datum";
+                    try {
+
+
+                        LocalDate tempDate = LocalDate.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                        whereBedingung = "STR_TO_DATE('" + tempDate.toString() + "', '%Y-%m-%d')";
+                    }catch (DateTimeParseException ae){
+                        kontrollAnzeige.setText("Datum muss in Format DD.MM.YYYY sein");
+                    }
+                    break;
+
+            case 2: whereAttribute = "ort";
                     whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
                     break;
             case 3: whereAttribute = "priorität";
                     whereBedingung = ftfSuchbegriff.getText();
                     break;
-            case 4: whereAttribute = "ort";
-                    whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
-                    break;
-            case 5: whereAttribute = "TIME_FORMAT(anfangsZeit, '%H:%i')";
-                try {
-                    LocalTime tempTime = LocalTime.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("HH:mm"));
-                    whereBedingung = "TIME_FORMAT('" + tempTime.toString() + "', '%H:%i')";
-                }catch (DateTimeParseException ex){
-                    kontrollAnzeige.setText("Zeit muss in Format HH:MM angegeben werden");
-                }
 
-                break;
-            default: break;
+            case 4: whereAttribute = "TIME_FORMAT(startZeit, '%H:%i')";
+                    try {
+
+
+                        LocalTime tempTime = LocalTime.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("HH:mm"));
+                        whereBedingung = "TIME_FORMAT('" + tempTime.toString() + "', '%H:%i')";
+                    }catch (DateTimeParseException ex){
+                        kontrollAnzeige.setText("Zeit muss in Format HH:MM angegeben werden");
+                    }
+
+                    break;
+
+            default:
+                    break;
         }
 
-
-
-        String query = controller.buildQueryStringEinheit(whereAttribute,whereBedingung);
-        List<Einheit> results = controller.searchEinheit(query);
+        String query = controller.buildQueryStringTermin(whereAttribute, whereBedingung);
+        List<Termin> results = controller.searchTermin(query);
 
         if(results.isEmpty()){
             if (kontrollAnzeige.getText().isEmpty()) {
@@ -257,6 +264,4 @@ public class SearchEinheit implements ActionListener,
     public void windowDeactivated(WindowEvent e) {
 
     }
-
-
 }
