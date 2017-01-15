@@ -42,3 +42,7 @@ crashlytics-build.properties
 fabric.properties
 .idea/inspectionProfiles/
 target/
+src/test/
+
+src/main/java/GUI/Such.java
+src/main/java/GUI/Ergebnis.java

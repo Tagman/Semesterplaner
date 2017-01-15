@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
@@ -25,8 +24,8 @@ public class SearchEinheit implements ActionListener {
 
     private JFrame frame;
 
-    private JComboBox comboBox;
-    private JFormattedTextField txtFieldInput;
+    private JComboBox boxAttribut;
+    private JFormattedTextField ftfSuchbegriff;
 
     private String whereAttribute = null;
     private String whereBedingung;
@@ -66,7 +65,7 @@ public class SearchEinheit implements ActionListener {
         lblSuchenEinerEinheit.setHorizontalAlignment(SwingConstants.CENTER);
         lblSuchenEinerEinheit.setFont(new Font("Arial", Font.PLAIN, 20));
 
-        JFormattedTextField ftfSuchbegriff = new JFormattedTextField();
+        ftfSuchbegriff = new JFormattedTextField();
         ftfSuchbegriff.setToolTipText("Wonach soll gesucht werden?");
         ftfSuchbegriff.setFont(new Font("Arial", Font.PLAIN, 11));
 
@@ -76,7 +75,7 @@ public class SearchEinheit implements ActionListener {
         JLabel lbAttribut = new JLabel("Attribut:");
         lbAttribut.setFont(new Font("Arial", Font.PLAIN, 11));
 
-        JComboBox boxAttribut = new JComboBox();
+        boxAttribut = new JComboBox();
         boxAttribut.setModel(new DefaultComboBoxModel(new String[]{"Name der Veranstaltung", "Datum", "Dozent", "Priorit\u00E4t", "Raum", "Uhrzeit"}));
         boxAttribut.setToolTipText("Bitte Attribut ausw\u00E4hlen z.B. Ort, Dozent etc.");
         boxAttribut.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -87,6 +86,7 @@ public class SearchEinheit implements ActionListener {
 
         JButton btnSuchen = new JButton("Suchen\r\n");
         btnSuchen.setToolTipText("Klicken um Suche zu starten");
+        btnSuchen.addActionListener(this);
         btnSuchen.setFont(new Font("Arial", Font.PLAIN, 11));
 
         JFormattedTextField KontrollAnzeige = new JFormattedTextField();
@@ -152,26 +152,26 @@ public class SearchEinheit implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        switch (comboBox.getSelectedIndex()){
+        switch (boxAttribut.getSelectedIndex()){
 
             case 0: whereAttribute = "name";
-                    whereBedingung = "'" + txtFieldInput.getText() + "'";
+                    whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
                     break;
             case 1: whereAttribute = "date";
-                    LocalDate tempDate = LocalDate.parse(txtFieldInput.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+                    LocalDate tempDate = LocalDate.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                     whereBedingung = "STR_TO_DATE('" + tempDate.toString() + "', '%Y-%m-%d')";
                     break;
             case 2: whereAttribute = "lehrender";
-                    whereBedingung = "'" + txtFieldInput.getText() + "'";
+                    whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
                     break;
             case 3: whereAttribute = "priorität";
-                    whereBedingung = txtFieldInput.getText();
+                    whereBedingung = ftfSuchbegriff.getText();
                     break;
             case 4: whereAttribute = "ort";
-                    whereBedingung = "'" + txtFieldInput.getText() + "'";
+                    whereBedingung = "'" + ftfSuchbegriff.getText() + "'";
                     break;
             case 5: whereAttribute = "TIME_FORMAT(anfangsZeit, '%H:%i')";
-                    LocalTime tempTime = LocalTime.parse(txtFieldInput.getText(), DateTimeFormatter.ofPattern("HH:mm"));
+                    LocalTime tempTime = LocalTime.parse(ftfSuchbegriff.getText(), DateTimeFormatter.ofPattern("HH:mm"));
                     whereBedingung = "TIME_FORMAT('" + tempTime.toString() + "', '%H:%i')";
                     break;
             default: break;
