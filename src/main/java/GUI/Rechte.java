@@ -2,17 +2,11 @@ package GUI;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.GroupLayout;
+import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import java.awt.Font;
 
 public class Rechte {
