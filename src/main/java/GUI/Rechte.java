@@ -15,7 +15,7 @@ public class Rechte {
 
 	private JFrame frame;
 
-	/**
+	/**cx
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
