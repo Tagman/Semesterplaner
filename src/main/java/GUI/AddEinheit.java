@@ -2,16 +2,13 @@ package GUI;
 
 import Backend.Controller;
 import Backend.Einheit;
-import Backend.Termin;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -25,9 +22,9 @@ import java.time.LocalTime;
 public class AddEinheit implements ActionListener {
 
     private JFrame frame;
-    private static  JTextField txtFieldName;
-    private static  JTextField txtFieldTimeStart;
-    private static  JTextField txtFieldTimeStop;
+    private static JTextField txtFieldName;
+    private static JTextField txtFieldTimeStart;
+    private static JTextField txtFieldTimeStop;
     private static JTextField txtFieldLocation;
     private static JTextField txtFieldTeacher;
     private static JTextField txtFieldDate;
@@ -39,15 +36,14 @@ public class AddEinheit implements ActionListener {
 
     private Controller controller = new Controller();
 
-     private Einheit eingabeEinheit;
-
-
+    private Einheit eingabeEinheit;
 
 
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
 
         EventQueue.invokeLater(new Runnable() {
@@ -60,6 +56,7 @@ public class AddEinheit implements ActionListener {
                 }
             }
         });
+
     }
 
     /**
@@ -168,7 +165,7 @@ public class AddEinheit implements ActionListener {
 
         comboIntervall = new JComboBox();
         comboIntervall.setName("Intervall");
-        comboIntervall.setModel(new DefaultComboBoxModel(new String[] {"Einmalig", "Jede Woche", "Jede zweite Woche"}));
+        comboIntervall.setModel(new DefaultComboBoxModel(new String[]{"Einmalig", "Jede Woche", "Jede zweite Woche"}));
         comboIntervall.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboIntervall.setBounds(15, 417, 382, 49);
         frame.getContentPane().add(comboIntervall);
@@ -192,7 +189,7 @@ public class AddEinheit implements ActionListener {
 
         comboTyp = new JComboBox();
         comboTyp.setName("Typ");
-        comboTyp.setModel(new DefaultComboBoxModel(new String[] {"Vorlesung\t", "Praktikum", "Seminar", "Tutorium"}));
+        comboTyp.setModel(new DefaultComboBoxModel(new String[]{"Vorlesung\t", "Praktikum", "Seminar", "Tutorium"}));
         comboTyp.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboTyp.setBounds(437, 114, 361, 49);
         comboTyp.setToolTipText("Bitte die Art der Veranstaltung auswählen");
@@ -228,12 +225,10 @@ public class AddEinheit implements ActionListener {
                     break;
                 }
             }
+        } else {
+            Confirmation.main(null);
+            Confirmation.confirm(Controller.iterateField(EinheitList, error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
         }
-        else
-            {
-                Confirmation.main(null);
-                Confirmation.confirm(Controller.iterateField(EinheitList,error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
-            }
         }
 /*
         Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
@@ -318,7 +313,8 @@ public class AddEinheit implements ActionListener {
 
             return args;
 
-        }
+    }
+
 
         public static void changeEinheit(String name, String type, LocalTime start, LocalTime schluss, String location, String teacher, LocalDate datum, String intervall, Boolean pflicht)
         {
@@ -334,4 +330,3 @@ public class AddEinheit implements ActionListener {
         }
 
 }
-

@@ -27,6 +27,7 @@ import java.util.List;
 public class Controller {
 
     private static String errString="";
+    private static String errStringTime ="";
     public static boolean errBoolean;
 
     public static final Logger logger = Logger.getLogger(Controller.class);
@@ -35,14 +36,12 @@ public class Controller {
 
     EntityManager entityManager;
 
-    private static boolean admin;
-
 
 
 
     public Controller(){
 
-
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
 
 
         // emtpy constructor.
@@ -118,9 +117,10 @@ public class Controller {
         }
     }
 
-    public static String iterateField(ArrayList<JTextField> fields, JTextField error){
+    public static String iterateField(ArrayList<JTextField> fields, JTextField error)
+    {
+        errString="";
 
-        errString = "";
 
 
         fields.forEach(field -> {
@@ -149,9 +149,9 @@ public class Controller {
                     break;
 
                 default:
-                   // errString = field.getName() + " OK!";
+                    // errString = field.getName() + " OK!";
                     errBoolean = true;
-                  //  error.setText(field.getName() + " OK!");
+                    //  error.setText(field.getName() + " OK!");
 
             }
         });
@@ -160,11 +160,11 @@ public class Controller {
 
     public static String checkTime(JTextField start, JTextField end)
     {
-        errString = "";
+        errStringTime = "";
 
         /*
-            0 - Time is in correct format
-            1 - Time has wrong format
+            0 - Time is in Correct Format
+            1 - Time has Wrong format
          */
 
         try{
@@ -172,22 +172,22 @@ public class Controller {
             LocalTime endTime = LocalTime.parse(end.getText());
 
             if(startTime.isBefore(endTime)){
-                return errString;
+                return errStringTime;
             }
             else
             {
-                errString=errString+"Die Startzeit darf nicht vor der Endzeit liegen";
-                return errString;
+                errStringTime=errStringTime+"Die Startzeit darf nicht vor der Endzeit liegen";
+                return errStringTime;
             }
 
 
 
-            
+
         }catch (DateTimeParseException e){
 
-            errString = errString +("Die Zeit: " + e.getParsedString() + "muss das Format hh:mm haben");
+            errStringTime = errStringTime +("Die Zeit ist falsch formatiert, sie muss das Format hh:mm haben");
 
-            return errString;
+            return errStringTime;
 
 
         }
@@ -217,6 +217,7 @@ public class Controller {
 
         boolean boolReturn = true;
 
+        entityManager = emf.createEntityManager();
 
 
         EntityTransaction transaction = null;
@@ -245,8 +246,7 @@ public class Controller {
 
     public Semesterplan initLoad(){
 
-        initDB();
-
+        entityManager = emf.createEntityManager();
         Semesterplan planReturn = null;
 
         try {
@@ -301,6 +301,7 @@ public class Controller {
 
     public List<Einheit> searchEinheit(String query){
 
+        entityManager = emf.createEntityManager();
 
         List<Einheit> einheitList = null;
 
@@ -342,3 +343,24 @@ public class Controller {
         this.admin = admin;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

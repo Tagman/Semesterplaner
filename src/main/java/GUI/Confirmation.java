@@ -1,13 +1,9 @@
 package GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Confirmation {
 
@@ -65,5 +61,6 @@ public class Confirmation {
     public static void confirm( String text)
     {
         ConfirmationText.setText(text);
+        System.out.println(text);
     }
 }
