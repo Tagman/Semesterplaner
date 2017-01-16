@@ -224,6 +224,13 @@ public class MainGUI {
         else{
         	btnNewButton.setText("Gast");
         }
+        btnNewButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                Rechte.main(null);
+            }
+        });
         
         btnNewButton.setBounds(471, 0, 118, 31);
         frame.getContentPane().add(btnNewButton);
