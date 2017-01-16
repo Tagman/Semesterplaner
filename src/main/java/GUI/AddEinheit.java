@@ -2,52 +2,42 @@ package GUI;
 
 import Backend.Controller;
 import Backend.Einheit;
-import Backend.Termin;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-
-import java.time.LocalTime;
 
 public class AddEinheit implements ActionListener {
 
+    public static boolean fertig = false;
     private JFrame frame;
-    private JTextField txtFieldName;
-    private JTextField txtFieldTimeStart;
-    private JTextField txtFieldTimeStop;
-    private JTextField txtFieldLocation;
-    private JTextField txtFieldTeacher;
-    private JTextField txtFieldDate;
-    private JComboBox comboTyp;
-    private JComboBox comboIntervall;
-    private JCheckBox checkPflicht;
-    private JTextField error;
+    private static JTextField txtFieldName;
+    private static JTextField txtFieldTimeStart;
+    private static JTextField txtFieldTimeStop;
+    private static JTextField txtFieldLocation;
+    private static JTextField txtFieldTeacher;
+    private static JTextField txtFieldDate;
+    private static JComboBox comboTyp;
+    private static JComboBox comboIntervall;
+    private static JCheckBox checkPflicht;
+    private static JTextField error;
 
 
     private Controller controller = new Controller();
 
-     private Einheit eingabeEinheit;
-
-
+    private Einheit eingabeEinheit;
 
 
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
 
 
         EventQueue.invokeLater(new Runnable() {
@@ -60,6 +50,7 @@ public class AddEinheit implements ActionListener {
                 }
             }
         });
+
     }
 
     /**
@@ -168,7 +159,7 @@ public class AddEinheit implements ActionListener {
 
         comboIntervall = new JComboBox();
         comboIntervall.setName("Intervall");
-        comboIntervall.setModel(new DefaultComboBoxModel(new String[] {"Einmalig", "Jede Woche", "Jede zweite Woche"}));
+        comboIntervall.setModel(new DefaultComboBoxModel(new String[]{"Einmalig", "Jede Woche", "Jede zweite Woche"}));
         comboIntervall.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboIntervall.setBounds(15, 417, 382, 49);
         frame.getContentPane().add(comboIntervall);
@@ -192,7 +183,7 @@ public class AddEinheit implements ActionListener {
 
         comboTyp = new JComboBox();
         comboTyp.setName("Typ");
-        comboTyp.setModel(new DefaultComboBoxModel(new String[] {"Vorlesung\t", "Praktikum", "Seminar", "Tutorium"}));
+        comboTyp.setModel(new DefaultComboBoxModel(new String[]{"Vorlesung\t", "Praktikum", "Seminar", "Tutorium"}));
         comboTyp.setFont(new Font("Tahoma", Font.PLAIN, 22));
         comboTyp.setBounds(437, 114, 361, 49);
         comboTyp.setToolTipText("Bitte die Art der Veranstaltung auswählen");
@@ -216,100 +207,111 @@ public class AddEinheit implements ActionListener {
         EinheitList.add(txtFieldTeacher);
 
         Controller.iterateField(EinheitList, error);
+        if (Controller.iterateField(EinheitList, error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals("")) {
+            Confirmation.main(null);
+            //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
+            Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
+            for (int i = 0; i <= MainGUI.daten.length; i++) {
+                if (MainGUI.daten[i] == null) {
 
-        for (int i = 0; i <= MainGUI.daten.length; i++) {
-            if (MainGUI.daten[i] == null) {
+                    MainGUI.daten[i] = (getAttributes());
+                    break;
+                }
+            }
+        } else {
+            Confirmation.main(null);
+            Confirmation.confirm(Controller.iterateField(EinheitList, error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
+        }
+    }
 
-                MainGUI.daten[i] = (getAttributes());
-                break;
+    /*
+            Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
+            ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
+            if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){      // Falls Felder alle in Ordnung sind kommt true zurück
+                eingabeEinheit = new Einheit(args);
+                //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
+                MainGUI.tm.addRow(tableArgs);
             }
         }
+    */
+
+    private Object[] getAttributes() {
+        Object[] args = new Object[9];
+
+        args[0] = txtFieldName.getText();
+        args[1] = comboTyp.getSelectedItem();
+
+        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+
+        //args[2] = ""+startTime+"-"+endTime;
+        args[2] = startTime;
+        args[3] = endTime;
+        args[4] = txtFieldLocation.getText();
+        args[5] = txtFieldTeacher.getText();
+
+        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        args[6] = date;
+
+        args[7] = (comboIntervall.getSelectedItem());
+
+
+        if (checkPflicht.isSelected()) {
+            args[8] = 10;
+        } else {
+            args[8] = 1;
         }
-/*
-        Object[] tableArgs = reorderAttributes();   //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
 
-        ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
-
-        if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){      // Falls Felder alle in Ordnung sind kommt true zurück
-
-            eingabeEinheit = new Einheit(args);
-
-            //Setzte Neue Reihenfolge für Object Array fest, damit sie zur Reihenfolge für das TableModel passt
-
-
-            MainGUI.tm.addRow(tableArgs);
-
-        }
+        return args;
 
     }
-*/
-        private Object[] getAttributes()
-        {
-            Object[] args = new Object[9];
 
-            args[0] = txtFieldName.getText();
-            args[1] = comboTyp.getSelectedItem();
+    private ArrayList<JTextField> collectTxtFields() {
+        ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
 
-            LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
-            LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
+        gatheredTxtFields.add(txtFieldDate);
+        gatheredTxtFields.add(txtFieldLocation);
+        gatheredTxtFields.add(txtFieldName);
+        gatheredTxtFields.add(txtFieldTeacher);
 
-            //args[2] = ""+startTime+"-"+endTime;
-            args[2] = startTime;
-            args[3] = endTime;
-            args[4] = txtFieldLocation.getText();
-            args[5] = txtFieldTeacher.getText();
+        return gatheredTxtFields;
+    }
 
-            LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-            args[6] = date;
+    public Object[] reorderAttributes() {
+        Object[] args = new Object[9];
 
-            args[7] = (comboIntervall.getSelectedItem());
+        args[0] = txtFieldName.getText();
+        args[1] = comboTyp.getSelectedItem();
 
+        LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
+        LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
 
-            if (checkPflicht.isSelected()) {
-                args[8] = 10;
-            } else {
-                args[8] = 1;
-            }
+        args[2] = "" + startTime + "-" + endTime;
+        args[3] = txtFieldLocation.getText();
+        args[4] = txtFieldTeacher.getText();
 
-            return args;
+        LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        args[6] = date;
 
-        }
+        args[7] = (comboIntervall.getSelectedItem());
 
-        private ArrayList<JTextField> collectTxtFields () {
-            ArrayList<JTextField> gatheredTxtFields = new ArrayList<>();
+        args[5] = (checkPflicht.isSelected());
 
-            gatheredTxtFields.add(txtFieldDate);
-            gatheredTxtFields.add(txtFieldLocation);
-            gatheredTxtFields.add(txtFieldName);
-            gatheredTxtFields.add(txtFieldTeacher);
+        return args;
 
-            return gatheredTxtFields;
-        }
-
-        public Object[] reorderAttributes () {
-            Object[] args = new Object[9];
-
-            args[0] = txtFieldName.getText();
-            args[1] = comboTyp.getSelectedItem();
-
-            LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
-            LocalTime endTime = LocalTime.parse(txtFieldTimeStop.getText());
-
-            args[2] = "" + startTime + "-" + endTime;
-            args[3] = txtFieldLocation.getText();
-            args[4] = txtFieldTeacher.getText();
-
-            LocalDate date = LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-            args[6] = date;
-
-            args[7] = (comboIntervall.getSelectedItem());
-
-            args[5] = (checkPflicht.isSelected());
-
-            return args;
-
-        }
+    }
+    public static void ChangeEinheit(String name, String type, LocalTime start, LocalTime end, String location, String teacher, LocalDate date, String intervall, boolean pflicht)
+    {
 
 
+        txtFieldName.setText(name);
+        comboTyp.setSelectedItem(type);
+        txtFieldTimeStart.setText(""+start+"");
+        txtFieldTimeStop.setText(""+end+"");
+        txtFieldLocation.setText(location);
+        txtFieldTeacher.setText(teacher);
+        txtFieldDate.setText(""+date+"");
+        comboIntervall.setSelectedItem(intervall);
+        checkPflicht.setSelected(pflicht);
+    }
 }
-

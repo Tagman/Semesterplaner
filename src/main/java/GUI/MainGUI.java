@@ -3,22 +3,17 @@ package GUI;
 import Backend.Semesterplan;
 import Backend.Stundenplan;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.time.LocalDate;
-import java.awt.Component;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
-import java.util.Date;
 import java.util.Locale;
 
 public class MainGUI {
@@ -178,36 +173,52 @@ public class MainGUI {
         frame.getContentPane().add(lblAnzeigezeitraum);
 
         JButton btnAktualisieren = new JButton("Aktualisieren");
-        btnAktualisieren.addActionListener(new ActionListener() {
+        btnAktualisieren.addActionListener(new ActionListener()
+        {
+
             public void actionPerformed(ActionEvent e)
             {
-                try {
-                for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+                if((""+Tabelle.getValueAt(Tabelle.getSelectedRow(),1)+"").equals(""))
                 {
-                    tm.removeRow(j);
+                    String name = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0)+"";
+                    String time = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),2)+"";
+                    String timestart = ""+time.charAt(0)+time.charAt(1)+time.charAt(2)+time.charAt(3)+time.charAt(4);
+                    String timeend = ""+time.charAt(6)+time.charAt(7)+time.charAt(8)+time.charAt(9)+time.charAt(10);
+                    String location = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),3)+"";
+                    LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(),6);
+                    String intervall = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),7)+"";
+                    String prio = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),8)+"";
+
+                        AddTermin.main(null);
+                        AddTermin.ChangeTermin(name,LocalTime.parse(timestart),LocalTime.parse(timeend),location,date,intervall,prio);
                 }
-
-                for(int i=0;i<=daten.length;i++)
+                else
                 {
-                    LocalDate today = LocalDate.now();
-                    TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-                    int weekNumber = today.get(woy);
-                  //  System.out.println(weekNumber);
-                    Object[] etwas = (Object[]) daten[i];
-                    LocalDate datum = (LocalDate) etwas[6];
-                    TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
-                    int holweek = datum.get(week);
-                   // System.out.println(holweek);
-                  //  System.out.println(datum);
-                    if(weekNumber==holweek)
-                    {
+                String name = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0)+"";
+                String type = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),1)+"";
+                LocalTime start = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(),2);
+                LocalTime end = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(),3);
+                String location = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),4)+"";
+                String teacher = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),5)+"";
+                LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(),6);
+                String intervall = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),7)+"";
+                boolean pflicht;
+                if((int) Tabelle.getValueAt(Tabelle.getSelectedRow(),8)==1)
+                {
+                    pflicht = false;
+                }
+                else{pflicht = true;}
 
-                        tm.addRow((Object[]) daten[i]);
-                    }
-                }}
-                catch (NullPointerException igno) {
-                    System.out.print("ignorieren");}
-            }
+                AddEinheit.main(null);
+               System.out.println("nachdem fenster(vor dem eintragen)");
+
+               while (AddEinheit.fertig==false)
+               {}
+                AddEinheit.ChangeEinheit(name,type,start,end,location,teacher,date,intervall,pflicht);
+                System.out.println("nachdem Eintragen");
+
+
+            }}
         });
         btnAktualisieren.setBounds(633, 87, 130, 29);
         frame.getContentPane().add(btnAktualisieren);
@@ -256,5 +267,37 @@ public class MainGUI {
             }
         });
     }
+
+    public static void aktualisieren()
+    {
+
+        try {
+            for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+            {
+                tm.removeRow(j);
+            }
+
+            for(int i=0;i<=daten.length;i++)
+            {
+                LocalDate today = LocalDate.now();
+                TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                int weekNumber = today.get(woy);
+                //  System.out.println(weekNumber);
+                Object[] etwas = (Object[]) daten[i];
+                LocalDate datum = (LocalDate) etwas[6];
+                TemporalField week = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
+                int holweek = datum.get(week);
+                // System.out.println(holweek);
+                //  System.out.println(datum);
+                if(weekNumber==holweek)
+                {
+
+                    tm.addRow((Object[]) daten[i]);
+                }
+            }}
+        catch (NullPointerException igno) {
+            System.out.print("ignorieren");}
+    }
+
 
 }

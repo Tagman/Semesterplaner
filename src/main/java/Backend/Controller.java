@@ -26,7 +26,8 @@ import java.util.List;
 
 public class Controller {
 
-    private static String errString;
+    private static String errString="";
+    private static String errStringTime ="";
     public static boolean errBoolean;
 
     public static final Logger logger = Logger.getLogger(Controller.class);
@@ -116,7 +117,9 @@ public class Controller {
         }
     }
 
-    public static boolean iterateField(ArrayList<JTextField> fields, JTextField error){
+    public static String iterateField(ArrayList<JTextField> fields, JTextField error)
+    {
+        errString="";
 
 
 
@@ -125,57 +128,66 @@ public class Controller {
             switch(checkField(field)) {
 
                 case 1:
-                    errString = field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.";
+                    errString = "<html>" +errString + field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein. <br> <html>";
                     errBoolean = false;
-                    error.setText(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu kurz! Muss mind. 3 Zeichen lang sein. \n");
                     break;
                 case 2:
-                    errString = field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.";
+                    errString =  "<html>" +errString + field.getName() + " zu lang! Darf max. 29 Zeichen lang sein. <br> <html>";
                     errBoolean = false;
-                    error.setText(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein.");
+                    error.setText(field.getName() + " zu lang! Darf max. 29 Zeichen lang sein. \n");
                     break;
                 case 3:
-                    errString = field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!";
+                    errString =  "<html>" +errString + field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten! <br> <html>";
                     errBoolean = false;
-                    error.setText(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten!");
+                    error.setText(field.getName() + " darf keine Sonderzeichen (!§$%&/()=?{[]}) enthalten! \n");
                     break;
                 case 4:
-                    errString = field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein";
+                    errString =  "<html>" +errString + field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein <br> <html>";
                     errBoolean = false;
-                    error.setText(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein");
+                    error.setText(field.getName() + " falsch formatiert. Format MUSS in DD.MM.YYYY sein \n");
                     break;
 
                 default:
-                    errString = field.getName() + " OK!";
+                    // errString = field.getName() + " OK!";
                     errBoolean = true;
-                    error.setText(field.getName() + " OK!");
+                    //  error.setText(field.getName() + " OK!");
 
             }
         });
 
-        return errBoolean; }
+        return errString; }
 
-    public static boolean checkTime(JTextField start, JTextField end) {
+    public static String checkTime(JTextField start, JTextField end)
+    {
+        errStringTime = "";
 
         /*
-            0 - Time is in correct format
-            1 - Time has wrong format
+            0 - Time is in Correct Format
+            1 - Time has Wrong format
          */
 
         try{
             LocalTime startTime = LocalTime.parse(start.getText());
             LocalTime endTime = LocalTime.parse(end.getText());
 
-            return startTime.isBefore(endTime);
+            if(startTime.isBefore(endTime)){
+                return errStringTime;
+            }
+            else
+            {
+                errStringTime=errStringTime+"Die Startzeit darf nicht vor der Endzeit liegen";
+                return errStringTime;
+            }
 
 
 
-            
+
         }catch (DateTimeParseException e){
 
-            System.out.println("Die Zeit: " + e.getParsedString() + "muss das Format hh:mm haben");
+            errStringTime = errStringTime +("Die Zeit ist falsch formatiert, sie muss das Format hh:mm haben");
 
-            return false;
+            return errStringTime;
 
 
         }
@@ -277,3 +289,24 @@ public class Controller {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
