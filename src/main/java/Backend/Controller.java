@@ -37,7 +37,7 @@ public class Controller {
 
     EntityManager entityManager;
 
-    private boolean admin;
+    private static boolean admin;
 
 
 

@@ -1,11 +1,13 @@
 package GUI;
 
+import Backend.Controller;
 import Backend.Semesterplan;
 import Backend.Stundenplan;
 
 import java.awt.EventQueue;
 
 import javax.swing.*;
+
 import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -34,6 +36,8 @@ public class MainGUI {
     static DefaultTableModel tm;
     static ListSelectionModel lm;
     static Object[] daten = new Object[200];
+    
+    private Controller controller = new Controller();
 
 
     /**
@@ -85,7 +89,8 @@ public class MainGUI {
         });
         mntmNewMenuItem_3.setToolTipText("Hier klicken um eine neue Einheit zu erstellen");
         mnNewMenu.add(mntmNewMenuItem_3);
-
+        
+       
         JMenuItem mntmNewMenuItem_4 = new JMenuItem("Termin");
         mntmNewMenuItem_4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
@@ -104,15 +109,15 @@ public class MainGUI {
         menuBar_1.add(mnAnsicht);
 
         JMenuItem mntmNewMenuItem = new JMenuItem("Ansicht 1");
-        mntmNewMenuItem.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 1' zu ändern");
+        mntmNewMenuItem.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 1' zu Ã¤ndern");
         mnAnsicht.add(mntmNewMenuItem);
 
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Ansicht 2");
-        mntmNewMenuItem_1.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 2' zu ändern");
+        mntmNewMenuItem_1.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 2' zu Ã¤ndern");
         mnAnsicht.add(mntmNewMenuItem_1);
 
         JMenuItem mntmNewMenuItem_2 = new JMenuItem("Ansicht 3");
-        mntmNewMenuItem_2.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 3' zu ändern");
+        mntmNewMenuItem_2.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 3' zu Ã¤ndern");
         mnAnsicht.add(mntmNewMenuItem_2);
 
         JMenuBar menuBar_2 = new JMenuBar();
@@ -149,7 +154,7 @@ public class MainGUI {
                 "Pflicht?",
                 "Datum",
                 "Wiederholrhythmus",
-                "Priorität"
+                "PrioritÃ¤t"
         };
 
 
@@ -210,6 +215,18 @@ public class MainGUI {
         JScrollPane jps = new JScrollPane(Tabelle);
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
+        
+        JButton btnNewButton = new JButton("test");
+        
+        if(controller.isAdmin()){
+        	btnNewButton.setText("Admin");
+        }
+        else{
+        	btnNewButton.setText("Gast");
+        }
+        
+        btnNewButton.setBounds(471, 0, 118, 31);
+        frame.getContentPane().add(btnNewButton);
         tm = (DefaultTableModel) Tabelle.getModel();
         Tabelle.getSelectedColumn();
 
@@ -263,5 +280,4 @@ public class MainGUI {
         catch (NullPointerException igno) {
             System.out.print("ignorieren");}
     }
-
 }
