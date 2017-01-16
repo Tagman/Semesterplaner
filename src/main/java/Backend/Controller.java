@@ -31,18 +31,18 @@ public class Controller {
 
     public static final Logger logger = Logger.getLogger(Controller.class);
 
-    private final EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     EntityManager entityManager;
 
-    private boolean admin;
+    private static boolean admin;
 
 
 
 
     public Controller(){
 
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+
 
 
         // emtpy constructor.
@@ -205,6 +205,8 @@ public class Controller {
 
         boolean boolReturn = true;
 
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+
         entityManager = emf.createEntityManager();
 
 
@@ -234,6 +236,7 @@ public class Controller {
 
     public Semesterplan initLoad(){
 
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
         entityManager = emf.createEntityManager();
         Semesterplan planReturn = null;
 
@@ -289,6 +292,8 @@ public class Controller {
 
     public List<Einheit> searchEinheit(String query){
 
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+
         entityManager = emf.createEntityManager();
 
         List<Einheit> einheitList = null;
@@ -306,6 +311,8 @@ public class Controller {
     }
 
     public List<Termin> searchTermin(String query){
+
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
         entityManager = emf.createEntityManager();
 
         List<Termin> terminList = null;
