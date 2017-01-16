@@ -1,9 +1,17 @@
 package GUI;
 
+import Backend.Controller;
 import Backend.Semesterplan;
 import Backend.Stundenplan;
 
+import java.awt.EventQueue;
+
 import javax.swing.*;
+import java.time.LocalDate;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,7 +34,10 @@ public class MainGUI {
     static Stundenplan stundenplan;
     static Object[][] data;
     static DefaultTableModel tm;
+    static ListSelectionModel lm;
     static Object[] daten = new Object[200];
+
+    private Controller controller = new Controller();
     static String model = "Wochenansicht";
 
 
@@ -247,6 +258,18 @@ public class MainGUI {
         JScrollPane jps = new JScrollPane(Tabelle);
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
+
+        JButton btnNewButton = new JButton("test");
+
+        if(controller.isAdmin()){
+        	btnNewButton.setText("Admin");
+        }
+        else{
+        	btnNewButton.setText("Gast");
+        }
+
+        btnNewButton.setBounds(471, 0, 118, 31);
+        frame.getContentPane().add(btnNewButton);
         tm = (DefaultTableModel) Tabelle.getModel();
 
 
@@ -336,5 +359,4 @@ public class MainGUI {
         catch (NullPointerException igno) {
             System.out.print("ignorieren");}
     }
-
 }

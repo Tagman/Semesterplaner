@@ -147,11 +147,15 @@ public class Login implements ActionListener {
                     JOptionPane.showMessageDialog(null, "richtig");
                     pwCorrect = true;
                     controller.setAdmin(true);
+                    
+                    MainGUI.main(null);
+                    
+                    
 
                     MainGUI.main(null);
 
                     /*
-                    HIER CODE FÜR WEITERLEITUNG ZUM NÄCHSTEN FENSTER EINFÜGEN
+                    HIER CODE FÜR WEITERLEITUNG ZUM NÃ„CHSTEN FENSTER EINFÃœGEN COmmit
                      */
                 } else {
 
@@ -162,6 +166,8 @@ public class Login implements ActionListener {
                 }
             }
 
+        }else {
+        	 MainGUI.main(null);
         }
     }
 }

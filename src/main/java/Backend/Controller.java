@@ -36,14 +36,7 @@ public class Controller {
 
     EntityManager entityManager;
 
-
-
-
-
-
-
-
-    private boolean admin = false;
+    private static boolean admin;
 
 
 
@@ -123,9 +116,9 @@ public class Controller {
         }
     }
 
-    public static String iterateField(ArrayList<JTextField> fields, JTextField error)
-    {
-        errString="";
+    public static String iterateField(ArrayList<JTextField> fields, JTextField error){
+
+        errString = "";
 
 
         fields.forEach(field -> {
@@ -154,9 +147,9 @@ public class Controller {
                     break;
 
                 default:
-                    // errString = field.getName() + " OK!";
+                   // errString = field.getName() + " OK!";
                     errBoolean = true;
-                    //  error.setText(field.getName() + " OK!");
+                  //  error.setText(field.getName() + " OK!");
 
             }
         });
