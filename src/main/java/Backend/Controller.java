@@ -35,15 +35,19 @@ public class Controller {
 
     EntityManager entityManager;
 
-    private static boolean admin;
+    
+
+
+
+
+
+
+    private boolean admin = false;
 
 
 
 
     public Controller(){
-
-
-
 
         // emtpy constructor.
     }
