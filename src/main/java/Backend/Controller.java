@@ -19,6 +19,8 @@ import java.util.List;
     /*
     Right now it will throw an error if its parsed into Einheit
     with the incorrect format.
+    
+    Robert push test
 
     checkField just checks Date field like any other txt field
     maybe decide if field is the date field over the getName() method of any passed JTextField
