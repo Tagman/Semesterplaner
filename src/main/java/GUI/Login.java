@@ -152,9 +152,7 @@ public class Login implements ActionListener {
                     
                     
 
-                    /*
-                    HIER CODE FÜR WEITERLEITUNG ZUM NÃ„CHSTEN FENSTER EINFÃœGEN COmmit
-                     */
+                  
                 } else {
 
                     JOptionPane.showMessageDialog(null, "Passwort falsch");
