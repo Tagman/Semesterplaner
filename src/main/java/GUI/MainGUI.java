@@ -27,6 +27,7 @@ public class MainGUI {
     static Object[][] data;
     static DefaultTableModel tm;
     static Object[] daten = new Object[200];
+    static String model = "Wochenansicht";
 
 
     /**
@@ -96,12 +97,26 @@ public class MainGUI {
         JMenu mnAnsicht = new JMenu("Ansicht                                 ");
         menuBar_1.add(mnAnsicht);
 
-        JMenuItem mntmNewMenuItem = new JMenuItem("Ansicht 1");
+        JMenuItem mntmNewMenuItem = new JMenuItem("Tagesansicht");
         mntmNewMenuItem.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 1' zu ändern");
+        mntmNewMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                model="Tagesansicht";
+                aktualisieren(model);
+            }
+        });
         mnAnsicht.add(mntmNewMenuItem);
 
-        JMenuItem mntmNewMenuItem_1 = new JMenuItem("Ansicht 2");
+        JMenuItem mntmNewMenuItem_1 = new JMenuItem("Wochenansicht");
         mntmNewMenuItem_1.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 2' zu ändern");
+        mntmNewMenuItem_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                model = "Wochenansicht";
+                aktualisieren(model);
+            }
+        });
         mnAnsicht.add(mntmNewMenuItem_1);
 
         JMenuItem mntmNewMenuItem_2 = new JMenuItem("Ansicht 3");
@@ -152,25 +167,18 @@ public class MainGUI {
         label.setBounds(427, 91, 13, 20);
         frame.getContentPane().add(label);
 
-        txtAnfangsdatum = new JTextField();
-        txtAnfangsdatum.setText("Anfangsdatum");
-        txtAnfangsdatum.setBounds(271, 88, 146, 26);
-        frame.getContentPane().add(txtAnfangsdatum);
-        txtAnfangsdatum.setColumns(10);
-        txtAnfangsdatum.setToolTipText("Hier bitte das anzuzeigende Startdatum eingeben");
+        JButton btnlöschen = new JButton("L\u00F6schen");
+        btnlöschen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        btnlöschen.setToolTipText("Hier klicken um eine Einheit oder einen Termin zu löschen");
+        btnlöschen.setBounds(456, 87, 130, 29);
+        frame.getContentPane().add(btnlöschen);
 
-        txtEnddatum = new JTextField();
-        txtEnddatum.setText("Enddatum");
-        txtEnddatum.setBounds(443, 88, 146, 26);
-        frame.getContentPane().add(txtEnddatum);
-        txtEnddatum.setColumns(10);
-        txtEnddatum.setToolTipText("Hier bitte das anzuzeigende Enddatum eingeben");
 
-        JLabel lblAnzeigezeitraum = new JLabel("Anzeigezeitraum:");
-        lblAnzeigezeitraum.setBounds(139, 91, 130, 20);
-        frame.getContentPane().add(lblAnzeigezeitraum);
 
-        JButton btnAktualisieren = new JButton("Aktualisieren");
+        JButton btnAktualisieren = new JButton("Anpassen");
         btnAktualisieren.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e)
             {
@@ -217,7 +225,7 @@ public class MainGUI {
         });
         btnAktualisieren.setBounds(633, 87, 130, 29);
         frame.getContentPane().add(btnAktualisieren);
-        btnAktualisieren.setToolTipText("Hier klicken um die Ansicht auf Basis der Daten zu Aktualisieren");
+        btnAktualisieren.setToolTipText("Hier klicken um eine Einheit oder einen Termin zu verändern");
 
         JPanel panel = new JPanel();
         panel.setBounds(15, 134, 857, 444);
@@ -263,7 +271,43 @@ public class MainGUI {
         });
     }
 
-    public static void aktualisieren()
+    public static void aktualisieren(String model)
+    {
+        if(model.equals("Tagesansicht"))
+        {
+            Tagesansicht();
+        }
+        else if(model.equals("Wochenansicht"))
+        {
+            Wochenansicht();
+        }
+
+    }
+    public static void Tagesansicht()
+    {
+        try {
+            for( int j = tm.getRowCount() - 1; j >= 0; j-- )
+            {
+                tm.removeRow(j);
+            }
+
+            for(int i=0;i<=daten.length;i++)
+            {
+                LocalDate today = LocalDate.now();
+                System.out.println(today);
+                Object[] etwas = (Object[]) daten[i];
+                LocalDate datum = (LocalDate) etwas[6];
+                System.out.println(datum);
+                if((""+today+"").equals(""+datum+""))
+                {
+                    System.out.println("passen!");
+                    tm.addRow((Object[]) daten[i]);
+                }
+            }}
+        catch (NullPointerException igno) {
+            System.out.print("ignorieren");}
+    }
+    public static void Wochenansicht()
     {
         try {
             for( int j = tm.getRowCount() - 1; j >= 0; j-- )
