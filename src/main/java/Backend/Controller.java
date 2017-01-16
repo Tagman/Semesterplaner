@@ -39,10 +39,16 @@ public class Controller {
 
 
 
+
+
+
+
+    private boolean admin = false;
+
+
+
+
     public Controller(){
-
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
-
 
         // emtpy constructor.
     }
@@ -122,7 +128,6 @@ public class Controller {
         errString="";
 
 
-
         fields.forEach(field -> {
 
             switch(checkField(field)) {
@@ -163,8 +168,8 @@ public class Controller {
         errStringTime = "";
 
         /*
-            0 - Time is in Correct Format
-            1 - Time has Wrong format
+            0 - Time is in correct format
+            1 - Time has wrong format
          */
 
         try{
@@ -182,7 +187,7 @@ public class Controller {
 
 
 
-
+            
         }catch (DateTimeParseException e){
 
             errStringTime = errStringTime +("Die Zeit ist falsch formatiert, sie muss das Format hh:mm haben");
@@ -217,7 +222,6 @@ public class Controller {
 
         boolean boolReturn = true;
 
-        entityManager = emf.createEntityManager();
 
 
         EntityTransaction transaction = null;
@@ -246,7 +250,8 @@ public class Controller {
 
     public Semesterplan initLoad(){
 
-        entityManager = emf.createEntityManager();
+        initDB();
+
         Semesterplan planReturn = null;
 
         try {
@@ -301,7 +306,6 @@ public class Controller {
 
     public List<Einheit> searchEinheit(String query){
 
-        entityManager = emf.createEntityManager();
 
         List<Einheit> einheitList = null;
 
@@ -343,24 +347,3 @@ public class Controller {
         this.admin = admin;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
