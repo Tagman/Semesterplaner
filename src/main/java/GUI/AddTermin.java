@@ -161,7 +161,8 @@ public class AddTermin implements ActionListener// implements ActionListener
 
         JButton button = new JButton("Zum Stundenplan hinzuf\u00FCgen");}
 
-     public void actionPerformed(ActionEvent e) {
+     public void actionPerformed(ActionEvent e)
+     {
 
 
 
@@ -175,6 +176,7 @@ public class AddTermin implements ActionListener// implements ActionListener
 
          if(Controller.iterateField(TerminList,error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals(""))
          {
+
              Confirmation.main(null);
              //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
              Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
@@ -218,6 +220,20 @@ public class AddTermin implements ActionListener// implements ActionListener
                      MainGUI.daten[i] = args;
                      break;
                  }
+
+                 else
+                     {
+                         Object[] inhalt = (Object[]) MainGUI.daten[i];
+                         System.out.println(inhalt[0]);
+                         if(txtFieldName.getText().equals(inhalt[0]))
+                         {
+                             MainGUI.daten[i] = args;
+                             break;
+                         }
+
+                     }
+
+
 
              }
              //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});

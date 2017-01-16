@@ -217,6 +217,17 @@ public class AddEinheit implements ActionListener {
                     MainGUI.daten[i] = (getAttributes());
                     break;
                 }
+                else
+                {
+                    Object[] inhalt = (Object[]) MainGUI.daten[i];
+                    System.out.println(inhalt[0]);
+                    if(txtFieldName.getText().equals(inhalt[0]))
+                    {
+                        MainGUI.daten[i] = (getAttributes());
+                        break;
+                    }
+
+                }
             }
         } else {
             Confirmation.main(null);

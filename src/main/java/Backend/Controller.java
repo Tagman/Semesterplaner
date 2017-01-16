@@ -29,7 +29,7 @@ public class Controller {
     private static String errString="";
     private static String errStringTime ="";
     public static boolean errBoolean;
-
+    private boolean admin;
     public static final Logger logger = Logger.getLogger(Controller.class);
 
     private final EntityManagerFactory emf;
