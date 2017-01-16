@@ -1,8 +1,8 @@
 package GUI;
 
 
-import Backend.Controller;
 import Backend.Termin;
+import Backend.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -266,7 +266,9 @@ public class AddTermin implements ActionListener// implements ActionListener
         */
 
      /*   ArrayList<JTextField> txtFieldsToCheck = collectTxtFields();
+
         if(controller.iterateField(txtFieldsToCheck) && controller.checkTime(txtFieldTimeStart, txtFieldTimeStop)){
+
             eingabeTermin = new Termin( txtFieldName.getText(),
                     LocalTime.parse(txtFieldTimeStart.getText()),
                     LocalTime.parse(txtFieldTimeStop.getText()),
@@ -275,7 +277,9 @@ public class AddTermin implements ActionListener// implements ActionListener
                     txtFieldLocation.getText(),
                     txtFieldDate.getText()
             );
+
             // neuen Termin mit Eingabenwert in Liste des Semesterplans Objekt hinzufügen
+
             MainGUI.sem.addTermin(eingabeTermin);  //Anschauen ob es in der wirklich in der Liste ist
         }
    */
@@ -292,6 +296,7 @@ public class AddTermin implements ActionListener// implements ActionListener
                 eingabeTermin.getPriorität(),
                 eingabeTermin.getOrt(),
                 eingabeTermin.getDatum()));
+
             */
 
      // MainGUI.tm.addRow(new Object[]{eingabeTermin.getBezeichnung(), "", eingabeTermin.getStartZeit()+"-"+ eingabeTermin.getEndZeit(), eingabeTermin.getOrt(), "", "", eingabeTermin.getDatum(), eingabeTermin.getPeriodisch(), eingabeTermin.getPriorität()});

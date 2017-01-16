@@ -178,5 +178,18 @@ public class Einheit {
     public void setFach(Fach fach) {
         this.fach = fach;
     }
+
+    @Override
+    public String toString(){
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(name).append("    ");
+        stringBuilder.append(date.toString()).append("    ");
+        stringBuilder.append(anfangsZeit.toString()).append("    ");
+        stringBuilder.append(ort).append("    ");
+        stringBuilder.append(typ).append("    ");
+
+        return stringBuilder.toString();
+    }
 }
 

@@ -32,7 +32,7 @@ public class Controller {
     private boolean admin;
     public static final Logger logger = Logger.getLogger(Controller.class);
 
-    private final EntityManagerFactory emf;
+    private EntityManagerFactory emf;
 
     EntityManager entityManager;
 
@@ -193,6 +193,16 @@ public class Controller {
         }
     }
 
+    public void initDB(){
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+        entityManager = emf.createEntityManager();
+    }
+
+    public void closeDB(){
+        entityManager.close();
+        emf.close();
+    }
+
     public void closeEntityManager(){
         entityManager.close();
     }
@@ -202,6 +212,8 @@ public class Controller {
            }
 
     public boolean save(Semesterplan sp){
+
+        initDB();
 
         boolean boolReturn = true;
 
@@ -247,7 +259,7 @@ public class Controller {
             logger.error("cannot query Semesterplan object for initLoad");
             logger.error("Error message: " + e.toString());
 
-            entityManager.close();
+            closeDB();
 
         }
         return planReturn;
@@ -258,6 +270,23 @@ public class Controller {
 
         if(!attribute.contains("Zeit")){
             builder.append(attribute).append(" = ");
+        }
+        else{
+            builder.append(attribute).append(" LIKE ");
+        }
+
+        builder.append(condition);
+
+        logger.info(builder.toString());
+
+        return builder.toString();
+    }
+
+    public String buildQueryStringTermin(String attribute, String condition) {
+        StringBuilder builder = new StringBuilder("SELECT ter FROM Termin ter WHERE ");
+
+        if(!attribute.contains("Zeit")){
+            builder.append(attribute).append(" =  ");
         }
         else{
             builder.append(attribute).append(" LIKE ");
@@ -288,6 +317,31 @@ public class Controller {
         return einheitList;
     }
 
+    public List<Termin> searchTermin(String query){
+
+
+
+        List<Termin> terminList = null;
+
+        try {
+            TypedQuery<Termin> typedQuery = entityManager.createQuery(query, Termin.class);
+
+            terminList = typedQuery.getResultList();
+        }catch (Exception e) {
+            logger.error("Cannot query for Termin...");
+            logger.error(e.toString());
+        }
+
+        return  terminList;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }
 
 
