@@ -35,6 +35,8 @@ public class Controller {
 
     EntityManager entityManager;
 
+    private boolean admin;
+
 
 
 
@@ -320,4 +322,11 @@ public class Controller {
         return  terminList;
     }
 
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }

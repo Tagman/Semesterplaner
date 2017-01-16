@@ -19,7 +19,7 @@ public class DBTest {
 
     public static void main(String[] args){
 
-        logger.debug("starting db test");
+        logger.debug("starting db Test");
 
         /*
 
