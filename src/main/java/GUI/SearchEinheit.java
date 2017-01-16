@@ -199,6 +199,7 @@ public class SearchEinheit implements ActionListener,
 
 
 
+        controller.initDB();
         String query = controller.buildQueryStringEinheit(whereAttribute,whereBedingung);
         List<Einheit> results = controller.searchEinheit(query);
 
@@ -227,8 +228,7 @@ public class SearchEinheit implements ActionListener,
 
     @Override
     public void windowClosing(WindowEvent e) {
-        controller.closeEntityManager();
-        controller.closeEntityManagerFactory();
+        controller.closeDB();
     }
 
     @Override

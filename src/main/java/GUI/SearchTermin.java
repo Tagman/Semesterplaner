@@ -208,6 +208,8 @@ public class SearchTermin implements ActionListener,
                     break;
         }
 
+        controller.initDB();
+
         String query = controller.buildQueryStringTermin(whereAttribute, whereBedingung);
         List<Termin> results = controller.searchTermin(query);
 
@@ -236,8 +238,7 @@ public class SearchTermin implements ActionListener,
 
     @Override
     public void windowClosing(WindowEvent e) {
-        controller.closeEntityManager();
-        controller.closeEntityManagerFactory();
+        controller.closeDB();
     }
 
     @Override

@@ -193,6 +193,16 @@ public class Controller {
         }
     }
 
+    public void initDB(){
+        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
+        entityManager = emf.createEntityManager();
+    }
+
+    public void closeDB(){
+        entityManager.close();
+        emf.close();
+    }
+
     public void closeEntityManager(){
         entityManager.close();
     }
@@ -203,11 +213,10 @@ public class Controller {
 
     public boolean save(Semesterplan sp){
 
+        initDB();
+
         boolean boolReturn = true;
 
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
-
-        entityManager = emf.createEntityManager();
 
 
         EntityTransaction transaction = null;
@@ -236,8 +245,8 @@ public class Controller {
 
     public Semesterplan initLoad(){
 
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
-        entityManager = emf.createEntityManager();
+        initDB();
+
         Semesterplan planReturn = null;
 
         try {
@@ -250,7 +259,7 @@ public class Controller {
             logger.error("cannot query Semesterplan object for initLoad");
             logger.error("Error message: " + e.toString());
 
-            entityManager.close();
+            closeDB();
 
         }
         return planReturn;
@@ -292,9 +301,6 @@ public class Controller {
 
     public List<Einheit> searchEinheit(String query){
 
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
-
-        entityManager = emf.createEntityManager();
 
         List<Einheit> einheitList = null;
 
@@ -312,8 +318,7 @@ public class Controller {
 
     public List<Termin> searchTermin(String query){
 
-        emf = Persistence.createEntityManagerFactory("SemesterplanerPU");
-        entityManager = emf.createEntityManager();
+
 
         List<Termin> terminList = null;
 

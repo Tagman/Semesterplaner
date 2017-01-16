@@ -147,9 +147,7 @@ public class DBTest {
 
         //System.out.println(spLoaded.getStundenplan().getFaecher().get(0).getEinheiten().get(4).getAnfangsZeit().toString());
 
-        controller.closeEntityManager();
-
-        controller.closeEntityManagerFactory();
+        controller.closeDB();
 
     }
 

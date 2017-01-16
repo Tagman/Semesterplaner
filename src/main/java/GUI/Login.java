@@ -148,6 +148,8 @@ public class Login implements ActionListener {
                     pwCorrect = true;
                     controller.setAdmin(true);
 
+                    MainGUI.main(null);
+
                     /*
                     HIER CODE FÜR WEITERLEITUNG ZUM NÄCHSTEN FENSTER EINFÜGEN
                      */
