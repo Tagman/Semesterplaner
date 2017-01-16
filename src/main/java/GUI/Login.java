@@ -32,7 +32,7 @@ public class Login implements ActionListener {
 
     private Controller controller = new Controller();
 
-    String password = "123";
+    String password = "toor";
 
     String passwordEntered;
 
@@ -169,6 +169,8 @@ public class Login implements ActionListener {
         }else {
         	 MainGUI.main(null);
         }
+
+        frame.dispose();
     }
 }
 

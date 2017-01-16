@@ -13,12 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.TemporalField;
 import java.time.temporal.WeekFields;
@@ -259,17 +255,28 @@ public class MainGUI {
         jps.setBounds(0, 0, 857, 442);
         panel.add(jps);
 
-        JButton btnNewButton = new JButton("test");
+        JButton btnRechte = new JButton("test");
+
+        btnRechte.setName("Rechte");
+
 
         if(controller.isAdmin()){
-        	btnNewButton.setText("Admin");
+        	btnRechte.setText("Admin");
         }
         else{
-        	btnNewButton.setText("Gast");
+        	btnRechte.setText("Gast");
         }
 
-        btnNewButton.setBounds(471, 0, 118, 31);
-        frame.getContentPane().add(btnNewButton);
+        btnRechte.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                Rechte.main(null);
+            }
+        });
+
+        btnRechte.setBounds(471, 0, 118, 31);
+        frame.getContentPane().add(btnRechte);
         tm = (DefaultTableModel) Tabelle.getModel();
 
 

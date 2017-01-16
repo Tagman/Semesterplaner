@@ -217,7 +217,7 @@ public class AddEinheit implements ActionListener {
         {
             Confirmation.main(null);
             //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
-            Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
+            Confirmation.confirm("Ihre Einheit wurde erfolgreich hinzugefügt!");
             for (int i = 0; i <= MainGUI.daten.length; i++) {
                 if (MainGUI.daten[i] == null) {
 
