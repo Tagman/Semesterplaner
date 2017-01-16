@@ -316,7 +316,7 @@ public class AddEinheit implements ActionListener {
     }
 
 
-        public static void changeEinheit(String name, String type, LocalTime start, LocalTime schluss, String location, String teacher, LocalDate datum, String intervall, Boolean pflicht)
+        public static void ChangeEinheit(String name, String type, LocalTime start, LocalTime schluss, String location, String teacher, LocalDate datum, String intervall, Boolean pflicht)
         {
             txtFieldName.setText(name);
             comboTyp.setSelectedItem(type);

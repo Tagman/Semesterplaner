@@ -301,7 +301,6 @@ public class AddTermin implements ActionListener// implements ActionListener
      public static void ChangeTermin(String name, LocalTime start, LocalTime end, String location, LocalDate date, String intervall, String priorität)
      {
 
- }
 
          txtFieldName.setText(name);
          txtFieldTimeStart.setText(""+start+"");
