@@ -1,9 +1,19 @@
 package GUI;
 
-import java.awt.*;
+import java.awt.EventQueue;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextPane;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class Rechte {
 
@@ -39,7 +49,7 @@ public class Rechte {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		
 		JLabel lblRechte = new JLabel("Rechte");
 		lblRechte.setFont(new Font("Tahoma", Font.PLAIN, 22));
 

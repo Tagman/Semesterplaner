@@ -7,6 +7,7 @@ import Backend.Stundenplan;
 import java.awt.EventQueue;
 
 import javax.swing.*;
+
 import java.time.LocalDate;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
@@ -32,7 +33,7 @@ public class MainGUI {
     static DefaultTableModel tm;
     static ListSelectionModel lm;
     static Object[] daten = new Object[200];
-
+    
     private Controller controller = new Controller();
     static String model = "Wochenansicht";
 
