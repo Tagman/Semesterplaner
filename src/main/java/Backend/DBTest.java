@@ -130,6 +130,8 @@ public class DBTest {
         testPlan.addFach(fach1);
         fach1.addEinheit(einheit1);
 
+        controller.initDB();
+
         controller.save(sp);
 
         Semesterplan spLoaded = controller.initLoad();
@@ -147,7 +149,9 @@ public class DBTest {
 
         //System.out.println(spLoaded.getStundenplan().getFaecher().get(0).getEinheiten().get(4).getAnfangsZeit().toString());
 
+
         controller.closeDB();
+
 
     }
 

@@ -148,7 +148,7 @@ public class Login implements ActionListener {
                     pwCorrect = true;
                     controller.setAdmin(true);
                     
-                    MainGUI.main(null);
+                    MainGUI.startMain(null);
                     
                     
 
@@ -163,7 +163,7 @@ public class Login implements ActionListener {
             }
 
         }else {
-        	 MainGUI.main(null);
+        	 MainGUI.startMain(null);
         }
         frame.dispose();
     }

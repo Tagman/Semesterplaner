@@ -116,7 +116,7 @@ public class Semester implements ActionListener{
                 SemesterList.add(txtFieldEndZeit);
                 SemesterList.add(txtFieldName);
                 Controller.iterateField(SemesterList,error);
-                MainGUI.main(null);
+                MainGUI.startMain(null);
                 frame.dispose();
             }
         });
@@ -132,7 +132,7 @@ public class Semester implements ActionListener{
         se.setSemesterName(txtFieldName.getText()); //speichern
         se.setStartDate(LocalDate.parse(txtFieldStartZeit.getText())); //speichern
         se.setEndDate(LocalDate.parse(txtFieldEndZeit.getText())); //speichern
-        MainGUI.main(null);
+        MainGUI.startMain(null);
         MainGUI.sem=se;
         frame.dispose();
 

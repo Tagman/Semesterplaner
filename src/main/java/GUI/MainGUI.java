@@ -41,7 +41,7 @@ public class MainGUI {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public static void startMain(Semesterplan sp) {
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {

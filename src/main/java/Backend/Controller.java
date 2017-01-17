@@ -34,7 +34,7 @@ public class Controller {
 
     private EntityManagerFactory emf;
 
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     private static boolean admin;
 
@@ -211,7 +211,8 @@ public class Controller {
 
     public boolean save(Semesterplan sp){
 
-        initDB();
+        //*** Autoinit wegen DB Test gelöscht
+        //initDB();
 
         boolean boolReturn = true;
 
@@ -234,7 +235,7 @@ public class Controller {
             transaction.rollback();
             boolReturn = false;
 
-            entityManager.close();
+            closeDB();
         }
 
         return boolReturn;
@@ -243,7 +244,8 @@ public class Controller {
 
     public Semesterplan initLoad(){
 
-        initDB();
+        //*** Autoinit wegen DB Test gelöscht
+        //initDB();
 
         Semesterplan planReturn = null;
 
