@@ -20,10 +20,15 @@ public class Semesterplan
     private String semesterName;
     private LocalDate startDate;
 
+    private String password;
+
 
     private LocalDate endDate;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Termin> termine;
+
+
 
     @OneToOne(cascade = CascadeType.ALL)
     private Stundenplan stundenplan;
@@ -111,5 +116,13 @@ public class Semesterplan
 
     public void setStundenplan(Stundenplan stundenplan) {
         this.stundenplan = stundenplan;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
