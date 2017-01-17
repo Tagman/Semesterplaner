@@ -37,7 +37,7 @@ public class MainGUI {
     static ListSelectionModel lm;
     static Object[] daten = new Object[200];
     
-    private Controller controller = new Controller();
+   // private Controller controller = new Controller();
 
 
     /**
@@ -218,7 +218,7 @@ public class MainGUI {
         
         JButton btnNewButton = new JButton("test");
         
-        if(controller.isAdmin()){
+        if(Controller.isAdmin()){
         	btnNewButton.setText("Admin");
         }
         else{
@@ -234,9 +234,19 @@ public class MainGUI {
         
         btnNewButton.setBounds(471, 0, 118, 31);
         frame.getContentPane().add(btnNewButton);
+        
+        if(Controller.isAdmin()){
+        JButton btnPWChange = new JButton("Passwort ändern");
+        btnPWChange.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		ChangePassword.main(null);;
+        	}
+        });
+        btnPWChange.setBounds(616, 0, 124, 31);
+        frame.getContentPane().add(btnPWChange);
         tm = (DefaultTableModel) Tabelle.getModel();
         Tabelle.getSelectedColumn();
-
+        }
 
     }
 

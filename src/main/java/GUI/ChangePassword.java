@@ -26,7 +26,7 @@ public class ChangePassword extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	
-    private static Controller controller = new Controller();
+   
     
   
 
@@ -70,7 +70,7 @@ public class ChangePassword extends JFrame {
 		btnBesttigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (
-						controller.isAdmin()
+						Controller.isAdmin()
 						){
 					
 					Semesterplan.setPassword(textField.getText());
