@@ -2,6 +2,7 @@ package GUI;
 
 import Backend.Controller;
 import Backend.Einheit;
+import Backend.Semesterplan;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,8 +18,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-import java.time.LocalTime;
-
 public class AddEinheit implements ActionListener {
 
     private JFrame frame;
@@ -33,6 +32,8 @@ public class AddEinheit implements ActionListener {
     private static JCheckBox checkPflicht;
     private static JTextField error;
 
+    Semesterplan plan;
+
 
     private Controller controller = new Controller();
 
@@ -41,15 +42,16 @@ public class AddEinheit implements ActionListener {
 
     /**
      * Launch the application.
+     * @param sp
      */
-    public static void main(String[] args)
+    public static void startAddEinheit(Semesterplan sp)
     {
 
 
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    AddEinheit window = new AddEinheit();
+                    AddEinheit window = new AddEinheit(sp);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -62,7 +64,8 @@ public class AddEinheit implements ActionListener {
     /**
      * Create the application.
      */
-    public AddEinheit() {
+    public AddEinheit(Semesterplan sp) {
+        plan = sp;
         initialize();
     }
 
@@ -215,18 +218,19 @@ public class AddEinheit implements ActionListener {
         Controller.iterateField(EinheitList, error);
         if(Controller.iterateField(EinheitList, error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals(""))
         {
-            Confirmation.main(null);
+            Confirmation.startConfirmation(plan);
             //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
             Confirmation.confirm("Ihre Einheit wurde erfolgreich hinzugefügt!");
             for (int i = 0; i <= MainGUI.daten.length; i++) {
                 if (MainGUI.daten[i] == null) {
 
                     MainGUI.daten[i] = (getAttributes());
+
                     break;
                 }
             }
         } else {
-            Confirmation.main(null);
+            Confirmation.startConfirmation(plan);
             Confirmation.confirm(Controller.iterateField(EinheitList, error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
         }
         }
@@ -275,6 +279,8 @@ public class AddEinheit implements ActionListener {
             } else {
                 args[8] = 1;
             }
+
+
 
             return args;
 

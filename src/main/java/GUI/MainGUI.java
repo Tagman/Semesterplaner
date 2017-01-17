@@ -47,7 +47,7 @@ public class MainGUI {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    MainGUI window = new MainGUI();
+                    MainGUI window = new MainGUI(sp);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -57,15 +57,14 @@ public class MainGUI {
     }
 
 
-    public MainGUI() {
-        initialize();
+    public MainGUI(Semesterplan sp) {
+        initialize(sp);
     }
 
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize()
-    {
+    private void initialize(Semesterplan sp) {
 
         frame = new JFrame();
         frame.setBounds(100, 100, 909, 650);
@@ -81,9 +80,8 @@ public class MainGUI {
 
         JMenuItem mntmNewMenuItem_3 = new JMenuItem("Einheit");
         mntmNewMenuItem_3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                AddEinheit.main(null);
+            public void actionPerformed(ActionEvent arg0) {
+                AddEinheit.startAddEinheit(sp);
             }
         });
         mntmNewMenuItem_3.setToolTipText("Hier klicken um eine neue Einheit zu erstellen");
@@ -91,9 +89,8 @@ public class MainGUI {
 
         JMenuItem mntmNewMenuItem_4 = new JMenuItem("Termin");
         mntmNewMenuItem_4.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                AddTermin.main(null);
+            public void actionPerformed(ActionEvent arg0) {
+                AddTermin.startAddTermin(sp);
             }
         });
         mntmNewMenuItem_4.setToolTipText("Hier klicken um einen neuen Termin zu erstellen");
@@ -109,9 +106,8 @@ public class MainGUI {
         JMenuItem mntmNewMenuItem = new JMenuItem("Tagesansicht");
         mntmNewMenuItem.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 1' zu ändern");
         mntmNewMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                model="Tagesansicht";
+            public void actionPerformed(ActionEvent arg0) {
+                model = "Tagesansicht";
                 aktualisieren(model);
             }
         });
@@ -120,8 +116,7 @@ public class MainGUI {
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Wochenansicht");
         mntmNewMenuItem_1.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 2' zu ändern");
         mntmNewMenuItem_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
+            public void actionPerformed(ActionEvent arg0) {
                 model = "Wochenansicht";
                 aktualisieren(model);
             }
@@ -170,31 +165,25 @@ public class MainGUI {
         };
 
 
-
-
         JLabel label = new JLabel("-");
         label.setBounds(427, 91, 13, 20);
         frame.getContentPane().add(label);
 
         JButton btnlöschen = new JButton("L\u00F6schen");
         btnlöschen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
                 System.out.println(daten.length);
-                String entrytodelete = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0);
-                for(int i = 0;i<daten.length;i++)
-                {
+                String entrytodelete = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 0);
+                for (int i = 0; i < daten.length; i++) {
                     System.out.println("something!!!");
-                    if(daten[i]!=null)
-                    {
+                    if (daten[i] != null) {
 
                         Object[] inhalt = (Object[]) daten[i];
                         System.out.println(entrytodelete);
                         System.out.println(inhalt[0]);
-                        if(entrytodelete.equals(inhalt[0]))
-                        {
+                        if (entrytodelete.equals(inhalt[0])) {
                             System.out.println("gefunden");
-                            daten[i]=null;
+                            daten[i] = null;
                             aktualisieren(model);
                             break;
                         }
@@ -209,51 +198,47 @@ public class MainGUI {
         frame.getContentPane().add(btnlöschen);
 
 
-
         JButton btnAktualisieren = new JButton("Anpassen");
         btnAktualisieren.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e)
-            {
-                if((""+Tabelle.getValueAt(Tabelle.getSelectedRow(),1)+"").equals(""))
-                {
-                    String name = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0)+"";
-                    String time = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),2)+"";
-                    String timestart = ""+time.charAt(0)+time.charAt(1)+time.charAt(2)+time.charAt(3)+time.charAt(4);
-                    String timeend = ""+time.charAt(6)+time.charAt(7)+time.charAt(8)+time.charAt(9)+time.charAt(10);
-                    String location = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),3)+"";
-                    LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(),6);
-                    String intervall = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),7)+"";
-                    String prio = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),8)+"";
+            public void actionPerformed(ActionEvent e) {
+                if (("" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 1) + "").equals("")) {
+                    String name = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 0) + "";
+                    String time = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 2) + "";
+                    String timestart = "" + time.charAt(0) + time.charAt(1) + time.charAt(2) + time.charAt(3) + time.charAt(4);
+                    String timeend = "" + time.charAt(6) + time.charAt(7) + time.charAt(8) + time.charAt(9) + time.charAt(10);
+                    String location = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 3) + "";
+                    LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(), 6);
+                    String intervall = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 7) + "";
+                    String prio = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 8) + "";
 
-                    AddTermin.main(null);
-                    AddTermin.ChangeTermin(name,LocalTime.parse(timestart),LocalTime.parse(timeend),location,date,intervall,prio);
-                }
-                else
-                {
-                    String name = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0)+"";
-                    String type = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),1)+"";
-                    LocalTime start = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(),2);
-                    LocalTime end = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(),3);
-                    String location = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),4)+"";
-                    String teacher = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),5)+"";
-                    LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(),6);
-                    String intervall = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),7)+"";
+                    AddTermin.startAddTermin(sp);
+                    AddTermin.ChangeTermin(name, LocalTime.parse(timestart), LocalTime.parse(timeend), location, date, intervall, prio);
+                } else {
+                    String name = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 0) + "";
+                    String type = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 1) + "";
+                    LocalTime start = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(), 2);
+                    LocalTime end = (LocalTime) Tabelle.getValueAt(Tabelle.getSelectedRow(), 3);
+                    String location = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 4) + "";
+                    String teacher = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 5) + "";
+                    LocalDate date = (LocalDate) Tabelle.getValueAt(Tabelle.getSelectedRow(), 6);
+                    String intervall = "" + Tabelle.getValueAt(Tabelle.getSelectedRow(), 7) + "";
                     boolean pflicht;
-                    if((int) Tabelle.getValueAt(Tabelle.getSelectedRow(),8)==1)
-                    {
+                    if ((int) Tabelle.getValueAt(Tabelle.getSelectedRow(), 8) == 1) {
                         pflicht = false;
+                    } else {
+                        pflicht = true;
                     }
-                    else{pflicht = true;}
 
-                    AddEinheit.main(null);
+                    AddEinheit.startAddEinheit(sp);
                     System.out.println("nachdem fenster(vor dem eintragen)");
 
 
-                    AddEinheit.ChangeEinheit(name,type,start,end,location,teacher,date,intervall,pflicht);
+                    AddEinheit.ChangeEinheit(name, type, start, end, location, teacher, date, intervall, pflicht);
                     System.out.println("nachdem Eintragen");
 
 
-                }}
+                }
+            }
         });
         btnAktualisieren.setBounds(633, 87, 130, 29);
         frame.getContentPane().add(btnAktualisieren);
@@ -281,43 +266,42 @@ public class MainGUI {
         panel.add(jps);
 
         JButton btnRechte = new JButton("test");
+        btnRechte.setBounds(471, 0, 118, 31);
+        frame.getContentPane().add(btnRechte);
 
         btnRechte.setName("Rechte");
 
 
-        if(controller.isAdmin()){
-        	btnRechte.setText("Admin");
-        }
-        else{
-        	btnRechte.setText("Gast");
+        if (Controller.isAdmin()) {
+            btnRechte.setText("Admin");
+        } else {
+            btnRechte.setText("Gast");
         }
 
-        btnRechte.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                Rechte.main(null);
+        btnRechte.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Rechte.main(sp);
             }
         });
-        
-        btnNewButton.setBounds(471, 0, 118, 31);
-        frame.getContentPane().add(btnNewButton);
-
-        if(Controller.isAdmin()){
-        JButton btnPWChange = new JButton("Passwort ändern");
-        btnPWChange.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		ChangePassword.main(null);;
-        	}
-        });
-        btnPWChange.setBounds(616, 0, 124, 31);
-        frame.getContentPane().add(btnPWChange);
-
-        btnRechte.setBounds(471, 0, 118, 31);
-        frame.getContentPane().add(btnRechte);
-        tm = (DefaultTableModel) Tabelle.getModel();
 
 
+        if (Controller.isAdmin()) {
+            JButton btnPWChange = new JButton("Passwort ändern");
+            btnPWChange.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent arg0) {
+                    ChangePassword.startChangePassword(sp);
+                    ;
+                }
+            });
+            btnPWChange.setBounds(616, 0, 124, 31);
+            frame.getContentPane().add(btnPWChange);
+
+            btnRechte.setBounds(471, 0, 118, 31);
+            frame.getContentPane().add(btnRechte);
+            tm = (DefaultTableModel) Tabelle.getModel();
+
+
+        }
     }
 
 

@@ -1,5 +1,7 @@
 package GUI;
 
+import Backend.Semesterplan;
+
 import java.awt.EventQueue;
 
 import javax.swing.*;
@@ -18,11 +20,11 @@ public class Rechte {
 	/**cx
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(Semesterplan sp) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Rechte window = new Rechte();
+					Rechte window = new Rechte(sp);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,14 +36,14 @@ public class Rechte {
 	/**
 	 * Create the application.
 	 */
-	public Rechte() {
-		initialize();
+	public Rechte(Semesterplan sp) {
+		initialize(sp);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Semesterplan sp) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,6 +55,7 @@ public class Rechte {
 		txtAdmin.setEditable(false);
 		txtAdmin.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		txtAdmin.setText("Der Admin besitzt Lese- und Schreibrechte.");
+		txtAdmin.setText(sp.getPassword());
 		//txtAdmin.setEditable(false);
 
 		JTextPane txtGast = new JTextPane();

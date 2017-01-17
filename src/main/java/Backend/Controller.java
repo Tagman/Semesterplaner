@@ -338,7 +338,7 @@ public class Controller {
         return admin;
     }
 
-    public static void setAdmin(boolean admin) {
-        admin = admin;
+    public static void setAdmin(boolean adminBool) {
+        admin = adminBool;
     }
 }

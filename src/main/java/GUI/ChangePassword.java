@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -17,14 +16,13 @@ import Backend.Semesterplan;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.SwingConstants;
-
 import java.awt.Font;
 
 public class ChangePassword extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+
 	
    
     
@@ -32,12 +30,13 @@ public class ChangePassword extends JFrame {
 
 	/**
 	 * Launch the application.
+	 * @param sp
 	 */
-	public static void main(String[] args) {
+	public static void startChangePassword(Semesterplan sp) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ChangePassword frame = new ChangePassword();
+					ChangePassword frame = new ChangePassword(sp);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +48,7 @@ public class ChangePassword extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ChangePassword() {
+	public ChangePassword(Semesterplan sp) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -73,7 +72,7 @@ public class ChangePassword extends JFrame {
 						Controller.isAdmin()
 						){
 					
-					Semesterplan.setPassword(textField.getText());
+					sp.setPassword(textField.getText());
 				
 				JOptionPane.showMessageDialog(null, "Passwort erfolgreich ge�ndert!");
 				

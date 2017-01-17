@@ -127,6 +127,8 @@ public class DBTest {
 
 
         sp.setStundenplan(testPlan);
+
+        //sp.setPassword("toor");
         testPlan.addFach(fach1);
         fach1.addEinheit(einheit1);
 

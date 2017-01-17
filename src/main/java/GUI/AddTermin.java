@@ -1,6 +1,7 @@
 package GUI;
 
 
+import Backend.Semesterplan;
 import Backend.Termin;
 import Backend.Controller;
 
@@ -33,8 +34,9 @@ public class AddTermin implements ActionListener// implements ActionListener
 
     /**
      * Launch the application.
+     * @param sp
      */
-    public static void main(String[] args) {
+    public static void startAddTermin(Semesterplan sp) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -175,7 +177,7 @@ public class AddTermin implements ActionListener// implements ActionListener
 
          if(Controller.iterateField(TerminList,error).equals("") && Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop).equals(""))
          {
-             Confirmation.main(null);
+             Confirmation.startConfirmation(null);
              //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
              Confirmation.confirm("Ihr Termin wurde erfolgreich hinzugefügt!");
 
@@ -228,7 +230,7 @@ public class AddTermin implements ActionListener// implements ActionListener
          }
          else
          {
-             Confirmation.main(null);
+             Confirmation.startConfirmation(null);
              Confirmation.confirm(Controller.iterateField(TerminList,error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
          }
      }
