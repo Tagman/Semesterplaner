@@ -177,7 +177,30 @@ public class MainGUI {
 
         JButton btnlöschen = new JButton("L\u00F6schen");
         btnlöschen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
+                System.out.println(daten.length);
+                String entrytodelete = ""+Tabelle.getValueAt(Tabelle.getSelectedRow(),0);
+                for(int i = 0;i<daten.length;i++)
+                {
+                    System.out.println("something!!!");
+                    if(daten[i]!=null)
+                    {
+
+                        Object[] inhalt = (Object[]) daten[i];
+                        System.out.println(entrytodelete);
+                        System.out.println(inhalt[0]);
+                        if(entrytodelete.equals(inhalt[0]))
+                        {
+                            System.out.println("gefunden");
+                            daten[i]=null;
+                            aktualisieren(model);
+                            break;
+                        }
+                    }
+                }
+
+
             }
         });
         btnlöschen.setToolTipText("Hier klicken um eine Einheit oder einen Termin zu löschen");
@@ -324,6 +347,10 @@ public class MainGUI {
 
             for(int i=0;i<=daten.length;i++)
             {
+                if(daten[i]==null)
+                {
+                    i++;
+                }
                 LocalDate today = LocalDate.now();
                 System.out.println(today);
                 Object[] etwas = (Object[]) daten[i];
@@ -348,6 +375,10 @@ public class MainGUI {
 
             for(int i=0;i<=daten.length;i++)
             {
+                if(daten[i]==null)
+                {
+                    i++;
+                }
                 LocalDate today = LocalDate.now();
                 TemporalField woy = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear();
                 int weekNumber = today.get(woy);
