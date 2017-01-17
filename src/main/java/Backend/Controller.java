@@ -334,11 +334,11 @@ public class Controller {
         return  terminList;
     }
 
-    public boolean isAdmin() {
+    public static boolean isAdmin() {
         return admin;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public static void setAdmin(boolean admin) {
+        admin = admin;
     }
 }

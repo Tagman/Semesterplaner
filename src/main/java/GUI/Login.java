@@ -30,7 +30,7 @@ public class Login implements ActionListener {
     private JTextField textField;
     private JComboBox combo1;
 
-    private Controller controller = new Controller();
+  //  private Controller controller = new Controller();
 
     String password = "toor";
 
@@ -146,7 +146,7 @@ public class Login implements ActionListener {
                 if (passwordEntered.equals(password)) {
                     JOptionPane.showMessageDialog(null, "Richtig");
                     pwCorrect = true;
-                    controller.setAdmin(true);
+                    Controller.setAdmin(true);
                     
                     MainGUI.startMain(null);
                     
