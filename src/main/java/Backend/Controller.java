@@ -38,7 +38,7 @@ public class Controller {
     EntityManager entityManager;
 
     private static boolean admin;
-
+    private static String password;
 
 
 
@@ -328,7 +328,10 @@ public class Controller {
         return admin;
     }
 
-    public static void setAdmin(boolean admin) {
-        admin = admin;
+    public static void setAdmin(boolean adminBool) {
+        adminBool = admin;
+    }
+    public static void setPassword(String passwordlogin) {
+    	passwordlogin = password;
     }
 }
