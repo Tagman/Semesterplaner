@@ -242,7 +242,7 @@ public class Controller {
 
     }
 
-    public Semesterplan initLoad(){
+    public Semesterplan initLoad() throws NullPointerException{
 
         //*** Autoinit wegen DB Test gelöscht
         //initDB();

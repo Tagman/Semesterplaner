@@ -42,10 +42,10 @@ public class Semesterplan
     }
 
     public Semesterplan(){
-        semesterName = null;
+        semesterName = "Semesterplan";
         startDate = null;
         endDate = null;
-        termine = null;
+        termine = new ArrayList<>();
     }
 
     public Semesterplan changeSemesterplan(String name, LocalDate start, LocalDate end, ArrayList<Termin> termine){

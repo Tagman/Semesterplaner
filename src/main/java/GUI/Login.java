@@ -36,6 +36,7 @@ public class Login implements ActionListener {
     String password = "toor";
 
     String passwordEntered;
+    Semesterplan loadedPlan;
 
     private boolean pwCorrect = false;
 
@@ -59,7 +60,9 @@ public class Login implements ActionListener {
      * Create the application.
      */
     public Login() {
+        loadedPlan = new Semesterplan();
         initialize();
+
     }
 
     /**
@@ -140,12 +143,17 @@ public class Login implements ActionListener {
 
         passwordEntered = textField.getText();
 
-        controller.initDB();
+        try {
 
-        Semesterplan loadedPlan = controller.initLoad();
 
-        password = loadedPlan.getPassword();
+            controller.initDB();
 
+            loadedPlan = controller.initLoad();
+
+            password = loadedPlan.getPassword();
+        }catch (NullPointerException nullError){
+            loadedPlan = new Semesterplan();
+        }
         if (combo1.getSelectedItem().equals("Admin")) {
 
             while(!pwCorrect) {
