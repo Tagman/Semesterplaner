@@ -89,6 +89,14 @@ public class MainGUI {
         });
         mntmNewMenuItem_4.setToolTipText("Hier klicken um einen neuen Termin zu erstellen");
         mnNewMenu.add(mntmNewMenuItem_4);
+        JMenuItem mntmSuche = new JMenuItem("Suche\t\t\t\t\t");
+        mntmSuche.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0)
+            {
+                Suchen.main(null);
+            }
+        });
+        mnNewMenu.add(mntmSuche);
 
         JMenuBar menuBar_1 = new JMenuBar();
         menuBar_1.setBounds(139, 0, 139, 31);
