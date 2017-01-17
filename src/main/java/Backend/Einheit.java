@@ -191,5 +191,19 @@ public class Einheit {
 
         return stringBuilder.toString();
     }
+
+    public Object[] getArray(){
+        boolean prio;
+
+        if(priorität == 10){
+            prio = true;
+        }else{
+            prio = false;
+        }
+
+       Object[] args = {name, typ, anfangsZeit.toString() + "-" + endZeit.toString(), ort, lehrender,
+               prio, date, wiederholungsrhytmus, priorität };
+        return args;
+    }
 }
 

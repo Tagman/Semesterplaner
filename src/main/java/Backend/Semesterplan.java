@@ -20,7 +20,7 @@ public class Semesterplan
     private String semesterName;
     private LocalDate startDate;
 
-    private String password;
+    private static String password;
 
 
     private LocalDate endDate;
@@ -118,11 +118,44 @@ public class Semesterplan
         this.stundenplan = stundenplan;
     }
 
-    public String getPassword() {
+    public static String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public static void setPassword(String password) {
+        password = password;
+    }
+
+    public Object[] collectArgs(){
+        List<Termin> terminList = this.getTermine();
+
+        List<Fach> faecher = this.getStundenplan().getFaecher();
+
+        List<Einheit> einheitList = new ArrayList<>();
+
+        faecher.forEach(fach -> {
+            einheitList.addAll(fach.getEinheiten());
+        });
+
+        Object[] args = new Object[200];
+
+        int i = 0;
+
+        for (int j = 0; j < einheitList.size(); j++){
+            args[i] = einheitList.get(j);
+            i++;
+        }
+
+        for (int j = 0; j < terminList.size(); j++){
+            args[i] = terminList.get(j);
+            i++;
+        }
+
+        return args;
+
+
+
+
+
     }
 }

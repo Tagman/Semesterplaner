@@ -165,5 +165,12 @@ public class Termin {
         return stringBuilder.toString();
     }
 
+    public Object[] getArray(){
+        Object[] args = {bezeichnung, "Termin", startZeit.toString() + "-" + endZeit.toString(),
+                ort, "", "", datum, "", priorität};
+
+        return args;
+    }
+
 
 }
