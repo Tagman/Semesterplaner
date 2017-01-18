@@ -257,7 +257,7 @@ public class AddEinheit implements ActionListener {
                     }
                     else
                     {
-                      //  Einheit e = new Einheit(getAttributes());
+                      //  Einheit e = new Einheit(getAttributes())
 
                     }
                 }
