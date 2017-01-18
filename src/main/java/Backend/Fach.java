@@ -14,10 +14,10 @@ public class Fach {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDFach;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Einheit> einheiten;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Stundenplan stundenplan;
 
     public Fach(String name, List<Einheit> einheiten){

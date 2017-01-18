@@ -17,11 +17,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import java.awt.Font;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class ChangePassword extends JFrame {
+public class ChangePassword extends JFrame implements WindowListener{
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private Controller controller = new Controller();
+
 
 	
    
@@ -68,17 +72,21 @@ public class ChangePassword extends JFrame {
 		JButton btnBesttigen = new JButton("best\u00E4tigen");
 		btnBesttigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (
-						Controller.isAdmin()
-						){
+				if (Controller.isAdmin())
+				{
 					
 					sp.setPassword(textField.getText());
+
 				
 				JOptionPane.showMessageDialog(null, "Passwort erfolgreich ge�ndert!");
 				
 				}
 				else  JOptionPane.showMessageDialog(null, "bitte zuerst als Admin anmelden!");
-				
+
+
+				controller.initDB();
+				controller.save(sp);
+				controller.closeDB();
 				dispose();
 				
 				
@@ -91,5 +99,42 @@ public class ChangePassword extends JFrame {
 		lblPasswortndern.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPasswortndern.setBounds(166, 26, 114, 33);
 		contentPane.add(lblPasswortndern);
+	}
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+
+
+
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+
 	}
 }

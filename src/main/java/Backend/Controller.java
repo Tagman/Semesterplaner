@@ -225,7 +225,8 @@ public class Controller {
 
             transaction.begin();
 
-            entityManager.persist(sp);
+//            entityManager.persist(sp);
+            entityManager.merge(sp);
             transaction.commit();
 
 
