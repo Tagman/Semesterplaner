@@ -20,7 +20,7 @@ public class Confirmation {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Confirmation window = new Confirmation();
+                    Confirmation window = new Confirmation(sp);
                     window.frame.setVisible(true);
                 } catch (Exception e)
                 {
@@ -33,14 +33,14 @@ public class Confirmation {
     /**
      * Create the application.
      */
-    public Confirmation() {
-        initialize();
+    public Confirmation(Semesterplan sp) {
+        initialize(sp);
     }
 
     /**
      * Initialize the contents of the frame.
      */
-    private void initialize() {
+    private void initialize(Semesterplan sp) {
         frame = new JFrame();
         frame.setBounds(100, 100, 450, 300);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -54,6 +54,15 @@ public class Confirmation {
         Bestätigen_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
+
+                Object[] etwas = sp.collectArgs();
+                for(int i=0; i<etwas.length;i++)
+                {
+                    Object[] jenes = (Object[])etwas[i];
+                    MainGUI.tm.addRow(jenes);
+                }
+
+
 
                 MainGUI.aktualisieren(MainGUI.model);
                 frame.dispose();

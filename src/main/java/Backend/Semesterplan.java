@@ -144,12 +144,12 @@ public class Semesterplan
         int i = 0;
 
         for (int j = 0; j < einheitList.size(); j++){
-            args[i] = einheitList.get(j);
+            args[i] = einheitList.get(j).getArray();
             i++;
         }
 
         for (int j = 0; j < terminList.size(); j++){
-            args[i] = terminList.get(j);
+            args[i] = terminList.get(j).getArray();
             i++;
         }
 

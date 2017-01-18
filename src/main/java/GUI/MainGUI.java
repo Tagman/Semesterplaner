@@ -351,7 +351,7 @@ public class MainGUI {
                 }
                 LocalDate today = LocalDate.now();
                 System.out.println(today);
-                Object[] etwas = (Object[]) daten[i];
+                Object[] etwas = (Object[]) daten [i];
                 LocalDate datum = (LocalDate) etwas[6];
                 System.out.println(datum);
                 if((""+today+"").equals(""+datum+""))
