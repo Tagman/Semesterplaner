@@ -15,6 +15,7 @@ import javax.swing.JComboBox;
 
 import Backend.Controller;
 import Backend.Semesterplan;
+import Backend.Stundenplan;
 
 
 import java.awt.event.ActionEvent;
@@ -153,6 +154,9 @@ public class Login implements ActionListener {
             password = loadedPlan.getPassword();
         }catch (NullPointerException nullError){
             loadedPlan = new Semesterplan();
+            Stundenplan stundenplan = new Stundenplan();
+            loadedPlan.setStundenplan(stundenplan);
+            stundenplan.setSemesterplan(loadedPlan);
         }
         if (combo1.getSelectedItem().equals("Admin")) {
 

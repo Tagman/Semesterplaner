@@ -109,8 +109,8 @@ public class DBTest {
         Controller controller = new Controller();
 
         Semesterplan sp = new Semesterplan("Test2", LocalDate.now(), LocalDate.now(), new ArrayList<>());
-        Termin ter = new Termin("TestTermin", LocalTime.now(), LocalTime.now(), "2", 3, "300", LocalDate.now());
-        Termin ter2 = new Termin("Test2Termin", LocalTime.now(), LocalTime.now(), "4", 5, "400", LocalDate.now());
+        Termin ter = new Termin("TestTermin", LocalTime.now(), LocalTime.now(), "2", 3, "300", LocalDate.now(), sp);
+        Termin ter2 = new Termin("Test2Termin", LocalTime.now(), LocalTime.now(), "4", 5, "400", LocalDate.now(), sp);
 
         Stundenplan testPlan = new Stundenplan(new ArrayList<>());
         Fach fach1 = new Fach("Fach1", new ArrayList<>());

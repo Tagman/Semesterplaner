@@ -1,6 +1,7 @@
 package Backend;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -11,11 +12,11 @@ public class Stundenplan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDStundenplan;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     private List<Fach> faecher;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Semesterplan semesterplan;
 
 
@@ -25,7 +26,7 @@ public class Stundenplan {
     }
 
     public Stundenplan(){
-        faecher = null;
+        faecher = new ArrayList<>();
     }
 
     public void addFach(Fach f)

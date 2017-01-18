@@ -26,7 +26,7 @@ public class Termin {
     @ManyToOne
     private Semesterplan semesterplan;
 
-    public static ArrayList<Termin> Termine = new ArrayList<Termin>();
+    //public static ArrayList<Termin> Termine = new ArrayList<Termin>();
     //Füge Termine liste zu Semesterplan hinzu
     //Dazugehörende Operationen wie zur liste hinzufügen, denke eher auch dort rein.
 
@@ -34,7 +34,7 @@ public class Termin {
     {
     }
 
-    public Termin(String bezeichnung, LocalTime startZeit, LocalTime endZeit, String periodisch, int priorität, String ort, LocalDate datum)
+    public Termin(String bezeichnung, LocalTime startZeit, LocalTime endZeit, String periodisch, int priorität, String ort, LocalDate datum, Semesterplan sp)
     {
         this.bezeichnung = bezeichnung;
         this.datum = datum;
@@ -43,6 +43,7 @@ public class Termin {
         this.ort = ort;
         this.periodisch = periodisch;
         this.priorität = priorität;
+        this.semesterplan = sp;
 
     }
 

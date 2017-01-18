@@ -18,7 +18,7 @@ public class AddTermin implements ActionListener// implements ActionListener
  {
 
     //speichert eingabe
-    private Termin eingabetermin = new Termin();
+    private Termin eingabetermin;
 
 
     private JFrame frame;
@@ -32,6 +32,8 @@ public class AddTermin implements ActionListener// implements ActionListener
     private Controller controller = new Controller();
     private JTextField error;
 
+    private Semesterplan plan;
+
     /**
      * Launch the application.
      * @param sp
@@ -40,7 +42,7 @@ public class AddTermin implements ActionListener// implements ActionListener
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    AddTermin window = new AddTermin();
+                    AddTermin window = new AddTermin(sp);
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -52,7 +54,8 @@ public class AddTermin implements ActionListener// implements ActionListener
     /**
      * Create the application.
      */
-    public AddTermin() {
+    public AddTermin(Semesterplan sp) {
+        plan = sp;
         initialize();
     }
 
@@ -165,7 +168,7 @@ public class AddTermin implements ActionListener// implements ActionListener
 
      public void actionPerformed(ActionEvent e) {
 
-
+            eingabetermin = new Termin();
 
          //Testen
          ArrayList<JTextField> TerminList= new ArrayList();
@@ -189,8 +192,11 @@ public class AddTermin implements ActionListener// implements ActionListener
              eingabetermin.setPriorität(Integer.parseInt((String) comboPriority.getSelectedItem()));
              eingabetermin.setOrt(txtFieldLocation.getText());
              eingabetermin.setDatum(LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+             eingabetermin.setSemesterplan(plan);
+             plan.addTermin(eingabetermin);
 
              //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen
+             /*
              Termin.Termine.add(new Termin(
                      eingabetermin.getBezeichnung(),
                      eingabetermin.getStartZeit(),
@@ -199,6 +205,7 @@ public class AddTermin implements ActionListener// implements ActionListener
                      eingabetermin.getPriorität(),
                      eingabetermin.getOrt(),
                      eingabetermin.getDatum()));
+                     */
 
              //experimentell
              Object[] args = new Object[9];
@@ -222,6 +229,10 @@ public class AddTermin implements ActionListener// implements ActionListener
                  }
 
              }
+
+             controller.initDB();
+             controller.save(plan);
+             controller.closeDB();
              //MainGUI.tm.addRow(new Object[]{eingabetermin.getBezeichnung(), "", eingabetermin.getStartzeit()+"-"+eingabetermin.getEndzeit(), eingabetermin.getOrt(), "", "", eingabetermin.getDatum(), eingabetermin.getPeriodisch(), eingabetermin.getPriorität()});
 
 
