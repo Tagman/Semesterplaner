@@ -19,6 +19,8 @@ import java.util.List;
     /*
     Right now it will throw an error if its parsed into Einheit
     with the incorrect format.
+    
+    Robert push test
 
     checkField just checks Date field like any other txt field
     maybe decide if field is the date field over the getName() method of any passed JTextField
@@ -242,6 +244,41 @@ public class Controller {
         return boolReturn;
 
     }
+
+    public boolean saveTermin(Einheit ein){
+
+
+    boolean boolReturn = true;
+
+
+
+    EntityTransaction transaction = null;
+
+        try{
+        transaction = entityManager.getTransaction();
+
+        transaction.begin();
+
+//            entityManager.persist(sp);
+        entityManager.merge(ein);
+        transaction.commit();
+
+
+    }catch (Exception e){
+        logger.error("cannot commit transaction....");
+        logger.error("Fehlermeldung: " + e.toString());
+        transaction.rollback();
+        boolReturn = false;
+
+        closeDB();
+    }
+
+        return boolReturn;
+
+
+    }
+
+
 
     public Semesterplan initLoad() throws NullPointerException{
 

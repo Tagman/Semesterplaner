@@ -25,12 +25,12 @@ public class Semesterplan
 
     private LocalDate endDate;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Termin> termine;
 
 
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private Stundenplan stundenplan;
 
 
@@ -144,12 +144,12 @@ public class Semesterplan
         int i = 0;
 
         for (int j = 0; j < einheitList.size(); j++){
-            args[i] = einheitList.get(j);
+            args[i] = einheitList.get(j).getArray();
             i++;
         }
 
         for (int j = 0; j < terminList.size(); j++){
-            args[i] = terminList.get(j);
+            args[i] = terminList.get(j).getArray();
             i++;
         }
 

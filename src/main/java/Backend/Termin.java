@@ -23,7 +23,7 @@ public class Termin {
     private LocalDate datum;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Semesterplan semesterplan;
 
     //public static ArrayList<Termin> Termine = new ArrayList<Termin>();

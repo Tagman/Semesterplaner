@@ -34,7 +34,6 @@ public class MainGUI {
     static ListSelectionModel lm;
     static Object[] daten = new Object[200];
     
-   // private Controller controller = new Controller();
     private Controller controller = new Controller();
     static String model = "Wochenansicht";
 
@@ -123,9 +122,6 @@ public class MainGUI {
         });
         mnAnsicht.add(mntmNewMenuItem_1);
 
-        JMenuItem mntmNewMenuItem_2 = new JMenuItem("Ansicht 3");
-        mntmNewMenuItem_2.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 3' zu ändern");
-        mnAnsicht.add(mntmNewMenuItem_2);
 
         JMenuBar menuBar_2 = new JMenuBar();
         menuBar_2.setBounds(748, 0, 139, 31);
@@ -142,15 +138,25 @@ public class MainGUI {
         menuBar_3.setBounds(278, 0, 139, 31);
         frame.getContentPane().add(menuBar_3);
 
-        JMenu mnImport = new JMenu("Import                                         ");
+        JMenu mnImport = new JMenu("Suchen                                         ");
         menuBar_3.add(mnImport);
 
-        JMenuItem mntmNewMenuItem_6 = new JMenuItem("Stundenplan");
-        mntmNewMenuItem_6.setToolTipText("Hier klicken um einen Vorhandenen Stundenplan zu importieren");
-        mnImport.add(mntmNewMenuItem_6);
-
-        JMenuItem mntmSonstiges = new JMenuItem("Sonstiges");
-        mnImport.add(mntmSonstiges);
+        JMenuItem mntmEinheitsuchen = new JMenuItem("Einheit suchen");
+        mntmEinheitsuchen.setToolTipText("Hier klicken um einen Termin zu suchen");
+        mnImport.add(mntmEinheitsuchen);
+        mntmEinheitsuchen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                SearchEinheit.main(null);
+            }
+        });
+        JMenuItem mntmTerminsuchen = new JMenuItem("Termin suchen");
+        mntmTerminsuchen.setToolTipText("Hier klicken um eine Einheit zu suchen");
+        mnImport.add(mntmTerminsuchen);
+        mntmTerminsuchen.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                SearchTermin.main(null);
+            }
+        });
 
 
         String[] columnNames = {"Modulname",
@@ -299,7 +305,6 @@ public class MainGUI {
             btnRechte.setBounds(471, 0, 118, 31);
             frame.getContentPane().add(btnRechte);
             tm = (DefaultTableModel) Tabelle.getModel();
-
 
         }
     }

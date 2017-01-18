@@ -25,7 +25,7 @@ public class Einheit {
     private LocalDate date;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Fach fach;
 
 

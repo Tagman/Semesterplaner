@@ -13,11 +13,14 @@ public class Fach {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDFach;
+
+
     private String name;
-    @OneToMany(cascade = CascadeType.MERGE)
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Einheit> einheiten;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Stundenplan stundenplan;
 
     public Fach(String name, List<Einheit> einheiten){

@@ -12,12 +12,12 @@ public class Stundenplan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDStundenplan;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Fach> faecher;
 
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     private Semesterplan semesterplan;
 
 
