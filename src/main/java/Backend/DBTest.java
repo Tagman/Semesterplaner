@@ -116,10 +116,10 @@ public class DBTest {
         Fach fach1 = new Fach("Fach1", new ArrayList<>());
         Einheit einheit1 = new Einheit(LocalTime.parse("14:30", DateTimeFormatter.ofPattern("HH:mm")), LocalTime.MAX, "100", "Einheit1", "Ich", "Wöchetnluch", 5, "Vorlesung", LocalDate.now(), fach1);
 
-
+/*
         ter.setSemesterplan(sp);
         ter2.setSemesterplan(sp);
-
+*/
         sp.addTermin(ter);
         sp.addTermin(ter2);
 

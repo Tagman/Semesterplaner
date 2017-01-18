@@ -156,7 +156,7 @@ public class Login implements ActionListener {
             loadedPlan = new Semesterplan();
             Stundenplan stundenplan = new Stundenplan();
             loadedPlan.setStundenplan(stundenplan);
-            stundenplan.setSemesterplan(loadedPlan);
+           // stundenplan.setSemesterplan(loadedPlan);
         }
         if (combo1.getSelectedItem().equals("Admin")) {
 

@@ -25,8 +25,8 @@ public class Einheit {
     private LocalDate date;
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Fach fach;
+    //@ManyToOne(cascade = CascadeType.MERGE)
+    //private Fach fach;
 
 
     public Einheit(){
@@ -42,7 +42,7 @@ public class Einheit {
         this.priorität = priorität;
         this.typ = typ;
         this.date = date;
-        this.fach = fach;
+       // this.fach = fach;
     }
 
     public Einheit(Object args[]){
@@ -55,7 +55,7 @@ public class Einheit {
         date = (LocalDate) args[6];
         wiederholungsrhytmus = (String)args[7];
         priorität = (int)args[8];
-        fach = (Fach)args[9];
+       // fach = (Fach)args[9];
 
 
     }
@@ -161,6 +161,7 @@ public class Einheit {
         this.date = date;
     }
 
+    /*
     public Fach getFach() {
         return fach;
     }
@@ -168,7 +169,7 @@ public class Einheit {
     public void setFach(Fach fach) {
         this.fach = fach;
     }
-
+*/
     @Override
     public String toString(){
         StringBuilder stringBuilder = new StringBuilder();

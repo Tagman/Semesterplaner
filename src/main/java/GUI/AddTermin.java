@@ -192,7 +192,7 @@ public class AddTermin implements ActionListener// implements ActionListener
              eingabetermin.setPriorität(Integer.parseInt((String) comboPriority.getSelectedItem()));
              eingabetermin.setOrt(txtFieldLocation.getText());
              eingabetermin.setDatum(LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-             eingabetermin.setSemesterplan(plan);
+            // eingabetermin.setSemesterplan(plan);
              plan.addTermin(eingabetermin);
 
              //neuen Termin mit Eingabewerten anlegen und der Liste hinzufügen

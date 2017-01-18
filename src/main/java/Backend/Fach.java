@@ -17,8 +17,8 @@ public class Fach {
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Einheit> einheiten;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Stundenplan stundenplan;
+    //@ManyToOne(cascade = CascadeType.MERGE)
+    //private Stundenplan stundenplan;
 
     public Fach(String name, List<Einheit> einheiten){
         this.name = name;
@@ -67,7 +67,7 @@ public class Fach {
     public void setEinheiten(List<Einheit> einheiten) {
         this.einheiten = einheiten;
     }
-
+    /*
     public Stundenplan getStundenplan() {
         return stundenplan;
     }
@@ -75,4 +75,5 @@ public class Fach {
     public void setStundenplan(Stundenplan stundenplan) {
         this.stundenplan = stundenplan;
     }
+    */
 }

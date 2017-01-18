@@ -258,10 +258,10 @@ public class AddEinheit implements ActionListener {
 
             plan.getStundenplan().addFach(eingabeFach);
 
-            eingabeFach.setStundenplan(plan.getStundenplan());
+            //eingabeFach.setStundenplan(plan.getStundenplan());
 
             eingabeFach.addEinheit(eingabeEinheit);
-            eingabeEinheit.setFach(eingabeFach);
+           // eingabeEinheit.setFach(eingabeFach);
 
 
             getFacherList();

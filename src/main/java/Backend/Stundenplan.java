@@ -13,13 +13,14 @@ public class Stundenplan {
     private long IDStundenplan;
 
     @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "IDFach")
     private List<Fach> faecher;
 
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+   /* @ManyToOne(cascade = CascadeType.MERGE)
     private Semesterplan semesterplan;
-
+*/
 
     public Stundenplan(List<Fach> f)
     {
@@ -57,6 +58,7 @@ public class Stundenplan {
         this.faecher = faecher;
     }
 
+    /*
     public Semesterplan getSemesterplan() {
         return semesterplan;
     }
@@ -64,7 +66,7 @@ public class Stundenplan {
     public void setSemesterplan(Semesterplan semesterplan) {
         this.semesterplan = semesterplan;
     }
-
+    */
     public Fach searchFach(String name){
 
 
