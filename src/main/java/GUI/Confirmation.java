@@ -55,7 +55,7 @@ public class Confirmation {
         Bestätigen_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0)
             {
-                MainGUI.aktualisieren();
+                
                 frame.dispose();
             }
         });
