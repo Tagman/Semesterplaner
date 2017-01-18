@@ -2,6 +2,7 @@ package GUI;
 
 import Backend.Controller;
 import Backend.Einheit;
+import Backend.Fach;
 import Backend.Semesterplan;
 
 import javax.swing.*;
@@ -11,7 +12,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
@@ -31,6 +33,8 @@ public class AddEinheit implements ActionListener {
     private static JComboBox comboIntervall;
     private static JCheckBox checkPflicht;
     private static JTextField error;
+    static JComboBox nameBox;
+    static String[] fächer  = new String[200];
 
     Semesterplan plan;
 
@@ -87,13 +91,14 @@ public class AddEinheit implements ActionListener {
         lblName.setBounds(15, 76, 186, 20);
         frame.getContentPane().add(lblName);
 
-        txtFieldName = new JTextField();
-        txtFieldName.setName("Name");
-        //txtFieldName.setToolTipText("Hier Name eingeben. mind. 3 max 29 Zeichen");
-        txtFieldName.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        txtFieldName.setBounds(14, 114, 383, 49);
-        frame.getContentPane().add(txtFieldName);
-        txtFieldName.setColumns(10);
+        nameBox = new JComboBox();
+        nameBox.setModel(new DefaultComboBoxModel(fächer));
+        nameBox.setToolTipText("Bitte die Art der Veranstaltung ausw\u00E4hlen");
+        nameBox.setName("Typ");
+        nameBox.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        nameBox.setBounds(14, 91, 381, 49);
+        nameBox.setEditable(true);
+        frame.getContentPane().add(nameBox);
 
         JLabel lblNewLabel_1 = new JLabel("Art der Veranstaltung");
         lblNewLabel_1.setBounds(437, 76, 203, 20);
@@ -204,11 +209,13 @@ public class AddEinheit implements ActionListener {
         error.setColumns(10);
     }
 
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae)
+    {
+
 
         //Testen
         ArrayList<JTextField> EinheitList = new ArrayList();
-        EinheitList.add(txtFieldName);
+     //   EinheitList.add(txtFieldName);
         EinheitList.add(txtFieldTimeStart);
         EinheitList.add(txtFieldTimeStop);
         EinheitList.add(txtFieldDate);
@@ -229,6 +236,33 @@ public class AddEinheit implements ActionListener {
                     break;
                 }
             }
+
+            for(int i = 0; i<fächer.length;i++)
+            {
+                if(fächer[i]==null)
+                {
+                    if(nameBox.getSelectedItem()!=fächer[i])
+                    {
+                        Einheit e = new Einheit(getAttributes());
+                        List<Einheit> einheiten=null;
+                        einheiten.add(e);
+                        Fach f = new Fach(((String)nameBox.getSelectedItem()).toLowerCase(),einheiten);
+
+                        fächer[i] = "" + nameBox.getSelectedItem();
+                        nameBox.setModel(new DefaultComboBoxModel(fächer));
+                        System.out.println(fächer[i]);
+                        Object[] etwas= plan.collectArgs();
+                        System.out.println(etwas[0]);
+                        break;
+                    }
+                    else
+                    {
+                      //  Einheit e = new Einheit(getAttributes())
+
+                    }
+                }
+            }
+
         } else {
             Confirmation.startConfirmation(plan);
             Confirmation.confirm(Controller.iterateField(EinheitList, error) + Controller.checkTime(txtFieldTimeStart, txtFieldTimeStop));
@@ -256,7 +290,7 @@ public class AddEinheit implements ActionListener {
         {
             Object[] args = new Object[9];
 
-            args[0] = txtFieldName.getText();
+            args[0] = nameBox.getSelectedItem();
             args[1] = comboTyp.getSelectedItem();
 
             LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
@@ -291,7 +325,7 @@ public class AddEinheit implements ActionListener {
 
             gatheredTxtFields.add(txtFieldDate);
             gatheredTxtFields.add(txtFieldLocation);
-            gatheredTxtFields.add(txtFieldName);
+          //  gatheredTxtFields.add(txtFieldName);
             gatheredTxtFields.add(txtFieldTeacher);
 
             return gatheredTxtFields;
@@ -300,7 +334,7 @@ public class AddEinheit implements ActionListener {
         public Object[] reorderAttributes () {
             Object[] args = new Object[9];
 
-            args[0] = txtFieldName.getText();
+            args[0] = nameBox.getSelectedItem();
             args[1] = comboTyp.getSelectedItem();
 
             LocalTime startTime = LocalTime.parse(txtFieldTimeStart.getText());
@@ -324,7 +358,7 @@ public class AddEinheit implements ActionListener {
 
         public static void ChangeEinheit(String name, String type, LocalTime start, LocalTime schluss, String location, String teacher, LocalDate datum, String intervall, Boolean pflicht)
         {
-            txtFieldName.setText(name);
+            nameBox.setSelectedItem(name);
             comboTyp.setSelectedItem(type);
             txtFieldTimeStart.setText(""+start+"");
             txtFieldTimeStop.setText(""+schluss+"");
