@@ -111,52 +111,64 @@ public class SearchTermin implements ActionListener,
 
         JList lsErgebnis = new JList(listModel);
         lsErgebnis.setFont(new Font("Arial", Font.PLAIN, 11));
+        
+        JButton btnNewButton = new JButton("Zurück");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		frame.dispose();
+        	}
+        });
 
 
 
         GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
         groupLayout.setHorizontalGroup(
-                groupLayout.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                        .addComponent(kontrollAnzeige, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-                                        .addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-                                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-                                                        .addComponent(lblErgebnis)
-                                                        .addComponent(lbAttribut, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lbSuchbegriff, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-                                                                .addComponent(boxAttribut, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(ftfSuchbegriff, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
-                                        .addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
+        	groupLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(kontrollAnzeige, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+        						.addComponent(lblErgebnis)
+        						.addComponent(lbAttribut, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lbSuchbegriff, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 256, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 271, GroupLayout.PREFERRED_SIZE)
+        						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+        							.addComponent(boxAttribut, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addComponent(ftfSuchbegriff, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))))
+        				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+        					.addGap(244)
+        					.addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap())
         );
         groupLayout.setVerticalGroup(
-                groupLayout.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(groupLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                                .addGap(44)
-                                .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lbSuchbegriff)
-                                        .addComponent(ftfSuchbegriff, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lbAttribut)
-                                        .addComponent(boxAttribut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                                .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblErgebnis))
-                                .addGap(12)
-                                .addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(kontrollAnzeige, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        	groupLayout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(groupLayout.createSequentialGroup()
+        			.addContainerGap()
+        			.addComponent(lblSuchenTermin, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+        			.addGap(44)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lbSuchbegriff)
+        				.addComponent(ftfSuchbegriff, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lbAttribut)
+        				.addComponent(boxAttribut, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+        				.addComponent(lsErgebnis, GroupLayout.PREFERRED_SIZE, 142, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblErgebnis))
+        			.addGap(12)
+        			.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        				.addComponent(btnSuchen, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(kontrollAnzeige, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         );
         frame.getContentPane().setLayout(groupLayout);
     }
