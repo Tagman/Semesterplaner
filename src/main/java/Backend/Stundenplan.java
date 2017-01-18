@@ -16,6 +16,7 @@ public class Stundenplan {
     private List<Fach> faecher;
 
 
+
     @ManyToOne(cascade = CascadeType.MERGE)
     private Semesterplan semesterplan;
 
@@ -62,5 +63,21 @@ public class Stundenplan {
 
     public void setSemesterplan(Semesterplan semesterplan) {
         this.semesterplan = semesterplan;
+    }
+
+    public Fach searchFach(String name){
+
+
+        for(int i = 0; i < faecher.size(); i++){
+
+
+            if (faecher.get(i).getName().toLowerCase().equals(name.toLowerCase())){
+
+                return faecher.get(i);
+            }
+        }
+
+        return null;
+
     }
 }
