@@ -1,5 +1,7 @@
 package GUI;
 
+import Backend.Semesterplan;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,8 +14,9 @@ public class Confirmation {
 
     /**
      * Launch the application.
+     * @param sp
      */
-    public static void main(String[] args) {
+    public static void startConfirmation(Semesterplan sp) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {

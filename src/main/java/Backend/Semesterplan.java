@@ -20,7 +20,7 @@ public class Semesterplan
     private String semesterName;
     private LocalDate startDate;
 
-    private static String password;
+    private String password = "toor";
 
 
     private LocalDate endDate;
@@ -42,10 +42,10 @@ public class Semesterplan
     }
 
     public Semesterplan(){
-        semesterName = null;
+        semesterName = "Semesterplan";
         startDate = null;
         endDate = null;
-        termine = null;
+        termine = new ArrayList<>();
     }
 
     public Semesterplan changeSemesterplan(String name, LocalDate start, LocalDate end, ArrayList<Termin> termine){
@@ -118,13 +118,15 @@ public class Semesterplan
         this.stundenplan = stundenplan;
     }
 
-    public static String getPassword() {
+
+    public String getPassword() {
         return password;
     }
 
-    public static void setPassword(String password) {
-        password = password;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
 
     public Object[] collectArgs(){
         List<Termin> terminList = this.getTermine();

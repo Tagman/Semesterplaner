@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 
 import Backend.Controller;
+import Backend.Semesterplan;
 
 
 import java.awt.event.ActionEvent;
@@ -35,6 +36,7 @@ public class Login implements ActionListener {
     String password = "toor";
 
     String passwordEntered;
+    Semesterplan loadedPlan;
 
     private boolean pwCorrect = false;
 
@@ -58,7 +60,9 @@ public class Login implements ActionListener {
      * Create the application.
      */
     public Login() {
+        loadedPlan = new Semesterplan();
         initialize();
+
     }
 
     /**
@@ -139,6 +143,17 @@ public class Login implements ActionListener {
 
         passwordEntered = textField.getText();
 
+        try {
+
+
+            controller.initDB();
+
+            loadedPlan = controller.initLoad();
+
+            password = loadedPlan.getPassword();
+        }catch (NullPointerException nullError){
+            loadedPlan = new Semesterplan();
+        }
         if (combo1.getSelectedItem().equals("Admin")) {
 
             while(!pwCorrect) {
@@ -146,9 +161,9 @@ public class Login implements ActionListener {
                 if (passwordEntered.equals(password)) {
                     JOptionPane.showMessageDialog(null, "Richtig");
                     pwCorrect = true;
-                    controller.setAdmin(true);
+                    Controller.setAdmin(true);
                     
-                    MainGUI.startMain(null);
+                    MainGUI.startMain(loadedPlan);
                     
                     
 
@@ -163,7 +178,7 @@ public class Login implements ActionListener {
             }
 
         }else {
-        	 MainGUI.startMain(null);
+        	 MainGUI.startMain(loadedPlan);
         }
         frame.dispose();
     }

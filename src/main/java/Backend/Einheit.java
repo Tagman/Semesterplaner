@@ -66,6 +66,7 @@ public class Einheit {
         date = (LocalDate) args[6];
         wiederholungsrhytmus = (String)args[7];
         priorität = (int)args[8];
+        fach = (Fach)args[9];
 
 
     }
