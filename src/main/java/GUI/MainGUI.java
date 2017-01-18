@@ -105,9 +105,8 @@ public class MainGUI {
         JMenuItem mntmNewMenuItem = new JMenuItem("Tagesansicht");
         mntmNewMenuItem.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 1' zu ändern");
         mntmNewMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
-                model="Tagesansicht";
+            public void actionPerformed(ActionEvent arg0) {
+                model = "Tagesansicht";
                 aktualisieren(model);
             }
         });
@@ -116,14 +115,12 @@ public class MainGUI {
         JMenuItem mntmNewMenuItem_1 = new JMenuItem("Wochenansicht");
         mntmNewMenuItem_1.setToolTipText("Hier klicken um die Ansicht auf 'Ansicht 2' zu ändern");
         mntmNewMenuItem_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0)
-            {
+            public void actionPerformed(ActionEvent arg0) {
                 model = "Wochenansicht";
                 aktualisieren(model);
             }
         });
         mnAnsicht.add(mntmNewMenuItem_1);
-
 
 
         JMenuBar menuBar_2 = new JMenuBar();
@@ -148,16 +145,16 @@ public class MainGUI {
         mntmEinheitsuchen.setToolTipText("Hier klicken um einen Termin zu suchen");
         mnImport.add(mntmEinheitsuchen);
         mntmEinheitsuchen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0){
-            	SearchEinheit.main(null);
+            public void actionPerformed(ActionEvent arg0) {
+                SearchEinheit.main(null);
             }
         });
         JMenuItem mntmTerminsuchen = new JMenuItem("Termin suchen");
         mntmTerminsuchen.setToolTipText("Hier klicken um eine Einheit zu suchen");
         mnImport.add(mntmTerminsuchen);
         mntmTerminsuchen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0){
-            	SearchTermin.main(null);
+            public void actionPerformed(ActionEvent arg0) {
+                SearchTermin.main(null);
             }
         });
 
@@ -309,6 +306,7 @@ public class MainGUI {
             frame.getContentPane().add(btnRechte);
             tm = (DefaultTableModel) Tabelle.getModel();
 
+        }
     }
 
 

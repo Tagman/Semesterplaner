@@ -7,7 +7,7 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="HelloWorldPU" value="faf3cded-2747-4fa5-b019-902b438520ac" />
-          <factory-entry name="SemesterplanerPU" />
+          <factory-entry name="SemesterplanerPU" value="faf3cded-2747-4fa5-b019-902b438520ac" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
