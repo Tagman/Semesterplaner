@@ -13,6 +13,8 @@ public class Fach {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long IDFach;
+
+
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL)

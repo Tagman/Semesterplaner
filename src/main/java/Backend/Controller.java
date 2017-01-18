@@ -245,6 +245,41 @@ public class Controller {
 
     }
 
+    public boolean saveTermin(Einheit ein){
+
+
+    boolean boolReturn = true;
+
+
+
+    EntityTransaction transaction = null;
+
+        try{
+        transaction = entityManager.getTransaction();
+
+        transaction.begin();
+
+//            entityManager.persist(sp);
+        entityManager.merge(ein);
+        transaction.commit();
+
+
+    }catch (Exception e){
+        logger.error("cannot commit transaction....");
+        logger.error("Fehlermeldung: " + e.toString());
+        transaction.rollback();
+        boolReturn = false;
+
+        closeDB();
+    }
+
+        return boolReturn;
+
+
+    }
+
+
+
     public Semesterplan initLoad() throws NullPointerException{
 
         //*** Autoinit wegen DB Test gelöscht
