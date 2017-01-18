@@ -91,6 +91,8 @@ public class AddEinheit implements ActionListener {
         lblName.setBounds(15, 76, 186, 20);
         frame.getContentPane().add(lblName);
 
+        getFacherList();
+
         nameBox = new JComboBox();
         nameBox.setModel(new DefaultComboBoxModel(fächer));
         nameBox.setToolTipText("Bitte die Art der Veranstaltung ausw\u00E4hlen");
@@ -212,7 +214,8 @@ public class AddEinheit implements ActionListener {
     public void actionPerformed(ActionEvent ae)
     {
 
-
+        eingabeEinheit = new Einheit();
+        Fach eingabeFach;
         //Testen
         ArrayList<JTextField> EinheitList = new ArrayList();
      //   EinheitList.add(txtFieldName);
@@ -228,6 +231,49 @@ public class AddEinheit implements ActionListener {
             Confirmation.startConfirmation(plan);
             //  Confirmation.confirm("Ihre Eingaben wurden erfolgreich auf Korrektheit geprüft!");
             Confirmation.confirm("Ihre Einheit wurde erfolgreich hinzugefügt!");
+
+            int prio;
+            if(checkPflicht.isSelected()){
+                prio = 10;
+            }else {
+                prio = 1;
+            }
+
+            eingabeEinheit.setName(nameBox.getSelectedItem().toString());
+            eingabeEinheit.setAnfangsZeit(LocalTime.parse(txtFieldTimeStart.getText()));
+            eingabeEinheit.setEndZeit(LocalTime.parse(txtFieldTimeStop.getText()));
+            eingabeEinheit.setDate(LocalDate.parse(txtFieldDate.getText(), DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            eingabeEinheit.setOrt(txtFieldLocation.getText());
+            eingabeEinheit.setLehrender(txtFieldTeacher.getText());
+            eingabeEinheit.setWiederholungsrhytmus(comboIntervall.getSelectedItem().toString());
+            eingabeEinheit.setTyp(comboTyp.getSelectedItem().toString());
+            eingabeEinheit.setPriorität(prio);
+
+            eingabeFach = plan.getStundenplan().searchFach(eingabeEinheit.getName());
+            if(eingabeFach == null){
+                eingabeFach = new Fach(eingabeEinheit.getName(), new ArrayList<>());
+
+
+            }
+
+            plan.getStundenplan().addFach(eingabeFach);
+
+            eingabeFach.setStundenplan(plan.getStundenplan());
+
+            eingabeFach.addEinheit(eingabeEinheit);
+            eingabeEinheit.setFach(eingabeFach);
+
+
+            getFacherList();
+            nameBox.setModel(new DefaultComboBoxModel(fächer));
+
+
+
+
+
+
+
+
             for (int i = 0; i <= MainGUI.daten.length; i++) {
                 if (MainGUI.daten[i] == null) {
 
@@ -237,6 +283,8 @@ public class AddEinheit implements ActionListener {
                 }
             }
 
+
+            /*
             for(int i = 0; i<fächer.length;i++)
             {
                 if(fächer[i]==null)
@@ -262,6 +310,11 @@ public class AddEinheit implements ActionListener {
                     }
                 }
             }
+            */
+
+            controller.initDB();
+            controller.save(plan);
+            controller.closeDB();
 
         } else {
             Confirmation.startConfirmation(plan);
@@ -288,7 +341,7 @@ public class AddEinheit implements ActionListener {
 */
         private Object[] getAttributes()
         {
-            Object[] args = new Object[9];
+            Object[] args = new Object[10];
 
             args[0] = nameBox.getSelectedItem();
             args[1] = comboTyp.getSelectedItem();
@@ -313,6 +366,8 @@ public class AddEinheit implements ActionListener {
             } else {
                 args[8] = 1;
             }
+
+
 
 
 
@@ -368,5 +423,15 @@ public class AddEinheit implements ActionListener {
             comboIntervall.setSelectedItem(intervall);
             checkPflicht.setSelected(pflicht);
         }
+
+        public void getFacherList(){
+            List<Fach> faecher = plan.getStundenplan().getFaecher();
+
+            for (int i = 0; i < faecher.size(); i++){
+                fächer[i] =  faecher.get(i).getName();
+            }
+        }
+
+
 
 }

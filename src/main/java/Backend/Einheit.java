@@ -30,18 +30,7 @@ public class Einheit {
 
 
     public Einheit(){
-        anfangsZeit = null;
-        endZeit = null;
-        ort = null;
-        name = null;
-        lehrender = null;
-        wiederholungsrhytmus = null;
-        priorität = -1;
-        typ = null;
-        date = null;
-
-
-    }
+          }
 
     public Einheit(LocalTime anfangsZeit, LocalTime endZeit, String ort, String name, String lehrender, String wiederholungsrhytmus, int priorität, String typ, LocalDate date, Fach fach) {
         this.anfangsZeit = anfangsZeit;
